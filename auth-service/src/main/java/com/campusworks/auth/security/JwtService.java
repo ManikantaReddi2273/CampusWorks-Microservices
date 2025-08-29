@@ -18,7 +18,7 @@ import java.util.Date;
  */
 @Service
 public class JwtService {
-    
+
     private static final Logger logger = LoggerFactory.getLogger(JwtService.class);
     
     @Value("${security.jwt.secret}")

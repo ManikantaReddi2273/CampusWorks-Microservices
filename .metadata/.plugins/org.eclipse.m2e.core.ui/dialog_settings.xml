@@ -3,6 +3,7 @@
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
 			<item value="C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records"/>
+			<item value="C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\bidding-service"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
@@ -12,5 +13,9 @@
 			<item value="[groupId].[artifactId]-[version]"/>
 			<item value="[name]"/>
 		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
 	</section>
 </section>

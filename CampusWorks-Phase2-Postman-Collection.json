@@ -1,0 +1,832 @@
+{
+  "info": {
+    "name": "CampusWorks Phase 2 - Core Business Services",
+    "description": "Complete API collection for Task, Bidding, and Profile services with JWT authentication",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "jwt_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "user_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "user_email",
+      "value": "student@campusworks.com",
+      "type": "string"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{jwt_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "1. Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{user_email}}\",\n  \"password\": \"student123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{user_email}}\",\n  \"password\": \"student123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Get User by Email",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/auth/user/{{user_email}}",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "user", "{{user_email}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Task Service",
+      "item": [
+        {
+          "name": "Create Task",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-User-Id",
+                "value": "{{user_id}}"
+              },
+              {
+                "key": "X-User-Email",
+                "value": "{{user_email}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Math Assignment Help\",\n  \"description\": \"Need help with calculus problems\",\n  \"budget\": 50.00,\n  \"category\": \"MATHEMATICS\",\n  \"biddingDeadline\": \"2024-12-31T23:59:59\",\n  \"completionDeadline\": \"2025-01-07T23:59:59\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/tasks",
+              "host": ["{{base_url}}"],
+              "path": ["tasks"]
+            }
+          }
+        },
+        {
+          "name": "Get All Tasks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/tasks",
+              "host": ["{{base_url}}"],
+              "path": ["tasks"]
+            }
+          }
+        },
+        {
+          "name": "Get Task by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/tasks/1",
+              "host": ["{{base_url}}"],
+              "path": ["tasks", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Tasks by Owner",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/tasks/owner/{{user_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["tasks", "owner", "{{user_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Get Tasks by Category",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/tasks/category/MATHEMATICS",
+              "host": ["{{base_url}}"],
+              "path": ["tasks", "category", "MATHEMATICS"]
+            }
+          }
+        },
+        {
+          "name": "Get Open Tasks for Bidding",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/tasks/open-for-bidding",
+              "host": ["{{base_url}}"],
+              "path": ["tasks", "open-for-bidding"]
+            }
+          }
+        },
+        {
+          "name": "Update Task",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-User-Id",
+                "value": "{{user_id}}"
+              },
+              {
+                "key": "X-User-Email",
+                "value": "{{user_email}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Math Assignment Help\",\n  \"description\": \"Updated description for calculus problems\",\n  \"budget\": 60.00,\n  \"category\": \"MATHEMATICS\",\n  \"biddingDeadline\": \"2024-12-31T23:59:59\",\n  \"completionDeadline\": \"2025-01-07T23:59:59\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/tasks/1",
+              "host": ["{{base_url}}"],
+              "path": ["tasks", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Task",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "{{user_id}}"
+              },
+              {
+                "key": "X-User-Email",
+                "value": "{{user_email}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/tasks/1",
+              "host": ["{{base_url}}"],
+              "path": ["tasks", "1"]
+            }
+          }
+        },
+        {
+          "name": "Assign Task",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "application/json"
+              },
+              {
+                "key": "X-User-Id",
+                "value": "{{user_id}}"
+              },
+              {
+                "key": "X-User-Email",
+                "value": "{{user_email}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assignedUserId\": 2,\n  \"assignedUserEmail\": \"worker@campusworks.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/tasks/1/assign",
+              "host": ["{{base_url}}"],
+              "path": ["tasks", "1", "assign"]
+            }
+          }
+        },
+        {
+          "name": "Mark Task as Completed",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "{{user_id}}"
+              },
+              {
+                "key": "X-User-Email",
+                "value": "{{user_email}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/tasks/1/complete",
+              "host": ["{{base_url}}"],
+              "path": ["tasks", "1", "complete"]
+            }
+          }
+        },
+        {
+          "name": "Get Task Statistics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/tasks/statistics",
+              "host": ["{{base_url}}"],
+              "path": ["tasks", "statistics"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Bidding Service",
+      "item": [
+        {
+          "name": "Place Bid",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-User-Id",
+                "value": "2"
+              },
+              {
+                "key": "X-User-Email",
+                "value": "worker@campusworks.com"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"taskId\": 1,\n  \"amount\": 45.00,\n  \"proposal\": \"I can help with calculus problems. I have experience in mathematics.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/bids",
+              "host": ["{{base_url}}"],
+              "path": ["bids"]
+            }
+          }
+        },
+        {
+          "name": "Get All Bids",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/bids",
+              "host": ["{{base_url}}"],
+              "path": ["bids"]
+            }
+          }
+        },
+        {
+          "name": "Get Bid by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/bids/1",
+              "host": ["{{base_url}}"],
+              "path": ["bids", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Bids by Task",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/bids/task/1",
+              "host": ["{{base_url}}"],
+              "path": ["bids", "task", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Bids by User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/bids/user/2",
+              "host": ["{{base_url}}"],
+              "path": ["bids", "user", "2"]
+            }
+          }
+        },
+        {
+          "name": "Get Winning Bid for Task",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/bids/task/1/winning",
+              "host": ["{{base_url}}"],
+              "path": ["bids", "task", "1", "winning"]
+            }
+          }
+        },
+        {
+          "name": "Accept Bid",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "{{user_id}}"
+              },
+              {
+                "key": "X-User-Email",
+                "value": "{{user_email}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/bids/1/accept",
+              "host": ["{{base_url}}"],
+              "path": ["bids", "1", "accept"]
+            }
+          }
+        },
+        {
+          "name": "Reject Bid",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-User-Id",
+                "value": "{{user_id}}"
+              },
+              {
+                "key": "X-User-Email",
+                "value": "{{user_email}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rejectionReason\": \"Bid amount is too high\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/bids/1/reject",
+              "host": ["{{base_url}}"],
+              "path": ["bids", "1", "reject"]
+            }
+          }
+        },
+        {
+          "name": "Withdraw Bid",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "2"
+              },
+              {
+                "key": "X-User-Email",
+                "value": "worker@campusworks.com"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/bids/1/withdraw",
+              "host": ["{{base_url}}"],
+              "path": ["bids", "1", "withdraw"]
+            }
+          }
+        },
+        {
+          "name": "Get User Active Bids",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/bids/user/2/active",
+              "host": ["{{base_url}}"],
+              "path": ["bids", "user", "2", "active"]
+            }
+          }
+        },
+        {
+          "name": "Get Bid Statistics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/bids/statistics",
+              "host": ["{{base_url}}"],
+              "path": ["bids", "statistics"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Profile Service",
+      "item": [
+        {
+          "name": "Create Profile",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-User-Id",
+                "value": "{{user_id}}"
+              },
+              {
+                "key": "X-User-Email",
+                "value": "{{user_email}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Student\",\n  \"university\": \"Tech University\",\n  \"major\": \"Computer Science\",\n  \"academicYear\": \"3rd Year\",\n  \"bio\": \"Computer Science student looking for opportunities to work on interesting projects.\",\n  \"skills\": \"Java, Python, Web Development\",\n  \"experienceYears\": 2,\n  \"experienceDescription\": \"Worked on several academic projects and freelance assignments\",\n  \"preferredCategories\": \"COMPUTER_SCIENCE,MATHEMATICS\",\n  \"hourlyRate\": 25.00\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/profiles",
+              "host": ["{{base_url}}"],
+              "path": ["profiles"]
+            }
+          }
+        },
+        {
+          "name": "Get All Public Profiles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/profiles/public",
+              "host": ["{{base_url}}"],
+              "path": ["profiles", "public"]
+            }
+          }
+        },
+        {
+          "name": "Get Profile by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/profiles/1",
+              "host": ["{{base_url}}"],
+              "path": ["profiles", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Profile by User ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/profiles/user/{{user_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["profiles", "user", "{{user_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Get Profiles by University",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/profiles/university/Tech%20University",
+              "host": ["{{base_url}}"],
+              "path": ["profiles", "university", "Tech University"]
+            }
+          }
+        },
+        {
+          "name": "Get Profiles by Major",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/profiles/major/Computer%20Science",
+              "host": ["{{base_url}}"],
+              "path": ["profiles", "major", "Computer Science"]
+            }
+          }
+        },
+        {
+          "name": "Get Top Rated Profiles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/profiles/top-rated",
+              "host": ["{{base_url}}"],
+              "path": ["profiles", "top-rated"]
+            }
+          }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-User-Id",
+                "value": "{{user_id}}"
+              },
+              {
+                "key": "X-User-Email",
+                "value": "{{user_email}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Student\",\n  \"university\": \"Tech University\",\n  \"major\": \"Computer Science\",\n  \"academicYear\": \"3rd Year\",\n  \"bio\": \"Updated bio: Computer Science student with strong programming skills\",\n  \"skills\": \"Java, Python, Web Development, Machine Learning\",\n  \"experienceYears\": 3,\n  \"experienceDescription\": \"Worked on several academic projects, freelance assignments, and research projects\",\n  \"preferredCategories\": \"COMPUTER_SCIENCE,MATHEMATICS,ARTIFICIAL_INTELLIGENCE\",\n  \"hourlyRate\": 30.00\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/profiles/1",
+              "host": ["{{base_url}}"],
+              "path": ["profiles", "1"]
+            }
+          }
+        },
+        {
+          "name": "Add Rating to Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "application/json"
+              },
+              {
+                "key": "X-User-Id",
+                "value": "{{user_id}}"
+              },
+              {
+                "key": "X-User-Email",
+                "value": "{{user_email}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rating\": 5,\n  \"comment\": \"Excellent work quality and communication\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/profiles/1/rating",
+              "host": ["{{base_url}}"],
+              "path": ["profiles", "1", "rating"]
+            }
+          }
+        },
+        {
+          "name": "Mark Task as Completed",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "{{user_id}}"
+              },
+              {
+                "key": "X-User-Email",
+                "value": "{{user_email}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/profiles/1/task-completed",
+              "host": ["{{base_url}}"],
+              "path": ["profiles", "1", "task-completed"]
+            }
+          }
+        },
+        {
+          "name": "Mark Task as Successful",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "application/json"
+              },
+              {
+                "key": "X-User-Id",
+                "value": "{{user_id}}"
+              },
+              {
+                "key": "X-User-Email",
+                "value": "{{user_email}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"earnings\": 50.00\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/profiles/1/task-successful",
+              "host": ["{{base_url}}"],
+              "path": ["profiles", "1", "task-successful"]
+            }
+          }
+        },
+        {
+          "name": "Update Availability Status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "application/json"
+              },
+              {
+                "key": "X-User-Id",
+                "value": "{{user_id}}"
+              },
+              {
+                "key": "X-User-Email",
+                "value": "{{user_email}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"availabilityStatus\": \"BUSY\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/profiles/1/availability",
+              "host": ["{{base_url}}"],
+              "path": ["profiles", "1", "availability"]
+            }
+          }
+        },
+        {
+          "name": "Get Profile Statistics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/profiles/statistics",
+              "host": ["{{base_url}}"],
+              "path": ["profiles", "statistics"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Health Checks",
+      "item": [
+        {
+          "name": "Eureka Server Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8761/actuator/health",
+              "host": ["localhost"],
+              "port": "8761",
+              "path": ["actuator", "health"]
+            }
+          }
+        },
+        {
+          "name": "API Gateway Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/actuator/health",
+              "host": ["{{base_url}}"],
+              "path": ["actuator", "health"]
+            }
+          }
+        },
+        {
+          "name": "Auth Service Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9000/actuator/health",
+              "host": ["localhost"],
+              "port": "9000",
+              "path": ["actuator", "health"]
+            }
+          }
+        },
+        {
+          "name": "Task Service Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9001/actuator/health",
+              "host": ["localhost"],
+              "port": "9001",
+              "path": ["actuator", "health"]
+            }
+          }
+        },
+        {
+          "name": "Bidding Service Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9002/actuator/health",
+              "host": ["localhost"],
+              "port": "9002",
+              "path": ["actuator", "health"]
+            }
+          }
+        },
+        {
+          "name": "Profile Service Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9003/actuator/health",
+              "host": ["localhost"],
+              "port": "9003",
+              "path": ["actuator", "health"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
