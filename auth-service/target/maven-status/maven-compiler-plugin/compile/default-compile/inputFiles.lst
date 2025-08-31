@@ -3,5 +3,6 @@ C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\auth-service\src\mai
 C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\auth-service\src\main\java\com\campusworks\auth\controller\AuthController.java
 C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\auth-service\src\main\java\com\campusworks\auth\model\User.java
 C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\auth-service\src\main\java\com\campusworks\auth\repo\UserRepository.java
+C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\auth-service\src\main\java\com\campusworks\auth\security\JwtAuthenticationFilter.java
 C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\auth-service\src\main\java\com\campusworks\auth\security\JwtService.java
 C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\auth-service\src\main\java\com\campusworks\auth\service\AuthService.java

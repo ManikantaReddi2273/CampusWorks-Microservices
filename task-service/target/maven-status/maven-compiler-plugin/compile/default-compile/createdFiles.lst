@@ -1,4 +1,5 @@
 com\campusworks\task\controller\TaskController$AssignTaskRequest.class
+com\campusworks\task\controller\TaskController$RateBidderRequest.class
 com\campusworks\task\dto\TaskCompletionRequest$TaskCompletionRequestBuilder.class
 com\campusworks\task\dto\ProfileResponse$ProfileResponseBuilder.class
 com\campusworks\task\service\TaskService.class
@@ -7,6 +8,7 @@ com\campusworks\task\dto\BiddingStatusResponse.class
 com\campusworks\task\client\BiddingServiceClientFallback.class
 com\campusworks\task\client\ProfileServiceClient.class
 com\campusworks\task\dto\TaskStatusUpdateRequest.class
+com\campusworks\task\security\CustomJwtAuthenticationConverter.class
 com\campusworks\task\dto\TaskStatusUpdateRequest$TaskStatusUpdateRequestBuilder.class
 com\campusworks\task\dto\TaskAssignmentRequest$TaskAssignmentRequestBuilder.class
 com\campusworks\task\dto\TaskAssignmentRequest.class
@@ -15,6 +17,7 @@ com\campusworks\task\controller\TaskController$ExtendBiddingRequest.class
 com\campusworks\task\model\Task$TaskStatus.class
 com\campusworks\task\controller\TaskController$CreateTaskRequest.class
 com\campusworks\task\dto\UserEarningsResponse.class
+com\campusworks\task\config\SecurityConfig.class
 com\campusworks\task\controller\TaskController$UpdateTaskRequest.class
 com\campusworks\task\dto\UserTaskStatisticsResponse$UserTaskStatisticsResponseBuilder.class
 com\campusworks\task\model\Task.class
