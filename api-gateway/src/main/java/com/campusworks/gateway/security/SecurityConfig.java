@@ -8,41 +8,37 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.List;
 
 /**
- * Security Configuration for API Gateway
- * Handles CORS configuration and global security settings
+ * Simple CORS Configuration for API Gateway
+ * Like Express.js app.use(cors()) - enables CORS for all routes
  */
 @Configuration
 public class SecurityConfig {
     
     /**
-     * CORS Web Filter - Configured globally for all endpoints
-     * Runs at highest precedence to ensure CORS is handled before other filters
+     * Simple CORS Filter - Enable CORS for all endpoints
+     * Equivalent to Express.js: app.use(cors())
      */
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public CorsWebFilter corsWebFilter() {
         CorsConfiguration corsConfig = new CorsConfiguration();
         
-        // Allow all origins for development (restrict in production)
-        corsConfig.setAllowedOriginPatterns(Collections.singletonList("*"));
+        // Allow frontend origin
+        corsConfig.setAllowedOrigins(List.of("http://localhost:3000"));
         
-        // Allow common HTTP methods
-        corsConfig.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        // Allow all HTTP methods
+        corsConfig.setAllowedMethods(List.of("*"));
         
-        // Allow all headers including Authorization
-        corsConfig.setAllowedHeaders(Arrays.asList("*"));
+        // Allow all headers
+        corsConfig.setAllowedHeaders(List.of("*"));
         
-        // Allow credentials (cookies, authorization headers)
+        // Allow credentials
         corsConfig.setAllowCredentials(true);
         
-        // Cache preflight response for 1 hour
-        corsConfig.setMaxAge(3600L);
-        
-        // Apply CORS configuration to all paths
+        // Apply to all paths
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfig);
         

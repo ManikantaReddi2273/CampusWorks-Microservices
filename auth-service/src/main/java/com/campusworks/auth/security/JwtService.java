@@ -10,7 +10,10 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * JWT Service
@@ -39,11 +42,13 @@ public class JwtService {
         
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpiration);
+        String jti = UUID.randomUUID().toString(); // Unique token identifier
         
         SecretKey key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
         
         String token = Jwts.builder()
                 .subject(userId)
+                .id(jti) // Add JTI for token identification
                 .claim("email", email)
                 .claim("roles", role)
                 .issuedAt(now)
@@ -51,7 +56,7 @@ public class JwtService {
                 .signWith(key, Jwts.SIG.HS256)
                 .compact();
         
-        logger.debug("✅ JWT token generated successfully for user: {}", userId);
+        logger.debug("✅ JWT token generated successfully for user: {} with JTI: {}", userId, jti);
         return token;
     }
     
@@ -118,5 +123,48 @@ public class JwtService {
     public String extractRoles(String token) {
         Claims claims = extractClaims(token);
         return claims.get("roles", String.class);
+    }
+    
+    /**
+     * Extract JTI (JWT ID) from token
+     * @param token JWT token string
+     * @return JWT ID string
+     */
+    public String extractJti(String token) {
+        Claims claims = extractClaims(token);
+        return claims.getId();
+    }
+    
+    /**
+     * Extract expiration date from JWT token
+     * @param token JWT token string
+     * @return expiration date
+     */
+    public Date extractExpiration(String token) {
+        Claims claims = extractClaims(token);
+        return claims.getExpiration();
+    }
+    
+    /**
+     * Convert Date to LocalDateTime
+     * @param date Date object
+     * @return LocalDateTime object
+     */
+    public LocalDateTime convertToLocalDateTime(Date date) {
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+    }
+    
+    /**
+     * Check if token is expired
+     * @param token JWT token string
+     * @return true if expired, false otherwise
+     */
+    public boolean isTokenExpired(String token) {
+        try {
+            Date expiration = extractExpiration(token);
+            return expiration.before(new Date());
+        } catch (Exception e) {
+            return true; // Consider invalid tokens as expired
+        }
     }
 }

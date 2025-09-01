@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 /**
  * User Entity
  * Represents users in the CampusWorks system
@@ -34,7 +36,31 @@ public class User {
     private UserRole role;
     
     @Column(nullable = false)
-    private boolean enabled = true;
+    private boolean enabled = false; // Changed to false by default - requires email verification
+    
+    // Email verification fields
+    @Column(nullable = false)
+    private boolean emailVerified = false;
+    
+    @Column
+    private LocalDateTime emailVerifiedAt;
+    
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
+    
+    @Column
+    private LocalDateTime updatedAt;
+    
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+    
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
     
     /**
      * User Roles - Simplified approach as per blueprint
