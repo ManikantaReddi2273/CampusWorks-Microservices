@@ -39,7 +39,7 @@ public class BiddingService {
     @Autowired
     private TaskServiceClient taskServiceClient;
     
-    @Value("${bidding.min-amount:0.01}")
+    @Value("${bidding.min-amount:50.00}")
     private BigDecimal minBidAmount;
     
     @Value("${bidding.max-amount:10000.00}")
@@ -53,6 +53,9 @@ public class BiddingService {
     
     @Value("${bidding.auto-assignment-check-interval:300000}")
     private long autoAssignmentCheckInterval;
+    
+    @Value("${bidding.auto-cancellation-check-interval:600000}")
+    private long autoCancellationCheckInterval;
     
     /**
      * Place a new bid on a task
@@ -318,20 +321,22 @@ public class BiddingService {
             
             Bid savedBid = bidRepository.save(bid);
             
-            // Update task status in Task Service via Feign Client
-            TaskUpdateResponse updateRequest = TaskUpdateResponse.builder()
+            // Update task acceptance timestamp in Task Service via Feign Client
+            TaskUpdateResponse acceptRequest = TaskUpdateResponse.builder()
                 .taskId(bid.getTaskId())
-                .status("ASSIGNED")
+                .status("IN_PROGRESS")
                 .message("Bid accepted: " + bid.getProposal())
                 .updatedAt(LocalDateTime.now())
+                .acceptedAt(savedBid.getAcceptedAt()) // Sync accepted_at timestamp
                 .success(true)
                 .build();
             
             try {
-                taskServiceClient.updateTaskStatus(bid.getTaskId(), updateRequest);
-                log.info("✅ Task status updated in Task Service for task ID: {}", bid.getTaskId());
+                taskServiceClient.acceptTask(bid.getTaskId(), acceptRequest);
+                log.info("✅ Task acceptance timestamp synchronized for task ID: {} at {}", 
+                        bid.getTaskId(), savedBid.getAcceptedAt());
             } catch (Exception e) {
-                log.warn("⚠️ Failed to update task status in Task Service: {}", e.getMessage());
+                log.warn("⚠️ Failed to synchronize task acceptance timestamp: {}", e.getMessage());
                 // Continue with bid acceptance even if task service update fails
             }
             
@@ -490,6 +495,38 @@ public class BiddingService {
     }
     
     /**
+     * Delete a bid (only for rejected bids)
+     */
+    public void deleteBid(Long bidId, Long bidderId) {
+        log.info("🗑️ Deleting bid ID: {} by bidder ID: {}", bidId, bidderId);
+        
+        Optional<Bid> bidOpt = bidRepository.findById(bidId);
+        
+        if (bidOpt.isEmpty()) {
+            log.warn("❌ Bid not found with ID: {}", bidId);
+            throw new RuntimeException("Bid not found");
+        }
+        
+        Bid bid = bidOpt.get();
+        
+        // Check if the bidder owns this bid
+        if (!bid.getBidderId().equals(bidderId)) {
+            log.warn("❌ Bidder ID: {} is not authorized to delete bid ID: {}", bidderId, bidId);
+            throw new RuntimeException("You are not authorized to delete this bid");
+        }
+        
+        // Only allow deletion of rejected bids
+        if (bid.getStatus() != Bid.BidStatus.REJECTED) {
+            log.warn("❌ Bid ID: {} cannot be deleted - status is: {}", bidId, bid.getStatus());
+            throw new RuntimeException("Only rejected bids can be deleted");
+        }
+        
+        bidRepository.deleteById(bidId);
+        
+        log.info("✅ Bid deleted successfully: ID: {}", bidId);
+    }
+    
+    /**
      * Get bid statistics
      */
     public BidStatistics getBidStatistics() {
@@ -554,11 +591,11 @@ public class BiddingService {
         }
         
         if (bid.getAmount().compareTo(minBidAmount) < 0) {
-            throw new RuntimeException("Bid amount must be at least $" + minBidAmount);
+            throw new RuntimeException("Bid amount must be at least ₹" + minBidAmount);
         }
         
         if (bid.getAmount().compareTo(maxBidAmount) > 0) {
-            throw new RuntimeException("Bid amount cannot exceed $" + maxBidAmount);
+            throw new RuntimeException("Bid amount cannot exceed ₹" + maxBidAmount);
         }
     }
     
@@ -672,6 +709,21 @@ public class BiddingService {
         } catch (Exception e) {
             log.error("❌ Error in scheduled job for processing expired bidding deadlines: {}", e.getMessage(), e);
         }
+    }
+    
+    /**
+     * Scheduled job to automatically cancel expired tasks and their bids
+     * Runs every 10 minutes by default
+     */
+    @Scheduled(fixedDelayString = "${bidding.auto-cancellation-check-interval:600000}")
+    public void processExpiredTasks() {
+        if (!autoAssignmentEnabled) {
+            log.debug("🔄 Automatic task cancellation is disabled, skipping scheduled job");
+            return;
+        }
+        
+        log.info("🔄 Starting scheduled job: Processing expired tasks");
+        autoCancelExpiredTasks();
     }
     
     /**
@@ -816,5 +868,356 @@ public class BiddingService {
      */
     public long getAutoAssignmentCheckInterval() {
         return autoAssignmentCheckInterval;
+    }
+    
+    /**
+     * Get automatic cancellation check interval
+     */
+    public long getAutoCancellationCheckInterval() {
+        return autoCancellationCheckInterval;
+    }
+    
+    // ==================== UPI ID OPERATIONS ====================
+    
+    /**
+     * Submit UPI ID for an accepted bid
+     */
+    public Bid submitUpiId(Long bidId, String upiId, Long bidderId) {
+        log.info("💳 Submitting UPI ID for bid ID: {} by bidder: {}", bidId, bidderId);
+        
+        try {
+            Optional<Bid> bidOpt = bidRepository.findById(bidId);
+            
+            if (bidOpt.isEmpty()) {
+                log.warn("❌ Bid not found with ID: {}", bidId);
+                throw new RuntimeException("Bid not found");
+            }
+            
+            Bid bid = bidOpt.get();
+            
+            // Check if bidder owns this bid
+            if (!bid.getBidderId().equals(bidderId)) {
+                log.warn("❌ User {} is not authorized to submit UPI ID for bid ID: {}", bidderId, bidId);
+                throw new RuntimeException("You are not authorized to submit UPI ID for this bid");
+            }
+            
+            // Check if bid is accepted
+            if (!bid.isAccepted()) {
+                log.warn("❌ Bid ID: {} cannot have UPI ID submitted - status is: {}", bidId, bid.getStatus());
+                throw new RuntimeException("UPI ID can only be submitted for accepted bids");
+            }
+            
+            // Check if UPI ID is already submitted
+            if (bid.hasUpiIdSubmitted()) {
+                log.warn("❌ UPI ID already submitted for bid ID: {}", bidId);
+                throw new RuntimeException("UPI ID has already been submitted for this bid");
+            }
+            
+            // Validate UPI ID format (basic validation)
+            if (upiId == null || upiId.trim().isEmpty()) {
+                throw new RuntimeException("UPI ID is required");
+            }
+            
+            if (upiId.length() < 5 || upiId.length() > 50) {
+                throw new RuntimeException("UPI ID must be between 5 and 50 characters");
+            }
+            
+            // Check if task deadline has expired
+            if (isTaskDeadlineExpired(bid.getTaskId())) {
+                log.warn("❌ Task deadline has expired for task ID: {}, cannot submit UPI ID", bid.getTaskId());
+                throw new RuntimeException("Task deadline has expired. UPI ID cannot be submitted.");
+            }
+            
+            // Submit UPI ID
+            bid.submitUpiId(upiId.trim());
+            Bid savedBid = bidRepository.save(bid);
+            
+            log.info("✅ UPI ID submitted successfully for bid ID: {}, Task: {}", savedBid.getId(), savedBid.getTaskId());
+            
+            return savedBid;
+            
+        } catch (Exception e) {
+            log.error("❌ Error submitting UPI ID for bid ID: {}. Error: {}", bidId, e.getMessage());
+            throw new RuntimeException("Failed to submit UPI ID: " + e.getMessage());
+        }
+    }
+    
+    /**
+     * View UPI ID for an accepted bid (by task owner)
+     */
+    public Bid viewUpiId(Long bidId, Long taskOwnerId) {
+        log.info("👁️ Viewing UPI ID for bid ID: {} by task owner: {}", bidId, taskOwnerId);
+        
+        try {
+            Optional<Bid> bidOpt = bidRepository.findById(bidId);
+            
+            if (bidOpt.isEmpty()) {
+                log.warn("❌ Bid not found with ID: {}", bidId);
+                throw new RuntimeException("Bid not found");
+            }
+            
+            Bid bid = bidOpt.get();
+            
+            // Check if bid is accepted
+            if (!bid.isAccepted()) {
+                log.warn("❌ Bid ID: {} cannot have UPI ID viewed - status is: {}", bidId, bid.getStatus());
+                throw new RuntimeException("UPI ID can only be viewed for accepted bids");
+            }
+            
+            // Check if UPI ID has been submitted
+            if (!bid.hasUpiIdSubmitted()) {
+                log.warn("❌ UPI ID not submitted for bid ID: {}", bidId);
+                throw new RuntimeException("UPI ID has not been submitted for this bid");
+            }
+            
+            // Check if task deadline has expired
+            if (isTaskDeadlineExpired(bid.getTaskId())) {
+                log.warn("❌ Task deadline has expired for task ID: {}, cannot view UPI ID", bid.getTaskId());
+                throw new RuntimeException("Task deadline has expired. UPI ID cannot be viewed.");
+            }
+            
+            // Mark UPI ID as viewed
+            bid.markUpiIdAsViewed();
+            Bid savedBid = bidRepository.save(bid);
+            
+            log.info("✅ UPI ID viewed successfully for bid ID: {}, Task: {}", savedBid.getId(), savedBid.getTaskId());
+            
+            return savedBid;
+            
+        } catch (Exception e) {
+            log.error("❌ Error viewing UPI ID for bid ID: {}. Error: {}", bidId, e.getMessage());
+            throw new RuntimeException("Failed to view UPI ID: " + e.getMessage());
+        }
+    }
+    
+    /**
+     * Accept completed work (by task owner after viewing UPI ID)
+     */
+    public Bid acceptCompletedWork(Long bidId, Long taskOwnerId) {
+        log.info("✅ Accepting completed work for bid ID: {} by task owner: {}", bidId, taskOwnerId);
+        
+        try {
+            Optional<Bid> bidOpt = bidRepository.findById(bidId);
+            
+            if (bidOpt.isEmpty()) {
+                log.warn("❌ Bid not found with ID: {}", bidId);
+                throw new RuntimeException("Bid not found");
+            }
+            
+            Bid bid = bidOpt.get();
+            
+            // Check if bid is accepted
+            if (!bid.isAccepted()) {
+                log.warn("❌ Bid ID: {} cannot be marked as completed - status is: {}", bidId, bid.getStatus());
+                throw new RuntimeException("Work can only be accepted for accepted bids");
+            }
+            
+            // Check if UPI ID has been submitted
+            if (!bid.hasUpiIdSubmitted()) {
+                log.warn("❌ UPI ID not submitted for bid ID: {}", bidId);
+                throw new RuntimeException("UPI ID must be submitted before accepting work");
+            }
+            
+            // Check if UPI ID has been viewed by task owner
+            if (!bid.hasUpiIdBeenViewed()) {
+                log.warn("❌ UPI ID not viewed for bid ID: {}", bidId);
+                throw new RuntimeException("You must view the bidder's UPI ID before accepting work");
+            }
+            
+            // Check if task deadline has expired
+            if (isTaskDeadlineExpired(bid.getTaskId())) {
+                log.warn("❌ Task deadline has expired for task ID: {}, cannot accept work", bid.getTaskId());
+                throw new RuntimeException("Task deadline has expired. Work cannot be accepted.");
+            }
+            
+            // Update bid status to completed
+            bid.setStatus(Bid.BidStatus.COMPLETED);
+            bid.setUpdatedAt(LocalDateTime.now());
+            Bid savedBid = bidRepository.save(bid);
+            
+            // Update task completion timestamp via Task Service
+            try {
+                LocalDateTime completionTime = LocalDateTime.now();
+                TaskUpdateResponse completeRequest = TaskUpdateResponse.builder()
+                    .taskId(bid.getTaskId())
+                    .status("COMPLETED")
+                    .message("Work accepted and task completed")
+                    .updatedAt(completionTime)
+                    .completedAt(completionTime) // Sync completed_at timestamp
+                    .success(true)
+                    .build();
+                
+                taskServiceClient.completeTask(bid.getTaskId(), completeRequest);
+                log.info("✅ Task completion timestamp synchronized for task ID: {} at {}", 
+                        bid.getTaskId(), completionTime);
+            } catch (Exception e) {
+                log.warn("⚠️ Failed to synchronize task completion timestamp: {}", e.getMessage());
+                // Continue with bid completion even if task service update fails
+            }
+            
+            log.info("✅ Work accepted successfully for bid ID: {}, Task: {}", savedBid.getId(), savedBid.getTaskId());
+            
+            return savedBid;
+            
+        } catch (Exception e) {
+            log.error("❌ Error accepting work for bid ID: {}. Error: {}", bidId, e.getMessage());
+            throw new RuntimeException("Failed to accept work: " + e.getMessage());
+        }
+    }
+    
+    /**
+     * Get accepted bid with UPI ID for a task
+     */
+    public Optional<Bid> getAcceptedBidWithUpiIdForTask(Long taskId) {
+        log.info("🔍 Retrieving accepted bid with UPI ID for task ID: {}", taskId);
+        
+        Optional<Bid> bid = bidRepository.findAcceptedBidWithUpiIdForTask(taskId);
+        
+        if (bid.isPresent()) {
+            log.info("✅ Found accepted bid with UPI ID: ID: {}, Task: {}", bid.get().getId(), taskId);
+        } else {
+            log.info("ℹ️ No accepted bid with UPI ID found for task ID: {}", taskId);
+        }
+        
+        return bid;
+    }
+    
+    /**
+     * Get accepted bid for a task
+     */
+    public Optional<Bid> getAcceptedBidForTask(Long taskId) {
+        log.info("🔍 Retrieving accepted bid for task ID: {}", taskId);
+        
+        Optional<Bid> bid = bidRepository.findAcceptedBidForTask(taskId);
+        
+        if (bid.isPresent()) {
+            log.info("✅ Found accepted bid: ID: {}, Task: {}", bid.get().getId(), taskId);
+        } else {
+            log.info("ℹ️ No accepted bid found for task ID: {}", taskId);
+        }
+        
+        return bid;
+    }
+    
+    /**
+     * Check if task has accepted bid with UPI ID submitted
+     */
+    public boolean hasAcceptedBidWithUpiIdForTask(Long taskId) {
+        return bidRepository.existsAcceptedBidWithUpiIdForTask(taskId);
+    }
+    
+    /**
+     * Check if task has accepted bid with UPI ID viewed
+     */
+    public boolean hasAcceptedBidWithViewedUpiIdForTask(Long taskId) {
+        return bidRepository.existsAcceptedBidWithViewedUpiIdForTask(taskId);
+    }
+    
+    /**
+     * Check if task deadline has expired
+     */
+    private boolean isTaskDeadlineExpired(Long taskId) {
+        try {
+            // Get task details from Task Service to check deadline
+            var taskResponse = taskServiceClient.getTaskById(taskId);
+            if (taskResponse != null && taskResponse.getCompletionDeadline() != null) {
+                LocalDateTime now = LocalDateTime.now();
+                boolean isExpired = now.isAfter(taskResponse.getCompletionDeadline());
+                log.debug("⏰ Task ID: {} completion deadline: {}, current time: {}, expired: {}", 
+                        taskId, taskResponse.getCompletionDeadline(), now, isExpired);
+                return isExpired;
+            }
+            log.warn("⚠️ Could not determine completion deadline for task ID: {}", taskId);
+            return false;
+        } catch (Exception e) {
+            log.error("❌ Error checking completion deadline for task ID: {}. Error: {}", 
+                    taskId, e.getMessage(), e);
+            return false; // Assume not expired if we can't check
+        }
+    }
+    
+    /**
+     * Auto-cancel expired tasks and their bids
+     */
+    @Transactional
+    public void autoCancelExpiredTasks() {
+        log.info("🔄 Starting auto-cancellation of expired tasks");
+        
+        try {
+            // Get all task IDs that have pending or accepted bids
+            List<Long> taskIdsWithBids = bidRepository.findAllTaskIdsWithPendingBids();
+            
+            if (taskIdsWithBids.isEmpty()) {
+                log.debug("ℹ️ No tasks with bids found");
+                return;
+            }
+            
+            log.info("📅 Found {} tasks with bids, checking for expired deadlines", taskIdsWithBids.size());
+            
+            // Process each task to check if deadline has expired
+            for (Long taskId : taskIdsWithBids) {
+                try {
+                    if (isTaskDeadlineExpired(taskId)) {
+                        log.info("⏰ Task ID: {} deadline has expired, auto-cancelling task and bids", taskId);
+                        autoCancelTaskAndBids(taskId);
+                    }
+                } catch (Exception e) {
+                    log.error("❌ Error checking task ID: {} for expiration. Error: {}", 
+                            taskId, e.getMessage(), e);
+                    // Continue with other tasks even if one fails
+                }
+            }
+            
+            log.info("✅ Completed checking {} tasks for expiration", taskIdsWithBids.size());
+            
+        } catch (Exception e) {
+            log.error("❌ Error in auto-cancellation of expired tasks: {}", e.getMessage(), e);
+        }
+    }
+    
+    /**
+     * Auto-cancel a specific task and all its bids
+     */
+    @Transactional
+    public void autoCancelTaskAndBids(Long taskId) {
+        log.info("❌ Auto-cancelling task ID: {} and all its bids", taskId);
+        
+        try {
+            // Get all bids for the task
+            List<Bid> taskBids = bidRepository.findByTaskIdOrderByAmountAsc(taskId);
+            
+            // Cancel all bids
+            for (Bid bid : taskBids) {
+                if (bid.getStatus() == Bid.BidStatus.PENDING || bid.getStatus() == Bid.BidStatus.ACCEPTED) {
+                    bid.setStatus(Bid.BidStatus.CANCELLED);
+                    bid.setUpdatedAt(LocalDateTime.now());
+                    bidRepository.save(bid);
+                    log.info("✅ Auto-cancelled bid ID: {} for task ID: {}", bid.getId(), taskId);
+                }
+            }
+            
+            // Update task status to cancelled via Task Service
+            try {
+                TaskUpdateResponse updateRequest = TaskUpdateResponse.builder()
+                    .taskId(taskId)
+                    .status("CANCELLED")
+                    .message("Task auto-cancelled due to expired deadline")
+                    .updatedAt(LocalDateTime.now())
+                    .success(true)
+                    .build();
+                
+                taskServiceClient.updateTaskStatus(taskId, updateRequest);
+                log.info("✅ Task status updated to CANCELLED in Task Service for task ID: {}", taskId);
+            } catch (Exception e) {
+                log.warn("⚠️ Failed to update task status in Task Service: {}", e.getMessage());
+                // Continue even if task service update fails
+            }
+            
+            log.info("🎉 Task ID: {} and all its bids auto-cancelled successfully", taskId);
+            
+        } catch (Exception e) {
+            log.error("❌ Error auto-cancelling task ID: {}. Error: {}", taskId, e.getMessage(), e);
+            throw new RuntimeException("Failed to auto-cancel task: " + e.getMessage(), e);
+        }
     }
 }

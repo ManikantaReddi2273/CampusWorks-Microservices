@@ -44,15 +44,11 @@ public class ProfileController {
                     .userEmail(userEmail)
                     .firstName(request.getFirstName())
                     .lastName(request.getLastName())
-                    .bio(request.getBio())
-                    .university(request.getUniversity())
+                    // Fixed college as per requirements
+                    .university("RGUKT NUZVID")
                     .major(request.getMajor())
-                    .academicYear(request.getAcademicYear())
-                    .skills(request.getSkills())
-                    .experienceYears(request.getExperienceYears())
-                    .experienceDescription(request.getExperienceDescription())
-                    .preferredCategories(request.getPreferredCategories())
-                    .hourlyRate(request.getHourlyRate())
+                    // Map academic year option to numeric representation stored in DB
+                    .academicYear(mapAcademicYear(request.getAcademicYear()))
                     .availabilityStatus(request.getAvailabilityStatus())
                     .isPublic(request.getIsPublic())
                     .build();
@@ -81,9 +77,9 @@ public class ProfileController {
         }
     }
     
-    /**
-     * Get all profiles
-     */
+    /*
+     // Get all profiles
+    
     @GetMapping
     public ResponseEntity<?> getAllProfiles() {
         log.info("📋 Retrieving all public profiles");
@@ -105,6 +101,7 @@ public class ProfileController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
+     */
     
     /**
      * Get profile by ID
@@ -196,194 +193,13 @@ public class ProfileController {
         }
     }
     
-    /**
-     * Get all verified profiles
-     */
-    @GetMapping("/verified")
-    public ResponseEntity<?> getVerifiedProfiles() {
-        log.info("✅ Retrieving all verified profiles");
-        
-        try {
-            List<Profile> profiles = profileService.getAllVerifiedProfiles();
-            
-            log.info("✅ Retrieved {} verified profiles successfully", profiles.size());
-            
-            return ResponseEntity.ok(profiles);
-            
-        } catch (Exception e) {
-            log.error("❌ Failed to retrieve verified profiles - Error: {}", e.getMessage(), e);
-            
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("error", "Failed to retrieve verified profiles");
-            errorResponse.put("message", e.getMessage());
-            
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
-        }
-    }
+   
+   
+   
+   
     
-    /**
-     * Get profiles by availability status
-     */
-    @GetMapping("/availability/{status}")
-    public ResponseEntity<?> getProfilesByAvailabilityStatus(@PathVariable String status) {
-        log.info("🏷️ Retrieving profiles with availability status: {}", status);
-        
-        try {
-            Profile.AvailabilityStatus availabilityStatus = Profile.AvailabilityStatus.valueOf(status.toUpperCase());
-            List<Profile> profiles = profileService.getProfilesByAvailabilityStatus(availabilityStatus);
-            
-            log.info("✅ Retrieved {} profiles with availability status: {}", profiles.size(), status);
-            
-            return ResponseEntity.ok(profiles);
-            
-        } catch (IllegalArgumentException e) {
-            log.warn("❌ Invalid availability status: {}", status);
-            
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("error", "Invalid availability status");
-            errorResponse.put("message", "Status must be one of: AVAILABLE, BUSY, UNAVAILABLE, ON_BREAK");
-            
-            return ResponseEntity.badRequest().body(errorResponse);
-            
-        } catch (Exception e) {
-            log.error("❌ Failed to retrieve profiles with availability status: {} - Error: {}", status, e.getMessage(), e);
-            
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("error", "Failed to retrieve profiles");
-            errorResponse.put("message", e.getMessage());
-            
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
-        }
-    }
     
-    /**
-     * Get profiles by university
-     */
-    @GetMapping("/university/{university}")
-    public ResponseEntity<?> getProfilesByUniversity(@PathVariable String university) {
-        log.info("🏫 Retrieving profiles for university: {}", university);
-        
-        try {
-            List<Profile> profiles = profileService.getProfilesByUniversity(university);
-            
-            log.info("✅ Retrieved {} profiles for university: {}", profiles.size(), university);
-            
-            return ResponseEntity.ok(profiles);
-            
-        } catch (Exception e) {
-            log.error("❌ Failed to retrieve profiles for university: {} - Error: {}", university, e.getMessage(), e);
-            
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("error", "Failed to retrieve profiles");
-            errorResponse.put("message", e.getMessage());
-            
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
-        }
-    }
-    
-    /**
-     * Get profiles by major
-     */
-    @GetMapping("/major/{major}")
-    public ResponseEntity<?> getProfilesByMajor(@PathVariable String major) {
-        log.info("📚 Retrieving profiles for major: {}", major);
-        
-        try {
-            List<Profile> profiles = profileService.getProfilesByMajor(major);
-            
-            log.info("✅ Retrieved {} profiles for major: {}", profiles.size(), major);
-            
-            return ResponseEntity.ok(profiles);
-            
-        } catch (Exception e) {
-            log.error("❌ Failed to retrieve profiles for major: {} - Error: {}", major, e.getMessage(), e);
-            
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("error", "Failed to retrieve profiles");
-            errorResponse.put("message", e.getMessage());
-            
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
-        }
-    }
-    
-    /**
-     * Get profiles by skill
-     */
-    @GetMapping("/skill/{skill}")
-    public ResponseEntity<?> getProfilesBySkill(@PathVariable String skill) {
-        log.info("🛠️ Retrieving profiles with skill: {}", skill);
-        
-        try {
-            List<Profile> profiles = profileService.getProfilesBySkill(skill);
-            
-            log.info("✅ Retrieved {} profiles with skill: {}", profiles.size(), skill);
-            
-            return ResponseEntity.ok(profiles);
-            
-        } catch (Exception e) {
-            log.error("❌ Failed to retrieve profiles with skill: {} - Error: {}", skill, e.getMessage(), e);
-            
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("error", "Failed to retrieve profiles");
-            errorResponse.put("message", e.getMessage());
-            
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
-        }
-    }
-    
-    /**
-     * Get profiles by rating range
-     */
-    @GetMapping("/rating")
-    public ResponseEntity<?> getProfilesByRatingRange(
-            @RequestParam BigDecimal minRating,
-            @RequestParam BigDecimal maxRating) {
-        log.info("⭐ Retrieving profiles with rating between {} and {}", minRating, maxRating);
-        
-        try {
-            List<Profile> profiles = profileService.getProfilesByRatingRange(minRating, maxRating);
-            
-            log.info("✅ Retrieved {} profiles with rating between {} and {}", profiles.size(), minRating, maxRating);
-            
-            return ResponseEntity.ok(profiles);
-            
-        } catch (Exception e) {
-            log.error("❌ Failed to retrieve profiles by rating range - Error: {}", e.getMessage(), e);
-            
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("error", "Failed to retrieve profiles");
-            errorResponse.put("message", e.getMessage());
-            
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
-        }
-    }
-    
-    /**
-     * Get profiles by hourly rate range
-     */
-    @GetMapping("/hourly-rate")
-    public ResponseEntity<?> getProfilesByHourlyRateRange(
-            @RequestParam BigDecimal minRate,
-            @RequestParam BigDecimal maxRate) {
-        log.info("💰 Retrieving profiles with hourly rate between ${} and ${}", minRate, maxRate);
-        
-        try {
-            List<Profile> profiles = profileService.getProfilesByHourlyRateRange(minRate, maxRate);
-            
-            log.info("✅ Retrieved {} profiles with hourly rate between ${} and ${}", profiles.size(), minRate, maxRate);
-            
-            return ResponseEntity.ok(profiles);
-            
-        } catch (Exception e) {
-            log.error("❌ Failed to retrieve profiles by hourly rate range - Error: {}", e.getMessage(), e);
-            
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("error", "Failed to retrieve profiles");
-            errorResponse.put("message", e.getMessage());
-            
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
-        }
-    }
+   
     
     /**
      * Get profiles available for work
@@ -410,105 +226,9 @@ public class ProfileController {
         }
     }
     
-    /**
-     * Get top rated profiles
-     */
-    @GetMapping("/top-rated")
-    public ResponseEntity<?> getTopRatedProfiles() {
-        log.info("🏆 Retrieving top rated profiles");
-        
-        try {
-            List<Profile> profiles = profileService.getTopRatedProfiles();
-            
-            log.info("✅ Retrieved {} top rated profiles", profiles.size());
-            
-            return ResponseEntity.ok(profiles);
-            
-        } catch (Exception e) {
-            log.error("❌ Failed to retrieve top rated profiles - Error: {}", e.getMessage(), e);
-            
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("error", "Failed to retrieve profiles");
-            errorResponse.put("message", e.getMessage());
-            
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
-        }
-    }
-    
-    /**
-     * Get most experienced profiles
-     */
-    @GetMapping("/most-experienced")
-    public ResponseEntity<?> getMostExperiencedProfiles() {
-        log.info("🎓 Retrieving most experienced profiles");
-        
-        try {
-            List<Profile> profiles = profileService.getMostExperiencedProfiles();
-            
-            log.info("✅ Retrieved {} most experienced profiles", profiles.size());
-            
-            return ResponseEntity.ok(profiles);
-            
-        } catch (Exception e) {
-            log.error("❌ Failed to retrieve most experienced profiles - Error: {}", e.getMessage(), e);
-            
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("error", "Failed to retrieve profiles");
-            errorResponse.put("message", e.getMessage());
-            
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
-        }
-    }
-    
-    /**
-     * Get most successful profiles
-     */
-    @GetMapping("/most-successful")
-    public ResponseEntity<?> getMostSuccessfulProfiles() {
-        log.info("✅ Retrieving most successful profiles");
-        
-        try {
-            List<Profile> profiles = profileService.getMostSuccessfulProfiles();
-            
-            log.info("✅ Retrieved {} most successful profiles", profiles.size());
-            
-            return ResponseEntity.ok(profiles);
-            
-        } catch (Exception e) {
-            log.error("❌ Failed to retrieve most successful profiles - Error: {}", e.getMessage(), e);
-            
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("error", "Failed to retrieve profiles");
-            errorResponse.put("message", e.getMessage());
-            
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
-        }
-    }
-    
-    /**
-     * Get highest earning profiles
-     */
-    @GetMapping("/highest-earning")
-    public ResponseEntity<?> getHighestEarningProfiles() {
-        log.info("💎 Retrieving highest earning profiles");
-        
-        try {
-            List<Profile> profiles = profileService.getHighestEarningProfiles();
-            
-            log.info("✅ Retrieved {} highest earning profiles", profiles.size());
-            
-            return ResponseEntity.ok(profiles);
-            
-        } catch (Exception e) {
-            log.error("❌ Failed to retrieve highest earning profiles - Error: {}", e.getMessage(), e);
-            
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("error", "Failed to retrieve profiles");
-            errorResponse.put("message", e.getMessage());
-            
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
-        }
-    }
+   
+   
+   
     
     /**
      * Update profile
@@ -525,15 +245,10 @@ public class ProfileController {
             Profile updatedProfile = Profile.builder()
                     .firstName(request.getFirstName())
                     .lastName(request.getLastName())
-                    .bio(request.getBio())
-                    .university(request.getUniversity())
+                    // Fixed college
+                    .university("RGUKT NUZVID")
                     .major(request.getMajor())
-                    .academicYear(request.getAcademicYear())
-                    .skills(request.getSkills())
-                    .experienceYears(request.getExperienceYears())
-                    .experienceDescription(request.getExperienceDescription())
-                    .preferredCategories(request.getPreferredCategories())
-                    .hourlyRate(request.getHourlyRate())
+                    .academicYear(mapAcademicYear(request.getAcademicYear()))
                     .availabilityStatus(request.getAvailabilityStatus())
                     .isPublic(request.getIsPublic())
                     .build();
@@ -593,37 +308,6 @@ public class ProfileController {
         }
     }
     
-    /**
-     * Add rating to profile
-     */
-    @PostMapping("/{id}/rating")
-    public ResponseEntity<?> addRating(@PathVariable Long id, @RequestBody AddRatingRequest request) {
-        log.info("⭐ Adding rating {} to profile ID: {}", request.getRating(), id);
-        
-        try {
-            Profile updatedProfile = profileService.addRating(id, request.getRating());
-            
-            log.info("✅ Rating added successfully: {} to profile: {} (New rating: {})", 
-                    request.getRating(), updatedProfile.getDisplayName(), updatedProfile.getRating());
-            
-            Map<String, Object> response = new HashMap<>();
-            response.put("message", "Rating added successfully");
-            response.put("profileId", updatedProfile.getId());
-            response.put("newRating", updatedProfile.getRating());
-            response.put("totalRatings", updatedProfile.getTotalRatings());
-            
-            return ResponseEntity.ok(response);
-            
-        } catch (Exception e) {
-            log.error("❌ Failed to add rating to profile ID: {} - Error: {}", id, e.getMessage(), e);
-            
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("error", "Failed to add rating");
-            errorResponse.put("message", e.getMessage());
-            
-            return ResponseEntity.badRequest().body(errorResponse);
-        }
-    }
     
     /**
      * Mark task as completed
@@ -859,15 +543,10 @@ public class ProfileController {
     public static class CreateProfileRequest {
         private String firstName;
         private String lastName;
-        private String bio;
-        private String university;
+        // university is fixed to RGUKT NUZVID in backend
         private String major;
-        private Integer academicYear;
-        private List<String> skills;
-        private Integer experienceYears;
-        private String experienceDescription;
-        private List<String> preferredCategories;
-        private BigDecimal hourlyRate;
+        // academicYear options: PUC1, PUC2, E1, E2, E3, E4
+        private String academicYear;
         private Profile.AvailabilityStatus availabilityStatus;
         private Boolean isPublic;
     }
@@ -879,15 +558,10 @@ public class ProfileController {
     public static class UpdateProfileRequest {
         private String firstName;
         private String lastName;
-        private String bio;
-        private String university;
+        // university is fixed to RGUKT NUZVID in backend
         private String major;
-        private Integer academicYear;
-        private List<String> skills;
-        private Integer experienceYears;
-        private String experienceDescription;
-        private List<String> preferredCategories;
-        private BigDecimal hourlyRate;
+        // academicYear options: PUC1, PUC2, E1, E2, E3, E4
+        private String academicYear;
         private Profile.AvailabilityStatus availabilityStatus;
         private Boolean isPublic;
     }
@@ -914,5 +588,19 @@ public class ProfileController {
     @lombok.Data
     public static class UpdateAvailabilityRequest {
         private Profile.AvailabilityStatus status;
+    }
+
+    // ==================== PRIVATE HELPERS ====================
+    private Integer mapAcademicYear(String option) {
+        if (option == null) return null;
+        switch (option.toUpperCase()) {
+            case "PUC1": return 1;
+            case "PUC2": return 2;
+            case "E1": return 3;
+            case "E2": return 4;
+            case "E3": return 5;
+            case "E4": return 6;
+            default: return null;
+        }
     }
 }

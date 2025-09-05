@@ -76,7 +76,7 @@ const Navigation = () => {
   ];
 
   return (
-    <AppBar position="static" elevation={1}>
+    <AppBar position="static" elevation={1} sx={{ backgroundColor: 'white', color: 'text.primary' }}>
       <Toolbar>
         {/* Logo/Brand */}
         <Typography
@@ -105,9 +105,10 @@ const Navigation = () => {
               startIcon={item.icon}
               sx={{
                 mx: 1,
-                backgroundColor: location.pathname === item.path ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
+                color: 'text.primary',
+                backgroundColor: location.pathname === item.path ? 'rgba(0, 0, 0, 0.04)' : 'transparent',
                 '&:hover': {
-                  backgroundColor: 'rgba(255, 255, 255, 0.1)'
+                  backgroundColor: 'rgba(0, 0, 0, 0.04)'
                 }
               }}
             >
@@ -129,13 +130,19 @@ const Navigation = () => {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
             onClick={handleMenuClick}
-            color="inherit"
             disabled={isLoading}
+            sx={{
+              color: '#000000',
+              '&:hover': {
+                color: '#1976d2',
+                backgroundColor: 'rgba(25, 118, 210, 0.1)'
+              }
+            }}
           >
             {isLoading ? (
-              <CircularProgress size={24} color="inherit" />
+              <CircularProgress size={24} color="primary" />
             ) : (
-              <Avatar sx={{ width: 32, height: 32, bgcolor: 'secondary.main' }}>
+              <Avatar sx={{ width: 32, height: 32, bgcolor: 'primary.main' }}>
                 <AccountCircle />
               </Avatar>
             )}

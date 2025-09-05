@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -26,7 +26,6 @@ import {
   Delete,
   Edit,
   Security,
-  Email,
   Person,
   Warning,
   Logout,
@@ -36,9 +35,9 @@ import {
   VisibilityOff
 } from '@mui/icons-material';
 import Layout from '@components/templates/Layout';
-import { selectAuth, logoutUser } from '@store/slices/authSlice';
-import { ROUTES } from '@constants';
-import apiService from '@services/api';
+import { selectAuth, logoutUser, updateUser } from '@store/slices/authSlice';
+import { ROUTES, AVAILABILITY_STATUS } from '@constants';
+import apiService, { apiUtils } from '@services/api';
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -68,10 +67,83 @@ const ProfilePage = () => {
     confirm: false
   });
 
-  // Resend verification state
-  const [resendVerificationLoading, setResendVerificationLoading] = useState(false);
-  const [resendVerificationError, setResendVerificationError] = useState('');
-  const [resendVerificationSuccess, setResendVerificationSuccess] = useState('');
+
+  // Profile edit state
+  const [editOpen, setEditOpen] = useState(false);
+  const [profileLoading, setProfileLoading] = useState(false);
+  const [saveLoading, setSaveLoading] = useState(false);
+  const [profileError, setProfileError] = useState('');
+  const [profileId, setProfileId] = useState(null);
+  const [form, setForm] = useState({
+    firstName: '',
+    lastName: '',
+    major: '',
+    academicYear: 'PUC1',
+    availabilityStatus: 'AVAILABLE',
+    isPublic: true
+  });
+
+  const ACADEMIC_YEAR_OPTIONS = ['PUC1', 'PUC2', 'E1', 'E2', 'E3', 'E4'];
+
+  const mapAcademicYearNumberToOption = (num) => {
+    switch (num) {
+      case 1: return 'PUC1';
+      case 2: return 'PUC2';
+      case 3: return 'E1';
+      case 4: return 'E2';
+      case 5: return 'E3';
+      case 6: return 'E4';
+      default: return 'PUC1';
+    }
+  };
+
+  const loadProfile = async () => {
+    try {
+      setProfileLoading(true);
+      setProfileError('');
+
+      let res = null;
+      // Try to get user ID from token if not available in user object
+      const userId = user?.id || apiUtils.getUserIdFromToken();
+      
+      if (userId) {
+        res = await apiService.profiles.getByUser(userId);
+      } else if (user?.email) {
+        res = await apiService.profiles.getByUserEmail(user.email);
+      }
+
+      if (res && res.status === 200 && res.data) {
+        const p = res.data;
+        setProfileId(p.id);
+        setForm({
+          firstName: p.firstName || '',
+          lastName: p.lastName || '',
+          major: p.major || '',
+          academicYear: mapAcademicYearNumberToOption(p.academicYear),
+          availabilityStatus: p.availabilityStatus || 'AVAILABLE',
+          isPublic: p.isPublic ?? true
+        });
+      }
+    } catch (e) {
+      console.error('Profile loading error:', e);
+      setProfileError(e.response?.data?.message || 'Failed to load profile');
+    } finally {
+      setProfileLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    // Ensure we have user ID from token if not in user object
+    if (!user?.id && user?.email) {
+      const userId = apiUtils.getUserIdFromToken();
+      if (userId) {
+        // Update user object with ID
+        dispatch(updateUser({ id: userId }));
+      }
+    }
+    loadProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id, user?.email]);
 
   const handleDeleteAccount = async () => {
     if (confirmEmail !== user?.email) {
@@ -253,50 +325,71 @@ const ProfilePage = () => {
     });
   };
 
-  const handleResendVerification = async () => {
-    if (!user?.email) {
-      setResendVerificationError('User email not found');
-      return;
-    }
 
-    setResendVerificationLoading(true);
-    setResendVerificationError('');
-    setResendVerificationSuccess('');
-
-    try {
-      const response = await apiService.auth.resendVerification();
-      
-      if (response.data.success) {
-        setResendVerificationSuccess('Verification email sent successfully! Please check your inbox.');
-        // Clear success message after 5 seconds
-        setTimeout(() => {
-          setResendVerificationSuccess('');
-        }, 5000);
-      } else {
-        setResendVerificationError(response.data.message || 'Failed to resend verification email');
-      }
-    } catch (error) {
-      const errorMessage = error.response?.data?.message || 
-                          error.message || 
-                          'Failed to resend verification email. Please try again.';
-      setResendVerificationError(errorMessage);
-    } finally {
-      setResendVerificationLoading(false);
-    }
+  const handleEditOpen = () => {
+    setEditOpen(true);
   };
 
-  const formatDate = (dateString) => {
-    if (!dateString) return 'Not available';
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
+  const handleEditClose = () => {
+    setEditOpen(false);
+    setProfileError('');
+  };
+
+  const onChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setForm((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
+  };
+
+  const saveProfile = async () => {
+    try {
+      setSaveLoading(true);
+      setProfileError('');
+      
+      const payload = {
+        firstName: form.firstName,
+        lastName: form.lastName,
+        major: form.major,
+        academicYear: form.academicYear,
+        availabilityStatus: form.availabilityStatus,
+        isPublic: form.isPublic
+      };
+      
+      if (profileId) {
+        // Update existing profile
+        const res = await apiService.profiles.update(profileId, payload);
+        if (res.status === 200) {
+          // Reload profile to get updated data
+          await loadProfile();
+          setEditOpen(false);
+        }
+      } else {
+        // Create new profile
+        const res = await apiService.profiles.create(payload);
+        if (res.status === 201) {
+          // Reload profile to get the created profile data
+          await loadProfile();
+          setEditOpen(false);
+        }
+      }
+    } catch (e) {
+      console.error('Profile save error:', e);
+      const errorMessage = e.response?.data?.message || 'Failed to save profile';
+      setProfileError(errorMessage);
+      
+      // If it's an authorization error, try to reload the profile
+      if (errorMessage.includes('not authorized')) {
+        console.log('Authorization error detected, reloading profile...');
+        await loadProfile();
+      }
+    } finally {
+      setSaveLoading(false);
+    }
   };
 
   return (
     <Layout>
-      <Container maxWidth="md">
+      <Box sx={{ minHeight: '100vh', py: 4 }}>
+        <Container maxWidth="lg">
         <Box sx={{ mb: 4 }}>
           <Typography variant="h4" component="h1" gutterBottom>
             Profile & Settings
@@ -306,105 +399,103 @@ const ProfilePage = () => {
           </Typography>
         </Box>
 
-        <Grid container spacing={3}>
-          {/* Profile Information */}
-          <Grid item xs={12} md={8}>
-            <Paper sx={{ p: 3, mb: 3 }}>
+        {/* Single Merged Profile Card */}
+        <Paper sx={{ p: 4 }}>
+          <Grid container spacing={4}>
+            {/* Account Information Section */}
+            <Grid item xs={12} md={4}>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
                 <Person sx={{ mr: 2, color: 'primary.main' }} />
                 <Typography variant="h6">Account Information</Typography>
               </Box>
               
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <Typography variant="body2" color="text.secondary">
-                    Email Address
-                  </Typography>
-                  <Typography variant="body1" sx={{ mb: 2 }}>
-                    {user?.email || 'Not available'}
-                  </Typography>
-                </Grid>
-                
-                <Grid item xs={12} sm={6}>
-                  <Typography variant="body2" color="text.secondary">
-                    Account Role
-                  </Typography>
-                  <Chip 
-                    label={user?.role || 'STUDENT'} 
-                    color="primary" 
-                    variant="outlined"
-                    sx={{ mb: 2 }}
-                  />
-                </Grid>
-                
-                <Grid item xs={12} sm={6}>
-                  <Typography variant="body2" color="text.secondary">
-                    Email Verified
-                  </Typography>
-                  <Chip 
-                    label={user?.emailVerified ? 'Verified' : 'Not Verified'} 
-                    color={user?.emailVerified ? 'success' : 'warning'} 
-                    variant="outlined"
-                    sx={{ mb: 2 }}
-                  />
-                </Grid>
-                
-                <Grid item xs={12} sm={6}>
-                  <Typography variant="body2" color="text.secondary">
-                    Account Created
-                  </Typography>
-                  <Typography variant="body1" sx={{ mb: 2 }}>
-                    {formatDate(user?.createdAt)}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Paper>
+              <Box sx={{ mb: 2 }}>
+                <Typography variant="body2" color="text.secondary">
+                  Email Address
+                </Typography>
+                <Typography variant="body1" sx={{ mb: 2 }}>
+                  {user?.email || 'Not available'}
+                </Typography>
+              </Box>
+              
+              <Box sx={{ mb: 3 }}>
+                <Typography variant="body2" color="text.secondary">
+                  Account Role
+                </Typography>
+                <Chip 
+                  label={user?.role || 'STUDENT'} 
+                  sx={{ 
+                    mb: 2,
+                    backgroundColor: '#E3F2FD',
+                    color: '#1976D2',
+                    border: '2px solid #1976D2',
+                    fontWeight: 'bold',
+                    '&:hover': {
+                      backgroundColor: '#BBDEFB',
+                      transform: 'scale(1.05)',
+                      transition: 'all 0.2s ease-in-out'
+                    }
+                  }}
+                />
+              </Box>
+              
+              <Button 
+                variant="contained" 
+                startIcon={<Edit />} 
+                onClick={handleEditOpen}
+                sx={{
+                  backgroundColor: '#4CAF50',
+                  color: 'white',
+                  border: '2px solid #4CAF50',
+                  fontWeight: 'bold',
+                  px: 3,
+                  py: 1.5,
+                  '&:hover': {
+                    backgroundColor: '#45A049',
+                    border: '2px solid #45A049',
+                    transform: 'translateY(-2px)',
+                    boxShadow: '0 4px 8px rgba(76, 175, 80, 0.3)',
+                    transition: 'all 0.2s ease-in-out'
+                  }
+                }}
+              >
+                Edit Profile
+              </Button>
+            </Grid>
 
-            {/* Security Settings */}
-            <Paper sx={{ p: 3, mb: 3 }}>
+            {/* Security Settings Section */}
+            <Grid item xs={12} md={4}>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
                 <Security sx={{ mr: 2, color: 'primary.main' }} />
                 <Typography variant="h6">Security Settings</Typography>
               </Box>
               
               <Button
-                variant="outlined"
-                color="primary"
+                variant="contained"
                 startIcon={<Edit />}
                 onClick={() => setChangePasswordOpen(true)}
-                sx={{ mr: 2, mb: 2 }}
+                fullWidth
+                sx={{
+                  backgroundColor: '#FF9800',
+                  color: 'white',
+                  border: '2px solid #FF9800',
+                  fontWeight: 'bold',
+                  py: 1.5,
+                  '&:hover': {
+                    backgroundColor: '#F57C00',
+                    border: '2px solid #F57C00',
+                    transform: 'translateY(-2px)',
+                    boxShadow: '0 4px 8px rgba(255, 152, 0, 0.3)',
+                    transition: 'all 0.2s ease-in-out'
+                  }
+                }}
               >
                 Change Password
               </Button>
-              
-              <Button
-                variant="outlined"
-                color="secondary"
-                startIcon={<Email />}
-                onClick={handleResendVerification}
-                disabled={resendVerificationLoading}
-                sx={{ mb: 2 }}
-              >
-                {resendVerificationLoading ? 'Sending...' : 'Resend Verification Email'}
-              </Button>
-              
-              {resendVerificationError && (
-                <Alert severity="error" sx={{ mb: 2 }}>
-                  {resendVerificationError}
-                </Alert>
-              )}
-              
-              {resendVerificationSuccess && (
-                <Alert severity="success" sx={{ mb: 2 }}>
-                  {resendVerificationSuccess}
-                </Alert>
-              )}
-            </Paper>
-          </Grid>
+            </Grid>
 
-          {/* Account Actions */}
-          <Grid item xs={12} md={4}>
-            <Paper sx={{ p: 3, mb: 3 }}>
+            {/* Account Actions Section */}
+            <Grid item xs={12} md={4}>
               <Typography variant="h6" gutterBottom>
                 Account Actions
               </Typography>
@@ -439,9 +530,9 @@ const ProfilePage = () => {
               <Typography variant="caption" color="text.secondary" sx={{ mt: 1, display: 'block' }}>
                 This action cannot be undone. All your data will be permanently deleted.
               </Typography>
-            </Paper>
+            </Grid>
           </Grid>
-        </Grid>
+        </Paper>
 
         {/* Delete Account Dialog */}
         <Dialog 
@@ -637,7 +728,79 @@ const ProfilePage = () => {
             </Button>
           </DialogActions>
         </Dialog>
+
+          {/* Edit Profile Dialog */}
+          <Dialog 
+            open={editOpen} 
+            onClose={handleEditClose}
+            maxWidth="sm"
+            fullWidth
+          >
+            <DialogTitle>Edit Profile</DialogTitle>
+            <DialogContent>
+              {profileError && (
+                <Alert severity="error" sx={{ mb: 2 }}>{profileError}</Alert>
+              )}
+              <Grid container spacing={2} sx={{ mt: 1 }}>
+                <Grid item xs={12} sm={6}>
+                  <TextField fullWidth label="First Name" name="firstName" value={form.firstName} onChange={onChange} />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField fullWidth label="Last Name" name="lastName" value={form.lastName} onChange={onChange} />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField fullWidth label="College" value="RGUKT NUZVID" disabled />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField fullWidth label="Major" name="major" value={form.major} onChange={onChange} />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    select
+                    fullWidth
+                    label="Academic Year"
+                    name="academicYear"
+                    value={form.academicYear}
+                    onChange={onChange}
+                    SelectProps={{ native: true }}
+                  >
+                    {ACADEMIC_YEAR_OPTIONS.map((opt) => (
+                      <option key={opt} value={opt}>{opt}</option>
+                    ))}
+                  </TextField>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    select
+                    fullWidth
+                    label="Availability"
+                    name="availabilityStatus"
+                    value={form.availabilityStatus}
+                    onChange={onChange}
+                    SelectProps={{ native: true }}
+                  >
+                    {Object.keys(AVAILABILITY_STATUS).map((k) => (
+                      <option key={k} value={k}>{k}</option>
+                    ))}
+                  </TextField>
+                </Grid>
+                <Grid item xs={12}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Typography variant="body2">Public Profile</Typography>
+                    <input type="checkbox" name="isPublic" checked={!!form.isPublic} onChange={onChange} />
+                  </Box>
+                </Grid>
+              </Grid>
+            </DialogContent>
+            <DialogActions sx={{ p: 3 }}>
+              <Button onClick={handleEditClose} disabled={saveLoading}>Cancel</Button>
+              <Button variant="contained" onClick={saveProfile} disabled={saveLoading} startIcon={saveLoading ? <CircularProgress size={20} /> : <Save />}>
+                {saveLoading ? 'Saving...' : 'Save'}
+              </Button>
+            </DialogActions>
+          </Dialog>
       </Container>
+      </Box>
     </Layout>
   );
 };

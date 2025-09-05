@@ -317,6 +317,57 @@ public class AuthController {
     }
     
     /**
+     * Resend verification email (public endpoint for unauthenticated users)
+     * @param request resend verification request with email
+     * @return resend result
+     */
+    @PostMapping("/resend-verification-public")
+    public ResponseEntity<?> resendVerificationEmailPublic(@RequestBody Map<String, String> request) {
+        String email = request.get("email");
+        logger.info("🔄 Public resend verification email request for: {}", email);
+        
+        if (email == null || email.trim().isEmpty()) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);
+            response.put("message", "Email address is required");
+            response.put("timestamp", System.currentTimeMillis());
+            return ResponseEntity.badRequest().body(response);
+        }
+        
+        try {
+            boolean emailSent = authService.resendVerificationEmail(email);
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("timestamp", System.currentTimeMillis());
+            
+            if (emailSent) {
+                response.put("success", true);
+                response.put("message", "Verification email sent successfully! Please check your inbox.");
+                response.put("email", email);
+                
+                logger.info("✅ Public verification email resent successfully to: {}", email);
+                return ResponseEntity.ok(response);
+            } else {
+                response.put("success", false);
+                response.put("message", "Failed to send verification email. Please check your email address and try again.");
+                
+                logger.error("❌ Failed to resend verification email to: {}", email);
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+            }
+            
+        } catch (Exception e) {
+            logger.error("❌ Public resend verification email failed for {}: {}", email, e.getMessage(), e);
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);
+            response.put("message", e.getMessage());
+            response.put("timestamp", System.currentTimeMillis());
+            
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+    
+    /**
      * Get verification status for an email
      * @param email email address to check
      * @return verification status

@@ -24,7 +24,6 @@ com\campusworks\bidding\dto\TaskOwnershipResponse$TaskOwnershipResponseBuilder.c
 com\campusworks\bidding\dto\TaskStatusUpdateRequest.class
 com\campusworks\bidding\dto\BiddingStatusResponse.class
 com\campusworks\bidding\dto\TaskAssignmentRequest$TaskAssignmentRequestBuilder.class
-com\campusworks\bidding\config\SecurityConfig.class
 com\campusworks\bidding\dto\BidResponse$BidResponseBuilder.class
 com\campusworks\bidding\service\BiddingService$BidStatistics.class
 com\campusworks\bidding\dto\BidResponse.class

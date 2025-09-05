@@ -20,9 +20,15 @@ import DashboardPage from '@pages/dashboard/DashboardPage';
 import TasksPage from '@pages/tasks/TasksPage';
 import TaskDetailPage from '@pages/tasks/TaskDetailPage';
 import CreateTaskPage from '@pages/tasks/CreateTaskPage';
+import EditTaskPage from '@pages/tasks/EditTaskPage';
+import MyTasksPage from '@pages/tasks/MyTasksPage';
 import BidsPage from '@pages/bids/BidsPage';
+import MyBidsPage from '@pages/bids/MyBidsPage';
 import ProfilePage from '@pages/profile/ProfilePage';
 import PaymentsPage from '@pages/payments/PaymentsPage';
+
+// Test Components
+import CountdownTest from '@components/test/CountdownTest';
 
 // Constants
 import { ROUTES } from '@constants';
@@ -102,10 +108,34 @@ function App() {
               } 
             />
             <Route 
+              path={ROUTES.EDIT_TASK} 
+              element={
+                <ProtectedRoute>
+                  <EditTaskPage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path={ROUTES.MY_TASKS} 
+              element={
+                <ProtectedRoute>
+                  <MyTasksPage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
               path={ROUTES.BIDS} 
               element={
                 <ProtectedRoute>
                   <BidsPage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path={ROUTES.MY_BIDS} 
+              element={
+                <ProtectedRoute>
+                  <MyBidsPage />
                 </ProtectedRoute>
               } 
             />
@@ -122,6 +152,16 @@ function App() {
               element={
                 <ProtectedRoute>
                   <PaymentsPage />
+                </ProtectedRoute>
+              } 
+            />
+            
+            {/* Test Route */}
+            <Route 
+              path="/test-countdown" 
+              element={
+                <ProtectedRoute>
+                  <CountdownTest />
                 </ProtectedRoute>
               } 
             />

@@ -14,6 +14,7 @@ export const API_CONFIG = {
           USER: '/api/auth/user',
           VERIFY: '/api/auth/verify',
           RESEND_VERIFICATION: '/api/auth/resend-verification',
+          RESEND_VERIFICATION_PUBLIC: '/api/auth/resend-verification-public',
           VERIFICATION_STATUS: '/api/auth/verification-status',
           VALIDATE_EMAIL: '/api/auth/validate-email',
           DELETE_ACCOUNT: '/api/auth/delete-account',
@@ -29,7 +30,9 @@ export const API_CONFIG = {
       BY_STATUS: '/api/tasks/status',
       BY_CATEGORY: '/api/tasks/category',
       OPEN_FOR_BIDDING: '/api/tasks/open-for-bidding',
-      BY_USER: '/api/tasks/user'
+      BY_USER: '/api/tasks/user',
+      BY_OWNER_EMAIL: '/api/tasks/owner-email',
+      CAN_EDIT: '/api/tasks'
     },
     
     // Bidding
@@ -37,6 +40,7 @@ export const API_CONFIG = {
       BASE: '/api/bids',
       BY_TASK: '/api/bids/task',
       BY_USER: '/api/bids/user',
+      BY_USER_EMAIL: '/api/bids/user/email',
       BY_STATUS: '/api/bids/status',
       AUTO_SELECT: '/api/bids/{taskId}/auto-select'
     },
@@ -45,6 +49,7 @@ export const API_CONFIG = {
     PROFILES: {
       BASE: '/api/profiles',
       BY_USER: '/api/profiles/user',
+      BY_EMAIL: '/api/profiles/user/email',
       BY_AVAILABILITY: '/api/profiles/availability'
     },
     
@@ -77,12 +82,19 @@ export const TASK_CATEGORIES = {
   MATHEMATICS: 'MATHEMATICS',              // Math problems, statistics
   SCIENCE: 'SCIENCE',                      // Physics, chemistry, biology
   LITERATURE: 'LITERATURE',                // Literary analysis
-  HISTORY: 'HISTORY',                      // Historical research
-  BUSINESS: 'BUSINESS',                    // Business plans, analysis
   ENGINEERING: 'ENGINEERING',              // Technical calculations
-  MEDICINE: 'MEDICINE',                    // Medical research
-  LAW: 'LAW',                             // Legal research
   OTHER: 'OTHER'                          // Miscellaneous tasks
+};
+
+// Category Display Labels
+export const CATEGORY_LABELS = {
+  ACADEMIC_WRITING: 'Academic Writing',
+  PROGRAMMING: 'Programming',
+  MATHEMATICS: 'Mathematics',
+  SCIENCE: 'Science',
+  LITERATURE: 'Literature',
+  ENGINEERING: 'Engineering',
+  OTHER: 'Other'
 };
 
 // =========================
@@ -235,14 +247,14 @@ export const VALIDATION_LIMITS = {
     TITLE_MAX_LENGTH: 100,
     DESCRIPTION_MIN_LENGTH: 10,
     DESCRIPTION_MAX_LENGTH: 1000,
-    MIN_BUDGET: 1.00,
+    MIN_BUDGET: 50.00,
     MAX_BUDGET: 10000.00
   },
   
   BID: {
     PROPOSAL_MIN_LENGTH: 10,
     PROPOSAL_MAX_LENGTH: 500,
-    MIN_AMOUNT: 1.00,
+    MIN_AMOUNT: 50.00,
     MAX_AMOUNT: 10000.00
   },
   
@@ -293,7 +305,10 @@ export const ROUTES = {
   TASKS: '/tasks',
   TASK_DETAIL: '/tasks/:id',
   CREATE_TASK: '/tasks/create',
+  EDIT_TASK: '/tasks/:id/edit',
+  MY_TASKS: '/my-tasks',
   BIDS: '/bids',
+  MY_BIDS: '/my-bids',
   BID_DETAIL: '/bids/:id',
   PROFILE: '/profile',
   EDIT_PROFILE: '/profile/edit',

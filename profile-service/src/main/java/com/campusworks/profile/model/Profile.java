@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.math.BigDecimal;
 
 /**
  * Profile Entity
@@ -45,10 +44,6 @@ public class Profile {
     @Column(name = "last_name", length = 100)
     private String lastName;
     
-    @Size(max = 1000, message = "Bio cannot exceed 1000 characters")
-    @Column(length = 1000)
-    private String bio;
-    
     @Size(max = 100, message = "University cannot exceed 100 characters")
     @Column(length = 100)
     private String university;
@@ -62,30 +57,6 @@ public class Profile {
     @Column(name = "academic_year")
     private Integer academicYear;
     
-    @ElementCollection
-    @CollectionTable(name = "profile_skills", joinColumns = @JoinColumn(name = "profile_id"))
-    @Column(name = "skill", length = 100)
-    @Size(max = 20, message = "Cannot have more than 20 skills")
-    private List<String> skills;
-    
-    @Min(value = 0, message = "Experience years cannot be negative")
-    @Max(value = 50, message = "Experience years cannot exceed 50")
-    @Column(name = "experience_years")
-    private Integer experienceYears;
-    
-    @Size(max = 500, message = "Experience description cannot exceed 500 characters")
-    @Column(name = "experience_description", length = 500)
-    private String experienceDescription;
-    
-    @DecimalMin(value = "0.0", message = "Rating cannot be negative")
-    @DecimalMax(value = "5.0", message = "Rating cannot exceed 5.0")
-    @Column(precision = 3, scale = 2)
-    private BigDecimal rating;
-    
-    @Column(name = "total_ratings")
-    @Min(value = 0, message = "Total ratings cannot be negative")
-    private Integer totalRatings;
-    
     @Column(name = "completed_tasks")
     @Min(value = 0, message = "Completed tasks cannot be negative")
     private Integer completedTasks;
@@ -95,7 +66,6 @@ public class Profile {
     private Integer successfulTasks;
     
     @Column(name = "total_earnings", precision = 10, scale = 2)
-    @DecimalMin(value = "0.0", message = "Total earnings cannot be negative")
     private BigDecimal totalEarnings;
     
     @Column(name = "is_verified")
@@ -106,14 +76,6 @@ public class Profile {
     @Builder.Default
     private Boolean isPublic = true;
     
-    @ElementCollection
-    @CollectionTable(name = "profile_preferred_categories", joinColumns = @JoinColumn(name = "profile_id"))
-    @Column(name = "category", length = 100)
-    private List<String> preferredCategories;
-    
-    @Column(name = "hourly_rate", precision = 8, scale = 2)
-    @DecimalMin(value = "0.0", message = "Hourly rate cannot be negative")
-    private BigDecimal hourlyRate;
     
     @Column(name = "availability_status")
     @Enumerated(EnumType.STRING)
@@ -165,9 +127,8 @@ public class Profile {
      * Check if profile is complete
      */
     public boolean isComplete() {
-        return firstName != null && lastName != null && bio != null && 
-               university != null && major != null && academicYear != null &&
-               skills != null && !skills.isEmpty();
+        return firstName != null && lastName != null &&
+               university != null && major != null && academicYear != null;
     }
     
     /**
@@ -176,33 +137,6 @@ public class Profile {
     public boolean isAvailableForWork() {
         return availabilityStatus == AvailabilityStatus.AVAILABLE && 
                isPublic && isVerified;
-    }
-    
-    /**
-     * Add a new rating
-     */
-    public void addRating(BigDecimal newRating) {
-        if (rating == null) {
-            rating = newRating;
-            totalRatings = 1;
-        } else {
-            BigDecimal totalRating = rating.multiply(BigDecimal.valueOf(totalRatings));
-            totalRating = totalRating.add(newRating);
-            totalRatings++;
-            rating = totalRating.divide(BigDecimal.valueOf(totalRatings), 2, BigDecimal.ROUND_HALF_UP);
-        }
-    }
-    
-    /**
-     * Update rating when task is completed
-     */
-    public void updateRating(BigDecimal newRating) {
-        addRating(newRating);
-        if (completedTasks == null) {
-            completedTasks = 1;
-        } else {
-            completedTasks++;
-        }
     }
     
     /**

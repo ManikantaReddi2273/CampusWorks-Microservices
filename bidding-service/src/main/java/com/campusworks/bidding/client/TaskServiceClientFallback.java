@@ -89,4 +89,47 @@ public class TaskServiceClientFallback implements TaskServiceClient {
                 .success(false)
                 .build();
     }
+    
+    @Override
+    public TaskResponse getTaskById(Long taskId) {
+        log.warn("⚠️ Task Service unavailable - Fallback: Returning default task response for task {}", taskId);
+        
+        // Return default response with far future deadline to avoid false expiration
+        return TaskResponse.builder()
+                .id(taskId)
+                .title("Task Service Unavailable")
+                .description("Task Service is unavailable")
+                .status("UNKNOWN")
+                .biddingDeadline(LocalDateTime.now().plusDays(30))
+                .completionDeadline(LocalDateTime.now().plusDays(60)) // Far future to avoid false expiration
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .build();
+    }
+    
+    @Override
+    public TaskUpdateResponse acceptTask(Long taskId, TaskUpdateResponse request) {
+        log.warn("⚠️ Task Service unavailable - Fallback: Cannot accept task {}", taskId);
+        
+        return TaskUpdateResponse.builder()
+                .taskId(taskId)
+                .status("FAILED")
+                .message("Task Service unavailable - Task acceptance failed")
+                .updatedAt(LocalDateTime.now())
+                .success(false)
+                .build();
+    }
+    
+    @Override
+    public TaskUpdateResponse completeTask(Long taskId, TaskUpdateResponse request) {
+        log.warn("⚠️ Task Service unavailable - Fallback: Cannot complete task {}", taskId);
+        
+        return TaskUpdateResponse.builder()
+                .taskId(taskId)
+                .status("FAILED")
+                .message("Task Service unavailable - Task completion failed")
+                .updatedAt(LocalDateTime.now())
+                .success(false)
+                .build();
+    }
 }

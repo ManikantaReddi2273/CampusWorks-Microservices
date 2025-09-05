@@ -52,7 +52,7 @@ public class SecurityConfig {
                 .requestMatchers("/auth/register", "/auth/login", "/auth/verify", 
                                "/auth/forgot-password", "/auth/reset-password", 
                                "/auth/verification-status/**", "/auth/validate-email/**", 
-                               "/auth/health").permitAll()
+                               "/auth/resend-verification-public", "/auth/health").permitAll()
                 
                 // Protected endpoints (require authentication)
                 .requestMatchers("/auth/change-password", "/auth/delete-account", 

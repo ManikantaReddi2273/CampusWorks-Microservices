@@ -69,11 +69,26 @@ public class TaskService {
         LocalDateTime biddingDeadline = LocalDateTime.now().plusHours(biddingPeriodHours);
         task.setBiddingDeadline(biddingDeadline);
         
+        // Ensure completion deadline is set and is in the future
+        LocalDateTime now = LocalDateTime.now();
+        if (task.getCompletionDeadline() == null || task.getCompletionDeadline().isBefore(now.plusHours(1))) {
+            // Set completion deadline to 7 days from now, or at least 1 hour after bidding deadline
+            LocalDateTime defaultCompletionDeadline = biddingDeadline.plusDays(7);
+            task.setCompletionDeadline(defaultCompletionDeadline);
+            log.info("📅 Setting completion deadline to: {} (7 days after bidding deadline)", defaultCompletionDeadline);
+        } else {
+            log.info("📅 Using provided completion deadline: {}", task.getCompletionDeadline());
+        }
+        
+        log.info("📅 Bidding deadline set to: {}", biddingDeadline);
+        log.info("📅 Completion deadline from task: {}", task.getCompletionDeadline());
+        
         // Save task
         Task savedTask = taskRepository.save(task);
         
         log.info("✅ Task created successfully with ID: {} and bidding deadline: {}", 
                 savedTask.getId(), savedTask.getBiddingDeadline());
+        log.info("📅 Final completion deadline: {}", savedTask.getCompletionDeadline());
         
         return savedTask;
     }
@@ -117,6 +132,19 @@ public class TaskService {
         List<Task> tasks = taskRepository.findByOwnerIdOrderByCreatedAtDesc(ownerId);
         
         log.info("✅ Retrieved {} tasks for owner ID: {}", tasks.size(), ownerId);
+        
+        return tasks;
+    }
+    
+    /**
+     * Get tasks by owner email
+     */
+    public List<Task> getTasksByOwnerEmail(String ownerEmail) {
+        log.info("👤 Retrieving tasks for owner email: {}", ownerEmail);
+        
+        List<Task> tasks = taskRepository.findByOwnerEmailOrderByCreatedAtDesc(ownerEmail);
+        
+        log.info("✅ Retrieved {} tasks for owner email: {}", tasks.size(), ownerEmail);
         
         return tasks;
     }
@@ -187,6 +215,62 @@ public class TaskService {
     }
     
     /**
+     * Check if a task can be edited or deleted by the owner
+     * Rules:
+     * 1. Task must be OPEN status
+     * 2. If bidding deadline has not passed, editing/deleting is not allowed (regardless of bids)
+     * 3. If bidding deadline has passed and task has bids, editing/deleting is not allowed permanently
+     * 4. If bidding deadline has passed and task has no bids, editing/deleting is allowed
+     */
+    public boolean canTaskBeEditedOrDeleted(Long taskId) {
+        log.info("🔍 Checking if task ID: {} can be edited or deleted", taskId);
+        
+        try {
+            Optional<Task> taskOpt = taskRepository.findById(taskId);
+            if (taskOpt.isEmpty()) {
+                log.warn("❌ Task not found with ID: {}", taskId);
+                return false;
+            }
+            
+            Task task = taskOpt.get();
+            
+            // Task must be OPEN status
+            if (task.getStatus() != Task.TaskStatus.OPEN) {
+                log.info("❌ Task ID: {} cannot be edited - status is: {}", taskId, task.getStatus());
+                return false;
+            }
+            
+            // Check if bidding deadline has passed
+            LocalDateTime now = LocalDateTime.now();
+            if (task.getBiddingDeadline().isAfter(now)) {
+                log.info("❌ Task ID: {} cannot be edited - bidding deadline has not passed (deadline: {})", 
+                        taskId, task.getBiddingDeadline());
+                return false;
+            }
+            
+            // Bidding deadline has passed, check if task has any bids
+            try {
+                Long bidCount = biddingServiceClient.getBidCountForTask(taskId);
+                if (bidCount != null && bidCount > 0) {
+                    log.info("❌ Task ID: {} cannot be edited - has {} bids after deadline", taskId, bidCount);
+                    return false;
+                }
+            } catch (Exception e) {
+                log.warn("⚠️ Could not check bid count for task ID: {} - Error: {}", taskId, e.getMessage());
+                // If we can't check bid count, assume it can be edited
+            }
+            
+            // If we reach here, task can be edited/deleted (deadline passed and no bids)
+            log.info("✅ Task ID: {} can be edited or deleted (deadline passed, no bids)", taskId);
+            return true;
+            
+        } catch (Exception e) {
+            log.error("❌ Error checking if task ID: {} can be edited - Error: {}", taskId, e.getMessage(), e);
+            return false;
+        }
+    }
+    
+    /**
      * Update task
      */
     public Task updateTask(Long taskId, Task updatedTask, Long userId) {
@@ -206,6 +290,33 @@ public class TaskService {
         if (existingTask.getStatus() != Task.TaskStatus.OPEN) {
             log.warn("❌ Cannot update task ID: {} - status is: {}", taskId, existingTask.getStatus());
             throw new RuntimeException("Cannot update task - bidding period has ended");
+        }
+        
+        // Check if task has any bids - if so, restrict editing
+        try {
+            Long bidCount = biddingServiceClient.getBidCountForTask(taskId);
+            if (bidCount != null && bidCount > 0) {
+                log.warn("❌ Cannot update task ID: {} - task has {} bids", taskId, bidCount);
+                throw new RuntimeException("You cannot edit this task because bids already exist. Please wait until the bidding deadline passes and no bids are placed.");
+            }
+        } catch (Exception e) {
+            log.warn("⚠️ Could not check bid count for task ID: {} - Error: {}", taskId, e.getMessage());
+            // If we can't check bid count, allow the update but log the warning
+        }
+        
+        // Check if bidding deadline has passed - if so, only allow editing if no bids exist
+        if (existingTask.getBiddingDeadline() != null && 
+            LocalDateTime.now().isAfter(existingTask.getBiddingDeadline())) {
+            try {
+                Long bidCount = biddingServiceClient.getBidCountForTask(taskId);
+                if (bidCount != null && bidCount > 0) {
+                    log.warn("❌ Cannot update task ID: {} - bidding deadline passed and task has {} bids", taskId, bidCount);
+                    throw new RuntimeException("You cannot edit this task because the bidding deadline has passed and bids already exist.");
+                }
+            } catch (Exception e) {
+                log.warn("⚠️ Could not check bid count for task ID: {} - Error: {}", taskId, e.getMessage());
+                // If we can't check bid count, allow the update but log the warning
+            }
         }
         
         // Update allowed fields
@@ -249,6 +360,33 @@ public class TaskService {
         if (task.getStatus() != Task.TaskStatus.OPEN) {
             log.warn("❌ Cannot delete task ID: {} - status is: {}", taskId, task.getStatus());
             throw new RuntimeException("Cannot delete task - bidding period has ended");
+        }
+        
+        // Check if task has any bids - if so, restrict deletion
+        try {
+            Long bidCount = biddingServiceClient.getBidCountForTask(taskId);
+            if (bidCount != null && bidCount > 0) {
+                log.warn("❌ Cannot delete task ID: {} - task has {} bids", taskId, bidCount);
+                throw new RuntimeException("You cannot delete this task because bids already exist. Please wait until the bidding deadline passes and no bids are placed.");
+            }
+        } catch (Exception e) {
+            log.warn("⚠️ Could not check bid count for task ID: {} - Error: {}", taskId, e.getMessage());
+            // If we can't check bid count, allow the deletion but log the warning
+        }
+        
+        // Check if bidding deadline has passed - if so, only allow deletion if no bids exist
+        if (task.getBiddingDeadline() != null && 
+            LocalDateTime.now().isAfter(task.getBiddingDeadline())) {
+            try {
+                Long bidCount = biddingServiceClient.getBidCountForTask(taskId);
+                if (bidCount != null && bidCount > 0) {
+                    log.warn("❌ Cannot delete task ID: {} - bidding deadline passed and task has {} bids", taskId, bidCount);
+                    throw new RuntimeException("You cannot delete this task because the bidding deadline has passed and bids already exist.");
+                }
+            } catch (Exception e) {
+                log.warn("⚠️ Could not check bid count for task ID: {} - Error: {}", taskId, e.getMessage());
+                // If we can't check bid count, allow the deletion but log the warning
+            }
         }
         
         taskRepository.deleteById(taskId);
@@ -566,5 +704,75 @@ public class TaskService {
         private long completedTasks;
         private long acceptedTasks;
         private long cancelledTasks;
+    }
+    
+    /**
+     * Accept task with timestamp synchronization (called by Bidding Service)
+     */
+    public Task acceptTaskWithTimestamp(Long taskId, LocalDateTime acceptedAt) {
+        log.info("🔄 Accepting task ID: {} with timestamp: {}", taskId, acceptedAt);
+        
+        Optional<Task> taskOpt = taskRepository.findById(taskId);
+        
+        if (taskOpt.isEmpty()) {
+            log.warn("❌ Task not found with ID: {}", taskId);
+            throw new RuntimeException("Task not found");
+        }
+        
+        Task task = taskOpt.get();
+        
+        // Check if task is in progress
+        if (!task.isInProgress()) {
+            log.warn("❌ Task ID: {} cannot be accepted - status: {}", taskId, task.getStatus());
+            throw new RuntimeException("Task cannot be accepted - it is not in progress");
+        }
+        
+        // Accept task with provided timestamp
+        task.acceptTask();
+        if (acceptedAt != null) {
+            task.setAcceptedAt(acceptedAt);
+        }
+        
+        Task savedTask = taskRepository.save(task);
+        
+        log.info("✅ Task accepted with timestamp: {} (ID: {}) at {}", 
+                savedTask.getTitle(), savedTask.getId(), savedTask.getAcceptedAt());
+        
+        return savedTask;
+    }
+    
+    /**
+     * Complete task with timestamp synchronization (called by Bidding Service)
+     */
+    public Task completeTaskWithTimestamp(Long taskId, LocalDateTime completedAt) {
+        log.info("🔄 Completing task ID: {} with timestamp: {}", taskId, completedAt);
+        
+        Optional<Task> taskOpt = taskRepository.findById(taskId);
+        
+        if (taskOpt.isEmpty()) {
+            log.warn("❌ Task not found with ID: {}", taskId);
+            throw new RuntimeException("Task not found");
+        }
+        
+        Task task = taskOpt.get();
+        
+        // Check if task is in progress
+        if (!task.isInProgress()) {
+            log.warn("❌ Task ID: {} cannot be completed - status: {}", taskId, task.getStatus());
+            throw new RuntimeException("Task cannot be completed - it is not in progress");
+        }
+        
+        // Complete task with provided timestamp
+        task.markAsCompleted();
+        if (completedAt != null) {
+            task.setCompletedAt(completedAt);
+        }
+        
+        Task savedTask = taskRepository.save(task);
+        
+        log.info("✅ Task completed with timestamp: {} (ID: {}) at {}", 
+                savedTask.getTitle(), savedTask.getId(), savedTask.getCompletedAt());
+        
+        return savedTask;
     }
 }

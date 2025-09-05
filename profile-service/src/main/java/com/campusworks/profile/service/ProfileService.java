@@ -53,11 +53,10 @@ public class ProfileService {
         }
         
         // Set default values
-        profile.setRating(BigDecimal.ZERO);
-        profile.setTotalRatings(0);
+        // Initialize counters
         profile.setCompletedTasks(0);
         profile.setSuccessfulTasks(0);
-        profile.setTotalEarnings(BigDecimal.ZERO);
+        profile.setTotalEarnings(java.math.BigDecimal.ZERO);
         profile.setIsVerified(false);
         profile.setIsPublic(true);
         profile.setAvailabilityStatus(Profile.AvailabilityStatus.AVAILABLE);
@@ -124,110 +123,7 @@ public class ProfileService {
         return profile;
     }
     
-    /**
-     * Get all public profiles
-     */
-    public List<Profile> getAllPublicProfiles() {
-        log.info("🌐 Retrieving all public profiles");
-        
-        List<Profile> profiles = profileRepository.findByIsPublicTrueOrderByRatingDesc();
-        
-        log.info("✅ Retrieved {} public profiles", profiles.size());
-        
-        return profiles;
-    }
-    
-    /**
-     * Get all verified profiles
-     */
-    public List<Profile> getAllVerifiedProfiles() {
-        log.info("✅ Retrieving all verified profiles");
-        
-        List<Profile> profiles = profileRepository.findByIsVerifiedTrueOrderByRatingDesc();
-        
-        log.info("✅ Retrieved {} verified profiles", profiles.size());
-        
-        return profiles;
-    }
-    
-    /**
-     * Get profiles by availability status
-     */
-    public List<Profile> getProfilesByAvailabilityStatus(Profile.AvailabilityStatus status) {
-        log.info("🏷️ Retrieving profiles with availability status: {}", status);
-        
-        List<Profile> profiles = profileRepository.findByAvailabilityStatusOrderByRatingDesc(status);
-        
-        log.info("✅ Retrieved {} profiles with availability status: {}", profiles.size(), status);
-        
-        return profiles;
-    }
-    
-    /**
-     * Get profiles by university
-     */
-    public List<Profile> getProfilesByUniversity(String university) {
-        log.info("🏫 Retrieving profiles for university: {}", university);
-        
-        List<Profile> profiles = profileRepository.findByUniversityOrderByRatingDesc(university);
-        
-        log.info("✅ Retrieved {} profiles for university: {}", profiles.size(), university);
-        
-        return profiles;
-    }
-    
-    /**
-     * Get profiles by major
-     */
-    public List<Profile> getProfilesByMajor(String major) {
-        log.info("📚 Retrieving profiles for major: {}", major);
-        
-        List<Profile> profiles = profileRepository.findByMajorOrderByRatingDesc(major);
-        
-        log.info("✅ Retrieved {} profiles for major: {}", profiles.size(), major);
-        
-        return profiles;
-    }
-    
-    /**
-     * Get profiles by skill
-     */
-    public List<Profile> getProfilesBySkill(String skill) {
-        log.info("🛠️ Retrieving profiles with skill: {}", skill);
-        
-        List<Profile> profiles = profileRepository.findBySkill(skill);
-        
-        log.info("✅ Retrieved {} profiles with skill: {}", profiles.size(), skill);
-        
-        return profiles;
-    }
-    
-    /**
-     * Get profiles by rating range
-     */
-    public List<Profile> getProfilesByRatingRange(BigDecimal minRating, BigDecimal maxRating) {
-        log.info("⭐ Retrieving profiles with rating between {} and {}", minRating, maxRating);
-        
-        List<Profile> profiles = profileRepository.findByRatingRange(minRating, maxRating);
-        
-        log.info("✅ Retrieved {} profiles with rating between {} and {}", profiles.size(), minRating, maxRating);
-        
-        return profiles;
-    }
-    
-    /**
-     * Get profiles by hourly rate range
-     */
-    public List<Profile> getProfilesByHourlyRateRange(BigDecimal minRate, BigDecimal maxRate) {
-        log.info("💰 Retrieving profiles with hourly rate between ${} and ${}", minRate, maxRate);
-        
-        List<Profile> profiles = profileRepository.findByHourlyRateRange(minRate, maxRate);
-        
-        log.info("✅ Retrieved {} profiles with hourly rate between ${} and ${}", profiles.size(), minRate, maxRate);
-        
-        return profiles;
-    }
-    
+   
     /**
      * Get profiles available for work
      */
@@ -241,57 +137,13 @@ public class ProfileService {
         return profiles;
     }
     
-    /**
-     * Get top rated profiles
-     */
-    public List<Profile> getTopRatedProfiles() {
-        log.info("🏆 Retrieving top rated profiles");
-        
-        List<Profile> profiles = profileRepository.findTopRatedProfiles();
-        
-        log.info("✅ Retrieved {} top rated profiles", profiles.size());
-        
-        return profiles;
-    }
     
-    /**
-     * Get most experienced profiles
-     */
-    public List<Profile> getMostExperiencedProfiles() {
-        log.info("🎓 Retrieving most experienced profiles");
-        
-        List<Profile> profiles = profileRepository.findMostExperiencedProfiles();
-        
-        log.info("✅ Retrieved {} most experienced profiles", profiles.size());
-        
-        return profiles;
-    }
     
-    /**
-     * Get most successful profiles
-     */
-    public List<Profile> getMostSuccessfulProfiles() {
-        log.info("✅ Retrieving most successful profiles");
-        
-        List<Profile> profiles = profileRepository.findMostSuccessfulProfiles();
-        
-        log.info("✅ Retrieved {} most successful profiles", profiles.size());
-        
-        return profiles;
-    }
+   
     
-    /**
-     * Get highest earning profiles
-     */
-    public List<Profile> getHighestEarningProfiles() {
-        log.info("💎 Retrieving highest earning profiles");
-        
-        List<Profile> profiles = profileRepository.findHighestEarningProfiles();
-        
-        log.info("✅ Retrieved {} highest earning profiles", profiles.size());
-        
-        return profiles;
-    }
+   
+    
+    
     
     /**
      * Update profile
@@ -318,15 +170,9 @@ public class ProfileService {
         // Update allowed fields
         existingProfile.setFirstName(updatedProfile.getFirstName());
         existingProfile.setLastName(updatedProfile.getLastName());
-        existingProfile.setBio(updatedProfile.getBio());
         existingProfile.setUniversity(updatedProfile.getUniversity());
         existingProfile.setMajor(updatedProfile.getMajor());
         existingProfile.setAcademicYear(updatedProfile.getAcademicYear());
-        existingProfile.setSkills(updatedProfile.getSkills());
-        existingProfile.setExperienceYears(updatedProfile.getExperienceYears());
-        existingProfile.setExperienceDescription(updatedProfile.getExperienceDescription());
-        existingProfile.setPreferredCategories(updatedProfile.getPreferredCategories());
-        existingProfile.setHourlyRate(updatedProfile.getHourlyRate());
         existingProfile.setAvailabilityStatus(updatedProfile.getAvailabilityStatus());
         existingProfile.setIsPublic(updatedProfile.getIsPublic());
         existingProfile.setUpdatedAt(LocalDateTime.now());
@@ -367,35 +213,7 @@ public class ProfileService {
         log.info("✅ Profile deleted successfully: {} (ID: {})", profile.getDisplayName(), profileId);
     }
     
-    /**
-     * Add rating to profile
-     */
-    public Profile addRating(Long profileId, BigDecimal rating) {
-        log.info("⭐ Adding rating {} to profile ID: {}", rating, profileId);
-        
-        // Validate rating
-        validateRating(rating);
-        
-        Optional<Profile> profileOpt = profileRepository.findById(profileId);
-        
-        if (profileOpt.isEmpty()) {
-            log.warn("❌ Profile not found with ID: {}", profileId);
-            throw new RuntimeException("Profile not found");
-        }
-        
-        Profile profile = profileOpt.get();
-        
-        // Add rating
-        profile.addRating(rating);
-        profile.setUpdatedAt(LocalDateTime.now());
-        
-        Profile savedProfile = profileRepository.save(profile);
-        
-        log.info("✅ Rating added successfully: {} to profile: {} (New rating: {})", 
-                rating, savedProfile.getDisplayName(), savedProfile.getRating());
-        
-        return savedProfile;
-    }
+   
     
     /**
      * Mark task as completed
@@ -606,24 +424,8 @@ public class ProfileService {
             throw new RuntimeException("User email is required");
         }
         
-        if (profile.getBio() != null && profile.getBio().length() > maxBioLength) {
-            throw new RuntimeException("Bio cannot exceed " + maxBioLength + " characters");
-        }
-        
-        if (profile.getSkills() != null && profile.getSkills().size() > maxSkillsCount) {
-            throw new RuntimeException("Cannot have more than " + maxSkillsCount + " skills");
-        }
-        
-        if (profile.getExperienceYears() != null && profile.getExperienceYears() > maxExperienceYears) {
-            throw new RuntimeException("Experience years cannot exceed " + maxExperienceYears);
-        }
-        
         if (profile.getAcademicYear() != null && (profile.getAcademicYear() < 1 || profile.getAcademicYear() > 10)) {
             throw new RuntimeException("Academic year must be between 1 and 10");
-        }
-        
-        if (profile.getHourlyRate() != null && profile.getHourlyRate().compareTo(BigDecimal.ZERO) < 0) {
-            throw new RuntimeException("Hourly rate cannot be negative");
         }
     }
     

@@ -48,4 +48,22 @@ public interface TaskServiceClient {
      */
     @GetMapping("/tasks/{taskId}/owner/{userId}")
     TaskOwnershipResponse isTaskOwner(@PathVariable("taskId") Long taskId, @PathVariable("userId") Long userId);
+    
+    /**
+     * Get task by ID
+     */
+    @GetMapping("/tasks/{taskId}")
+    TaskResponse getTaskById(@PathVariable("taskId") Long taskId);
+    
+    /**
+     * Update task acceptance timestamp
+     */
+    @PutMapping("/tasks/{taskId}/accept")
+    TaskUpdateResponse acceptTask(@PathVariable("taskId") Long taskId, @RequestBody TaskUpdateResponse request);
+    
+    /**
+     * Update task completion timestamp
+     */
+    @PutMapping("/tasks/{taskId}/complete")
+    TaskUpdateResponse completeTask(@PathVariable("taskId") Long taskId, @RequestBody TaskUpdateResponse request);
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Container, Typography, Paper, Grid, Button, Box, Chip } from '@mui/material';
-import { Add, Assignment, Gavel, AccountBalanceWallet, TrendingUp } from '@mui/icons-material';
+import { Add, Assignment, Gavel, AccountBalanceWallet, TrendingUp, AssignmentTurnedIn } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import Layout from '@components/templates/Layout';
 import { selectAuth } from '@store/slices/authSlice';
@@ -20,6 +20,13 @@ const DashboardPage = () => {
       color: 'primary'
     },
     {
+      title: 'My Tasks',
+      description: 'View and manage your created tasks',
+      icon: <AssignmentTurnedIn />,
+      action: () => navigate(ROUTES.MY_TASKS),
+      color: 'warning'
+    },
+    {
       title: 'Browse Tasks',
       description: 'Find tasks to bid on and earn money',
       icon: <Assignment />,
@@ -30,7 +37,7 @@ const DashboardPage = () => {
       title: 'My Bids',
       description: 'Check the status of your bids',
       icon: <Gavel />,
-      action: () => navigate(ROUTES.BIDS),
+      action: () => navigate(ROUTES.MY_BIDS),
       color: 'info'
     },
     {

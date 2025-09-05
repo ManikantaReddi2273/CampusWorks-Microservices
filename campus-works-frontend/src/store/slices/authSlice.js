@@ -16,7 +16,27 @@ export const loginUser = createAsyncThunk(
       
       return { token, email, message };
     } catch (error) {
-      return rejectWithValue(apiUtils.handleError(error));
+      // Enhanced error handling for login
+      const errorInfo = apiUtils.handleError(error);
+      
+      // If it's an "Invalid credentials" error, check if user exists
+      if (errorInfo.message.includes('Invalid credentials')) {
+        try {
+          const verificationResponse = await apiService.auth.getVerificationStatus(credentials.email);
+          const userExists = verificationResponse.data.userExists;
+          
+          if (!userExists) {
+            errorInfo.message = 'No account found with this email address. Please check your email or create a new account.';
+          } else {
+            errorInfo.message = 'Invalid password. Please check your password and try again.';
+          }
+        } catch (verificationError) {
+          // If we can't check verification status, keep the original error
+          console.warn('Could not check user existence:', verificationError);
+        }
+      }
+      
+      return rejectWithValue(errorInfo);
     }
   }
 );
@@ -69,6 +89,18 @@ export const validateToken = createAsyncThunk(
   }
 );
 
+export const checkVerificationStatus = createAsyncThunk(
+  'auth/checkVerificationStatus',
+  async (email, { rejectWithValue }) => {
+    try {
+      const response = await apiService.auth.getVerificationStatus(email);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(apiUtils.handleError(error));
+    }
+  }
+);
+
 // Initial state
 const initialState = {
   user: apiUtils.getUserData(),
@@ -113,7 +145,12 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = { email: action.payload.email };
+        // Get user ID from token
+        const userId = apiUtils.getUserIdFromToken();
+        state.user = { 
+          email: action.payload.email,
+          id: userId
+        };
         state.token = action.payload.token;
         state.isAuthenticated = true;
         state.message = action.payload.message;
@@ -193,6 +230,20 @@ const authSlice = createSlice({
         state.token = null;
         state.isAuthenticated = false;
         apiUtils.clearAuthData();
+      })
+      
+      // Check verification status cases
+      .addCase(checkVerificationStatus.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(checkVerificationStatus.fulfilled, (state, action) => {
+        state.isLoading = false;
+        // Verification status is returned, can be used for UI feedback
+      })
+      .addCase(checkVerificationStatus.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload.message;
       });
   }
 });

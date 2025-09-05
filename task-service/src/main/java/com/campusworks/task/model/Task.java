@@ -39,8 +39,8 @@ public class Task {
     private String description;
     
     @NotNull(message = "Budget is required")
-    @DecimalMin(value = "1.0", message = "Budget must be at least $1.00")
-    @DecimalMax(value = "10000.0", message = "Budget cannot exceed $10,000.00")
+    @DecimalMin(value = "50.0", message = "Task budget must be at least ₹50.00")
+    @DecimalMax(value = "10000.0", message = "Task budget cannot exceed ₹10,000.00")
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal budget;
     
@@ -186,11 +186,7 @@ public class Task {
         MATHEMATICS("Mathematics"),
         SCIENCE("Science"),
         LITERATURE("Literature"),
-        HISTORY("History"),
-        BUSINESS("Business"),
         ENGINEERING("Engineering"),
-        MEDICINE("Medicine"),
-        LAW("Law"),
         OTHER("Other");
         
         private final String displayName;

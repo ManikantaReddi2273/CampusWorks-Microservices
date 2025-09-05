@@ -32,6 +32,10 @@ const LoginPage = () => {
     password: ''
   });
 
+  // Form validation state
+  const [formErrors, setFormErrors] = useState({});
+  const [touched, setTouched] = useState({});
+
   // Forgot password state
   const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
   const [forgotPasswordEmail, setForgotPasswordEmail] = useState('');
@@ -41,15 +45,99 @@ const LoginPage = () => {
 
   const from = location.state?.from?.pathname || ROUTES.DASHBOARD;
 
+  // Email validation
+  const validateEmail = (email) => {
+    if (!email) {
+      return 'Email is required';
+    }
+    
+    const emailRegex = /^n\d{6}@rguktn\.ac\.in$/;
+    if (!emailRegex.test(email)) {
+      return 'Please enter a valid RGUKT Nuzvidu email (n######@rguktn.ac.in)';
+    }
+    
+    return '';
+  };
+
+  // Password validation
+  const validatePassword = (password) => {
+    if (!password) {
+      return 'Password is required';
+    }
+    
+    if (password.length < 8) {
+      return 'Password must be at least 8 characters long';
+    }
+    
+    return '';
+  };
+
   const handleChange = (e) => {
+    const { name, value } = e.target;
+    
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
+    
+    // Clear field-specific error when user starts typing
+    if (formErrors[name]) {
+      setFormErrors({
+        ...formErrors,
+        [name]: ''
+      });
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    
+    setTouched({
+      ...touched,
+      [name]: true
+    });
+    
+    // Validate field on blur
+    let fieldError = '';
+    switch (name) {
+      case 'email':
+        fieldError = validateEmail(value);
+        break;
+      case 'password':
+        fieldError = validatePassword(value);
+        break;
+      default:
+        break;
+    }
+    
+    setFormErrors({
+      ...formErrors,
+      [name]: fieldError
+    });
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    
+    errors.email = validateEmail(formData.email);
+    errors.password = validatePassword(formData.password);
+    
+    setFormErrors(errors);
+    return Object.keys(errors).filter(key => errors[key]).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Mark all fields as touched to show validation errors
+    setTouched({
+      email: true,
+      password: true
+    });
+    
+    if (!validateForm()) {
+      return;
+    }
     
     const result = await dispatch(loginUser(formData));
     
@@ -128,8 +216,12 @@ const LoginPage = () => {
               name="email"
               autoComplete="email"
               autoFocus
+              placeholder="n210419@rguktn.ac.in"
               value={formData.email}
               onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.email && !!formErrors.email}
+              helperText={touched.email && formErrors.email ? formErrors.email : "Enter your RGUKT Nuzvidu email"}
             />
             <TextField
               margin="normal"
@@ -142,6 +234,9 @@ const LoginPage = () => {
               autoComplete="current-password"
               value={formData.password}
               onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.password && !!formErrors.password}
+              helperText={touched.password && formErrors.password ? formErrors.password : "Enter your password"}
             />
             
             {/* Forgot Password Link */}

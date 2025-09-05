@@ -237,4 +237,42 @@ public interface BidRepository extends JpaRepository<Bid, Long> {
      */
     @Query("SELECT DISTINCT b.taskId FROM Bid b WHERE b.status = 'PENDING'")
     List<Long> findAllTaskIdsWithPendingBids();
+    
+    // ==================== UPI ID OPERATIONS ====================
+    
+    /**
+     * Find accepted bid for a specific task that has UPI ID submitted
+     */
+    @Query("SELECT b FROM Bid b WHERE b.taskId = :taskId AND b.status = 'ACCEPTED' AND b.upiId IS NOT NULL AND b.upiId != ''")
+    Optional<Bid> findAcceptedBidWithUpiIdForTask(@Param("taskId") Long taskId);
+    
+    /**
+     * Find accepted bid for a specific task
+     */
+    @Query("SELECT b FROM Bid b WHERE b.taskId = :taskId AND b.status = 'ACCEPTED'")
+    Optional<Bid> findAcceptedBidForTask(@Param("taskId") Long taskId);
+    
+    /**
+     * Find bids with UPI ID submitted but not viewed
+     */
+    @Query("SELECT b FROM Bid b WHERE b.upiId IS NOT NULL AND b.upiId != '' AND (b.upiIdViewed IS NULL OR b.upiIdViewed = false)")
+    List<Bid> findBidsWithUnviewedUpiId();
+    
+    /**
+     * Find bids with UPI ID submitted and viewed
+     */
+    @Query("SELECT b FROM Bid b WHERE b.upiId IS NOT NULL AND b.upiId != '' AND b.upiIdViewed = true")
+    List<Bid> findBidsWithViewedUpiId();
+    
+    /**
+     * Check if task has accepted bid with UPI ID submitted
+     */
+    @Query("SELECT COUNT(b) > 0 FROM Bid b WHERE b.taskId = :taskId AND b.status = 'ACCEPTED' AND b.upiId IS NOT NULL AND b.upiId != ''")
+    boolean existsAcceptedBidWithUpiIdForTask(@Param("taskId") Long taskId);
+    
+    /**
+     * Check if task has accepted bid with UPI ID viewed
+     */
+    @Query("SELECT COUNT(b) > 0 FROM Bid b WHERE b.taskId = :taskId AND b.status = 'ACCEPTED' AND b.upiIdViewed = true")
+    boolean existsAcceptedBidWithViewedUpiIdForTask(@Param("taskId") Long taskId);
 }

@@ -19,5 +19,7 @@ public class TaskUpdateResponse {
     private String status;
     private String message;
     private LocalDateTime updatedAt;
+    private LocalDateTime acceptedAt;
+    private LocalDateTime completedAt;
     private boolean success;
 }

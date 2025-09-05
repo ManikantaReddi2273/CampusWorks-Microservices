@@ -313,11 +313,7 @@ CANCELLED CANCELLED   CANCELLED  CANCELLED
 - `MATHEMATICS` - Math problems, calculations, statistics
 - `SCIENCE` - Physics, chemistry, biology assignments
 - `LITERATURE` - Literary analysis, creative writing
-- `HISTORY` - Historical research, analysis
-- `BUSINESS` - Business plans, market analysis
 - `ENGINEERING` - Technical drawings, calculations
-- `MEDICINE` - Medical research, case studies
-- `LAW` - Legal research, document preparation
 - `OTHER` - Miscellaneous academic tasks
 
 ### API Endpoints
@@ -1450,11 +1446,7 @@ const TASK_CATEGORIES = {
   MATHEMATICS: 'MATHEMATICS',              // Math problems, statistics
   SCIENCE: 'SCIENCE',                      // Physics, chemistry, biology
   LITERATURE: 'LITERATURE',                // Literary analysis
-  HISTORY: 'HISTORY',                      // Historical research
-  BUSINESS: 'BUSINESS',                    // Business plans, analysis
   ENGINEERING: 'ENGINEERING',              // Technical calculations
-  MEDICINE: 'MEDICINE',                    // Medical research
-  LAW: 'LAW',                             // Legal research
   OTHER: 'OTHER'                          // Miscellaneous tasks
 };
 ```

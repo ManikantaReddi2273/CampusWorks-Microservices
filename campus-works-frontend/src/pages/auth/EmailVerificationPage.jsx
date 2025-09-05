@@ -59,34 +59,69 @@ const EmailVerificationPage = () => {
       
       const response = await apiService.auth.verifyEmail(verificationToken);
       
-      if (response.success) {
+      // The response data is in response.data, not response directly
+      const responseData = response.data;
+      
+      if (responseData.success) {
         setVerificationState({
           loading: false,
           success: true,
           error: null,
-          message: response.message || 'Email verified successfully!'
+          message: responseData.message || 'Email verified successfully!'
+        });
+      } else {
+        // Check if user is already verified
+        if (responseData.message && (responseData.message.includes('already verified') || responseData.message.includes('already active'))) {
+          setVerificationState({
+            loading: false,
+            success: true,
+            error: null,
+            message: 'Your email is already verified! You can now sign in to your account.'
+          });
+        } else {
+          setVerificationState({
+            loading: false,
+            success: false,
+            error: responseData.message || 'Verification failed',
+            message: responseData.message || 'Email verification failed'
+          });
+        }
+      }
+    } catch (error) {
+      console.error('Email verification error:', error);
+      
+      // Check if the error indicates user is already verified
+      const errorMessage = error.response?.data?.message || error.message || 'An error occurred during verification';
+      
+      if (errorMessage.includes('already verified') || errorMessage.includes('already active')) {
+        setVerificationState({
+          loading: false,
+          success: true,
+          error: null,
+          message: 'Your email is already verified! You can now sign in to your account.'
+        });
+      } else if (error.response?.status === 400 && (errorMessage.includes('invalid') || errorMessage.includes('expired'))) {
+        setVerificationState({
+          loading: false,
+          success: false,
+          error: 'Invalid or expired verification link',
+          message: 'The verification link is invalid or has expired. Please request a new one.'
+        });
+      } else if (error.response?.status === 400 && errorMessage.includes('already used')) {
+        setVerificationState({
+          loading: false,
+          success: true,
+          error: null,
+          message: 'This verification link has already been used. Your email is already verified!'
         });
       } else {
         setVerificationState({
           loading: false,
           success: false,
-          error: response.message || 'Verification failed',
-          message: response.message || 'Email verification failed'
+          error: errorMessage,
+          message: errorMessage
         });
       }
-    } catch (error) {
-      console.error('Email verification error:', error);
-      
-      const errorMessage = error.response?.data?.message || 
-                          error.message || 
-                          'An error occurred during verification';
-      
-      setVerificationState({
-        loading: false,
-        success: false,
-        error: errorMessage,
-        message: errorMessage
-      });
     }
   };
 
@@ -111,7 +146,10 @@ const EmailVerificationPage = () => {
       
       const response = await apiService.auth.resendVerification(email);
       
-      if (response.success) {
+      // The response data is in response.data, not response directly
+      const responseData = response.data;
+      
+      if (responseData.success) {
         setResendState({
           loading: false,
           success: true,
@@ -121,7 +159,7 @@ const EmailVerificationPage = () => {
         setResendState({
           loading: false,
           success: false,
-          error: response.message || 'Failed to resend verification email'
+          error: responseData.message || 'Failed to resend verification email'
         });
       }
     } catch (error) {

@@ -38,6 +38,7 @@ public class TaskController {
         String userId = httpRequest.getHeader("X-User-Id");
         
         log.info("📝 Creating new task: '{}' by user: {} ({})", request.getTitle(), userEmail, userId);
+        log.info("📅 Completion deadline from request: {}", request.getCompletionDeadline());
         
         try {
             // Build task from request
@@ -50,6 +51,8 @@ public class TaskController {
                     .ownerEmail(userEmail)
                     .completionDeadline(request.getCompletionDeadline())
                     .build();
+            
+            log.info("📅 Task completion deadline set to: {}", task.getCompletionDeadline());
             
             // Create task
             Task createdTask = taskService.createTask(task);
@@ -324,6 +327,31 @@ public class TaskController {
     }
     
     /**
+     * Get tasks by owner email
+     */
+    @GetMapping("/owner-email/{ownerEmail}")
+    public ResponseEntity<?> getTasksByOwnerEmail(@PathVariable String ownerEmail) {
+        log.info("👤 Retrieving tasks for owner email: {}", ownerEmail);
+        
+        try {
+            List<Task> tasks = taskService.getTasksByOwnerEmail(ownerEmail);
+            
+            log.info("✅ Retrieved {} tasks for owner email: {}", tasks.size(), ownerEmail);
+            
+            return ResponseEntity.ok(tasks);
+            
+        } catch (Exception e) {
+            log.error("❌ Failed to retrieve tasks for owner email: {} - Error: {}", ownerEmail, e.getMessage(), e);
+            
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Failed to retrieve tasks");
+            errorResponse.put("message", e.getMessage());
+            
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
+    }
+    
+    /**
      * Get tasks by assigned user ID
      */
     @GetMapping("/assigned/{assignedUserId}")
@@ -403,7 +431,7 @@ public class TaskController {
             
             Map<String, String> errorResponse = new HashMap<>();
             errorResponse.put("error", "Invalid category");
-            errorResponse.put("message", "Category must be one of: ACADEMIC_WRITING, PROGRAMMING, MATHEMATICS, SCIENCE, LITERATURE, HISTORY, BUSINESS, ENGINEERING, MEDICINE, LAW, OTHER");
+            errorResponse.put("message", "Category must be one of: ACADEMIC_WRITING, PROGRAMMING, MATHEMATICS, SCIENCE, LITERATURE, ENGINEERING, OTHER");
             
             return ResponseEntity.badRequest().body(errorResponse);
             
@@ -1061,5 +1089,124 @@ public class TaskController {
     @lombok.Data
     public static class ExtendBiddingRequest {
         private int additionalHours;
+    }
+    
+    /**
+     * Accept task with timestamp synchronization (called by Bidding Service)
+     */
+    @PutMapping("/{id}/accept")
+    public ResponseEntity<?> acceptTaskWithTimestamp(@PathVariable Long id, @RequestBody TaskAcceptRequest request) {
+        log.info("🔄 Accepting task ID: {} with timestamp synchronization", id);
+        
+        try {
+            Task acceptedTask = taskService.acceptTaskWithTimestamp(id, request.getAcceptedAt());
+            
+            log.info("✅ Task accepted with timestamp: {} (ID: {}) at {}", 
+                    acceptedTask.getTitle(), acceptedTask.getId(), acceptedTask.getAcceptedAt());
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Task accepted successfully");
+            response.put("taskId", acceptedTask.getId());
+            response.put("title", acceptedTask.getTitle());
+            response.put("status", acceptedTask.getStatus());
+            response.put("acceptedAt", acceptedTask.getAcceptedAt());
+            response.put("success", true);
+            
+            return ResponseEntity.ok(response);
+            
+        } catch (Exception e) {
+            log.error("❌ Failed to accept task ID: {} with timestamp - Error: {}", id, e.getMessage(), e);
+            
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Failed to accept task");
+            errorResponse.put("message", e.getMessage());
+            errorResponse.put("success", false);
+            
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+    }
+    
+    /**
+     * Complete task with timestamp synchronization (called by Bidding Service)
+     */
+    @PutMapping("/{id}/complete")
+    public ResponseEntity<?> completeTaskWithTimestamp(@PathVariable Long id, @RequestBody TaskCompleteRequest request) {
+        log.info("🔄 Completing task ID: {} with timestamp synchronization", id);
+        
+        try {
+            Task completedTask = taskService.completeTaskWithTimestamp(id, request.getCompletedAt());
+            
+            log.info("✅ Task completed with timestamp: {} (ID: {}) at {}", 
+                    completedTask.getTitle(), completedTask.getId(), completedTask.getCompletedAt());
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Task completed successfully");
+            response.put("taskId", completedTask.getId());
+            response.put("title", completedTask.getTitle());
+            response.put("status", completedTask.getStatus());
+            response.put("completedAt", completedTask.getCompletedAt());
+            response.put("success", true);
+            
+            return ResponseEntity.ok(response);
+            
+        } catch (Exception e) {
+            log.error("❌ Failed to complete task ID: {} with timestamp - Error: {}", id, e.getMessage(), e);
+            
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Failed to complete task");
+            errorResponse.put("message", e.getMessage());
+            errorResponse.put("success", false);
+            
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+    }
+    
+    /**
+     * Check if task can be edited or deleted
+     */
+    @GetMapping("/{id}/can-edit")
+    public ResponseEntity<?> canTaskBeEdited(@PathVariable Long id, HttpServletRequest httpRequest) {
+        String userEmail = httpRequest.getHeader("X-User-Email");
+        String userId = httpRequest.getHeader("X-User-Id");
+        
+        log.info("🔍 Checking if task ID: {} can be edited by user: {} ({})", id, userEmail, userId);
+        
+        try {
+            boolean canEdit = taskService.canTaskBeEditedOrDeleted(id);
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("canEdit", canEdit);
+            response.put("taskId", id);
+            response.put("message", canEdit ? 
+                "Task can be edited or deleted" : 
+                "Task cannot be edited or deleted because it has bids or bidding period has ended");
+            
+            return ResponseEntity.ok(response);
+            
+        } catch (Exception e) {
+            log.error("❌ Failed to check if task ID: {} can be edited - Error: {}", id, e.getMessage(), e);
+            
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Failed to check task edit status");
+            errorResponse.put("message", e.getMessage());
+            
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+    }
+    
+    /**
+     * Task Accept Request DTO
+     */
+    @lombok.Data
+    public static class TaskAcceptRequest {
+        private LocalDateTime acceptedAt;
+    }
+    
+    /**
+     * Task Complete Request DTO
+     */
+    @lombok.Data
+    public static class TaskCompleteRequest {
+        private LocalDateTime completedAt;
     }
 }

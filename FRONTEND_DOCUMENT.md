@@ -1,7 +1,7 @@
 # 🎨 CampusWorks - Complete Frontend Development Guide
 
 > **Version**: 1.0.0 | **Last Updated**: January 2025  
-> **Framework**: React.js with JavaScript | **Theme Color**: #C6D0DF  
+> **Framework**: React.js with JavaScript | **Theme Color**:  #C6D0DF 
 > **Font**: Outfit (All Weights) | **Development**: Phase-by-Phase Approach
 
 ---
@@ -594,11 +594,7 @@ export const CATEGORY_LABELS = {
   MATHEMATICS: 'Mathematics',
   SCIENCE: 'Science',
   LITERATURE: 'Literature',
-  HISTORY: 'History',
-  BUSINESS: 'Business',
   ENGINEERING: 'Engineering',
-  MEDICINE: 'Medicine',
-  LAW: 'Law',
   OTHER: 'Other'
 };
 ```

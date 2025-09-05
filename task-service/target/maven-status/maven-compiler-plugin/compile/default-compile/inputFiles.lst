@@ -2,7 +2,6 @@ C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\task-service\src\mai
 C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\task-service\src\main\java\com\campusworks\task\client\BiddingServiceClientFallback.java
 C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\task-service\src\main\java\com\campusworks\task\client\ProfileServiceClient.java
 C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\task-service\src\main\java\com\campusworks\task\client\ProfileServiceClientFallback.java
-C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\task-service\src\main\java\com\campusworks\task\config\SecurityConfig.java
 C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\task-service\src\main\java\com\campusworks\task\controller\TaskController.java
 C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\task-service\src\main\java\com\campusworks\task\dto\BiddingStatusResponse.java
 C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\task-service\src\main\java\com\campusworks\task\dto\BidResponse.java
@@ -16,7 +15,6 @@ C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\task-service\src\mai
 C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\task-service\src\main\java\com\campusworks\task\dto\UserTaskStatisticsResponse.java
 C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\task-service\src\main\java\com\campusworks\task\model\Task.java
 C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\task-service\src\main\java\com\campusworks\task\repo\TaskRepository.java
-C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\task-service\src\main\java\com\campusworks\task\security\CustomJwtAuthenticationConverter.java
 C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\task-service\src\main\java\com\campusworks\task\service\TaskService.java
 C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\task-service\src\main\java\com\campusworks\task\TaskService.java
 C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\task-service\src\main\java\com\campusworks\task\TaskServiceApplication.java

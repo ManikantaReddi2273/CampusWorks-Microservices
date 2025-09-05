@@ -96,7 +96,7 @@ export const apiService = {
     validateToken: () => api.get(API_CONFIG.ENDPOINTS.AUTH.VALIDATE),
     getUser: (email) => api.get(`${API_CONFIG.ENDPOINTS.AUTH.USER}/${email}`),
     verifyEmail: (token) => api.get(`${API_CONFIG.ENDPOINTS.AUTH.VERIFY}?token=${token}`),
-    resendVerification: () => api.post(API_CONFIG.ENDPOINTS.AUTH.RESEND_VERIFICATION),
+    resendVerification: (email) => api.post(API_CONFIG.ENDPOINTS.AUTH.RESEND_VERIFICATION_PUBLIC, { email }),
     getVerificationStatus: (email) => api.get(`${API_CONFIG.ENDPOINTS.AUTH.VERIFICATION_STATUS}/${email}`),
     validateEmailFormat: (email) => api.get(`${API_CONFIG.ENDPOINTS.AUTH.VALIDATE_EMAIL}/${email}`),
     deleteAccount: (email) => api.delete(API_CONFIG.ENDPOINTS.AUTH.DELETE_ACCOUNT, { data: { email } }),
@@ -116,7 +116,9 @@ export const apiService = {
     getByStatus: (status) => api.get(`${API_CONFIG.ENDPOINTS.TASKS.BY_STATUS}/${status}`),
     getByCategory: (category) => api.get(`${API_CONFIG.ENDPOINTS.TASKS.BY_CATEGORY}/${category}`),
     getOpenForBidding: () => api.get(API_CONFIG.ENDPOINTS.TASKS.OPEN_FOR_BIDDING),
-    getByUser: (userId) => api.get(`${API_CONFIG.ENDPOINTS.TASKS.BY_USER}/${userId}`)
+    getByUser: (userId) => api.get(`${API_CONFIG.ENDPOINTS.TASKS.BY_USER}/${userId}`),
+    getByOwnerEmail: (ownerEmail) => api.get(`${API_CONFIG.ENDPOINTS.TASKS.BY_OWNER_EMAIL}/${ownerEmail}`),
+    canEdit: (id) => api.get(`${API_CONFIG.ENDPOINTS.TASKS.BASE}/${id}/can-edit`)
   },
   
   // Bidding methods
@@ -124,12 +126,24 @@ export const apiService = {
     getAll: (params = {}) => api.get(API_CONFIG.ENDPOINTS.BIDS.BASE, { params }),
     getById: (id) => api.get(`${API_CONFIG.ENDPOINTS.BIDS.BASE}/${id}`),
     create: (bidData) => api.post(API_CONFIG.ENDPOINTS.BIDS.BASE, bidData),
+    placeBid: (bidData) => api.post(API_CONFIG.ENDPOINTS.BIDS.BASE, bidData),
     update: (id, bidData) => api.put(`${API_CONFIG.ENDPOINTS.BIDS.BASE}/${id}`, bidData),
     delete: (id) => api.delete(`${API_CONFIG.ENDPOINTS.BIDS.BASE}/${id}`),
     getByTask: (taskId) => api.get(`${API_CONFIG.ENDPOINTS.BIDS.BY_TASK}/${taskId}`),
     getByUser: (userId) => api.get(`${API_CONFIG.ENDPOINTS.BIDS.BY_USER}/${userId}`),
+    getByUserEmail: (userEmail) => api.get(`${API_CONFIG.ENDPOINTS.BIDS.BY_USER_EMAIL}/${userEmail}`),
     getByStatus: (status) => api.get(`${API_CONFIG.ENDPOINTS.BIDS.BY_STATUS}/${status}`),
-    autoSelect: (taskId) => api.post(API_CONFIG.ENDPOINTS.BIDS.AUTO_SELECT.replace('{taskId}', taskId))
+    getWinningBid: (taskId) => api.get(`${API_CONFIG.ENDPOINTS.BIDS.BASE}/task/${taskId}/winning`),
+    autoSelect: (taskId) => api.post(API_CONFIG.ENDPOINTS.BIDS.AUTO_SELECT.replace('{taskId}', taskId)),
+    
+    // UPI ID operations
+    submitUpiId: (bidId, data) => api.post(`${API_CONFIG.ENDPOINTS.BIDS.BASE}/${bidId}/submit-upi`, data),
+    viewUpiId: (bidId) => api.post(`${API_CONFIG.ENDPOINTS.BIDS.BASE}/${bidId}/view-upi`),
+    acceptWork: (bidId) => api.post(`${API_CONFIG.ENDPOINTS.BIDS.BASE}/${bidId}/accept-work`),
+    getAcceptedBidWithUpi: (taskId) => api.get(`${API_CONFIG.ENDPOINTS.BIDS.BY_TASK}/${taskId}/accepted-with-upi`),
+    getAcceptedBid: (taskId) => api.get(`${API_CONFIG.ENDPOINTS.BIDS.BY_TASK}/${taskId}/accepted`),
+    hasUpiSubmitted: (taskId) => api.get(`${API_CONFIG.ENDPOINTS.BIDS.BY_TASK}/${taskId}/has-upi-submitted`),
+    hasUpiViewed: (taskId) => api.get(`${API_CONFIG.ENDPOINTS.BIDS.BY_TASK}/${taskId}/has-upi-viewed`)
   },
   
   // Profile methods
@@ -139,6 +153,7 @@ export const apiService = {
     create: (profileData) => api.post(API_CONFIG.ENDPOINTS.PROFILES.BASE, profileData),
     update: (id, profileData) => api.put(`${API_CONFIG.ENDPOINTS.PROFILES.BASE}/${id}`, profileData),
     getByUser: (userId) => api.get(`${API_CONFIG.ENDPOINTS.PROFILES.BY_USER}/${userId}`),
+    getByUserEmail: (userEmail) => api.get(`${API_CONFIG.ENDPOINTS.PROFILES.BY_EMAIL}/${userEmail}`),
     getByAvailability: (status) => api.get(`${API_CONFIG.ENDPOINTS.PROFILES.BY_AVAILABILITY}/${status}`),
     addRating: (userId, ratingData) => api.put(`${API_CONFIG.ENDPOINTS.PROFILES.BY_USER}/${userId}/rating`, ratingData)
   },
@@ -189,26 +204,98 @@ export const apiUtils = {
     localStorage.setItem(STORAGE_KEYS.USER_DATA, JSON.stringify(userData));
   },
   
-  // Handle API error
+  // Decode JWT token to get user ID
+  getUserIdFromToken: () => {
+    try {
+      const token = localStorage.getItem(STORAGE_KEYS.AUTH_TOKEN);
+      if (!token) return null;
+      
+      // Decode JWT token (simple base64 decode of payload)
+      const payload = token.split('.')[1];
+      const decodedPayload = JSON.parse(atob(payload));
+      return decodedPayload.sub; // 'sub' is the subject (user ID)
+    } catch (error) {
+      console.error('Error decoding JWT token:', error);
+      return null;
+    }
+  },
+  
+  // Get user email from token
+  getEmailFromToken: () => {
+    try {
+      const token = localStorage.getItem(STORAGE_KEYS.AUTH_TOKEN);
+      if (!token) return null;
+      
+      const payload = token.split('.')[1];
+      const decodedPayload = JSON.parse(atob(payload));
+      return decodedPayload.email;
+    } catch (error) {
+      console.error('Error decoding JWT token:', error);
+      return null;
+    }
+  },
+  
+  // Handle API error with specific messages
   handleError: (error) => {
     if (error.response) {
       // Server responded with error status
+      const status = error.response.status;
+      const data = error.response.data;
+      let message = data?.message || 'An error occurred';
+      
+      // Provide specific error messages based on status and response
+      if (status === 401) {
+        if (message.includes('Invalid credentials')) {
+          // Check if this is a user not found vs wrong password by making a separate call
+          // For now, we'll use a more generic message that covers both cases
+          message = 'Invalid email or password. Please check your credentials and try again.';
+        } else if (message.includes('Account not verified') || message.includes('Email not verified') || message.includes('verify your email')) {
+          message = 'Your account is not verified. Please check your email and click the verification link.';
+        } else if (message.includes('Account disabled') || message.includes('Account locked')) {
+          message = 'Your account has been disabled. Please contact support for assistance.';
+        } else {
+          message = 'Authentication failed. Please check your credentials and try again.';
+        }
+      } else if (status === 404) {
+        if (message.includes('User not found') || message.includes('Email not registered')) {
+          message = 'No account found with this email address. Please check your email or create a new account.';
+        } else {
+          message = 'The requested resource was not found.';
+        }
+      } else if (status === 400) {
+        if (message.includes('Invalid email format')) {
+          message = 'Please enter a valid RGUKT Nuzvidu email address (n######@rguktn.ac.in).';
+        } else if (message.includes('Password too weak')) {
+          message = 'Password does not meet security requirements. Please use a stronger password.';
+        } else if (message.includes('Email already exists')) {
+          message = 'An account with this email already exists. Please try signing in instead.';
+        } else if (message.includes('already verified') || message.includes('already active')) {
+          message = 'Your email is already verified! You can now sign in to your account.';
+        } else {
+          message = message || 'Invalid request. Please check your input and try again.';
+        }
+      } else if (status === 429) {
+        message = 'Too many login attempts. Please wait a few minutes before trying again.';
+      } else if (status >= 500) {
+        message = 'Server error. Please try again later or contact support if the problem persists.';
+      }
+      
       return {
-        message: error.response.data?.message || 'An error occurred',
-        status: error.response.status,
-        data: error.response.data
+        message,
+        status,
+        data
       };
     } else if (error.request) {
       // Network error
       return {
-        message: 'Network error. Please check your connection.',
+        message: 'Unable to connect to the server. Please check your internet connection and try again.',
         status: 0,
         data: null
       };
     } else {
       // Other error
       return {
-        message: error.message || 'An unexpected error occurred',
+        message: error.message || 'An unexpected error occurred. Please try again.',
         status: 0,
         data: null
       };

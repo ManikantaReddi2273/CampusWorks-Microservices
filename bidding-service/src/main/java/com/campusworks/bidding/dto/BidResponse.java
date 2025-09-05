@@ -25,6 +25,9 @@ public class BidResponse {
     private boolean isWinning;
     private boolean isAccepted;
     private String proposal;
+    private String rejectionReason;
+    private LocalDateTime rejectedAt;
+    private LocalDateTime acceptedAt;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

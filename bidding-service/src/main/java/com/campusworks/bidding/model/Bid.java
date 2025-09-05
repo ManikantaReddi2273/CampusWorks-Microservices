@@ -41,8 +41,8 @@ public class Bid {
     private String bidderEmail;
     
     @NotNull(message = "Bid amount is required")
-    @DecimalMin(value = "0.01", message = "Bid amount must be at least $0.01")
-    @DecimalMax(value = "10000.00", message = "Bid amount cannot exceed $10,000.00")
+    @DecimalMin(value = "50.00", message = "Bid amount must be at least ₹50.00")
+    @DecimalMax(value = "10000.00", message = "Bid amount cannot exceed ₹10,000.00")
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal amount;
     
@@ -51,7 +51,7 @@ public class Bid {
     
     @NotNull(message = "Bid status is required")
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false,length=500)
     @Builder.Default
     private BidStatus status = BidStatus.PENDING;
     
@@ -71,6 +71,19 @@ public class Bid {
     
     @Column(length = 500)
     private String rejectionReason;
+    
+    @Column(name = "upi_id")
+    private String upiId;
+    
+    @Column(name = "upi_id_viewed")
+    @Builder.Default
+    private Boolean upiIdViewed = false;
+    
+    @Column(name = "upi_id_submitted_at")
+    private LocalDateTime upiIdSubmittedAt;
+    
+    @Column(name = "upi_id_viewed_at")
+    private LocalDateTime upiIdViewedAt;
     
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -163,6 +176,38 @@ public class Bid {
         this.updatedAt = LocalDateTime.now();
     }
     
+    /**
+     * Submit UPI ID for payment
+     */
+    public void submitUpiId(String upiId) {
+        this.upiId = upiId;
+        this.upiIdSubmittedAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+    
+    /**
+     * Mark UPI ID as viewed by task owner
+     */
+    public void markUpiIdAsViewed() {
+        this.upiIdViewed = true;
+        this.upiIdViewedAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+    
+    /**
+     * Check if UPI ID has been submitted
+     */
+    public boolean hasUpiIdSubmitted() {
+        return upiId != null && !upiId.trim().isEmpty();
+    }
+    
+    /**
+     * Check if UPI ID has been viewed by task owner
+     */
+    public boolean hasUpiIdBeenViewed() {
+        return upiIdViewed != null && upiIdViewed;
+    }
+    
     // Enums
     
     /**
@@ -172,7 +217,9 @@ public class Bid {
         PENDING("Pending"),
         ACCEPTED("Accepted"),
         REJECTED("Rejected"),
-        WITHDRAWN("Withdrawn");
+        WITHDRAWN("Withdrawn"),
+        COMPLETED("Completed"),
+        CANCELLED("Cancelled");
         
         private final String displayName;
         

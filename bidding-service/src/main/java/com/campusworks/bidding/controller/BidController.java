@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 /**
  * Bid Controller
  * Handles HTTP requests for bid management
@@ -573,6 +572,7 @@ public class BidController {
             Map<String, Object> config = new HashMap<>();
             config.put("autoAssignmentEnabled", biddingService.isAutoAssignmentEnabled());
             config.put("checkInterval", biddingService.getAutoAssignmentCheckInterval());
+            config.put("autoCancellationCheckInterval", biddingService.getAutoCancellationCheckInterval());
             config.put("lastCheckTime", LocalDateTime.now()); // This would be tracked in a real implementation
             
             log.info("✅ Automatic bid selection configuration retrieved successfully");
@@ -587,6 +587,292 @@ public class BidController {
             errorResponse.put("message", e.getMessage());
             
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
+    }
+    
+    // ==================== UPI ID OPERATIONS ====================
+    
+    /**
+     * Submit UPI ID for an accepted bid
+     */
+    @PostMapping("/{id}/submit-upi")
+    public ResponseEntity<?> submitUpiId(@PathVariable Long id, @RequestBody SubmitUpiIdRequest request, HttpServletRequest httpRequest) {
+        String userEmail = httpRequest.getHeader("X-User-Email");
+        String userId = httpRequest.getHeader("X-User-Id");
+        
+        log.info("💳 Submitting UPI ID for bid ID: {} by user: {} ({})", id, userEmail, userId);
+        
+        try {
+            Bid bid = biddingService.submitUpiId(id, request.getUpiId(), Long.parseLong(userId));
+            
+            log.info("✅ UPI ID submitted successfully: Bid ID: {}, UPI ID: {}", bid.getId(), request.getUpiId());
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "UPI ID submitted successfully");
+            response.put("bidId", bid.getId());
+            response.put("upiId", bid.getUpiId());
+            response.put("upiIdSubmittedAt", bid.getUpiIdSubmittedAt());
+            response.put("status", bid.getStatus());
+            
+            return ResponseEntity.ok(response);
+            
+        } catch (Exception e) {
+            log.error("❌ Failed to submit UPI ID for bid ID: {} - Error: {}", id, e.getMessage(), e);
+            
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Failed to submit UPI ID");
+            errorResponse.put("message", e.getMessage());
+            
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+    }
+    
+    /**
+     * View UPI ID for an accepted bid (by task owner)
+     */
+    @PostMapping("/{id}/view-upi")
+    public ResponseEntity<?> viewUpiId(@PathVariable Long id, HttpServletRequest httpRequest) {
+        String userEmail = httpRequest.getHeader("X-User-Email");
+        String userId = httpRequest.getHeader("X-User-Id");
+        
+        log.info("👁️ Viewing UPI ID for bid ID: {} by user: {} ({})", id, userEmail, userId);
+        
+        try {
+            Bid bid = biddingService.viewUpiId(id, Long.parseLong(userId));
+            
+            log.info("✅ UPI ID viewed successfully: Bid ID: {}, UPI ID: {}", bid.getId(), bid.getUpiId());
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "UPI ID viewed successfully");
+            response.put("bidId", bid.getId());
+            response.put("upiId", bid.getUpiId());
+            response.put("upiIdViewedAt", bid.getUpiIdViewedAt());
+            response.put("upiIdViewed", bid.getUpiIdViewed());
+            response.put("status", bid.getStatus());
+            
+            return ResponseEntity.ok(response);
+            
+        } catch (Exception e) {
+            log.error("❌ Failed to view UPI ID for bid ID: {} - Error: {}", id, e.getMessage(), e);
+            
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Failed to view UPI ID");
+            errorResponse.put("message", e.getMessage());
+            
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+    }
+    
+    /**
+     * Accept completed work (by task owner after viewing UPI ID)
+     */
+    @PostMapping("/{id}/accept-work")
+    public ResponseEntity<?> acceptCompletedWork(@PathVariable Long id, HttpServletRequest httpRequest) {
+        String userEmail = httpRequest.getHeader("X-User-Email");
+        String userId = httpRequest.getHeader("X-User-Id");
+        
+        log.info("✅ Accepting completed work for bid ID: {} by user: {} ({})", id, userEmail, userId);
+        
+        try {
+            Bid bid = biddingService.acceptCompletedWork(id, Long.parseLong(userId));
+            
+            log.info("✅ Work accepted successfully: Bid ID: {}, Task ID: {}", bid.getId(), bid.getTaskId());
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Work accepted successfully");
+            response.put("bidId", bid.getId());
+            response.put("taskId", bid.getTaskId());
+            response.put("status", bid.getStatus());
+            response.put("updatedAt", bid.getUpdatedAt());
+            
+            return ResponseEntity.ok(response);
+            
+        } catch (Exception e) {
+            log.error("❌ Failed to accept work for bid ID: {} - Error: {}", id, e.getMessage(), e);
+            
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Failed to accept work");
+            errorResponse.put("message", e.getMessage());
+            
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+    }
+    
+    /**
+     * Get accepted bid with UPI ID for a task
+     */
+    @GetMapping("/task/{taskId}/accepted-with-upi")
+    public ResponseEntity<?> getAcceptedBidWithUpiIdForTask(@PathVariable Long taskId) {
+        log.info("🔍 Retrieving accepted bid with UPI ID for task ID: {}", taskId);
+        
+        try {
+            var bidOpt = biddingService.getAcceptedBidWithUpiIdForTask(taskId);
+            
+            if (bidOpt.isPresent()) {
+                Bid bid = bidOpt.get();
+                log.info("✅ Found accepted bid with UPI ID: ID: {}, Task: {}", bid.getId(), taskId);
+                return ResponseEntity.ok(bid);
+            } else {
+                log.info("ℹ️ No accepted bid with UPI ID found for task ID: {}", taskId);
+                return ResponseEntity.notFound().build();
+            }
+            
+        } catch (Exception e) {
+            log.error("❌ Failed to retrieve accepted bid with UPI ID for task ID: {} - Error: {}", taskId, e.getMessage(), e);
+            
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Failed to retrieve accepted bid with UPI ID");
+            errorResponse.put("message", e.getMessage());
+            
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
+    }
+    
+    /**
+     * Get accepted bid for a task
+     */
+    @GetMapping("/task/{taskId}/accepted")
+    public ResponseEntity<?> getAcceptedBidForTask(@PathVariable Long taskId) {
+        log.info("🔍 Retrieving accepted bid for task ID: {}", taskId);
+        
+        try {
+            var bidOpt = biddingService.getAcceptedBidForTask(taskId);
+            
+            if (bidOpt.isPresent()) {
+                Bid bid = bidOpt.get();
+                log.info("✅ Found accepted bid: ID: {}, Task: {}", bid.getId(), taskId);
+                return ResponseEntity.ok(bid);
+            } else {
+                log.info("ℹ️ No accepted bid found for task ID: {}", taskId);
+                return ResponseEntity.notFound().build();
+            }
+            
+        } catch (Exception e) {
+            log.error("❌ Failed to retrieve accepted bid for task ID: {} - Error: {}", taskId, e.getMessage(), e);
+            
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Failed to retrieve accepted bid");
+            errorResponse.put("message", e.getMessage());
+            
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
+    }
+    
+    /**
+     * Check if task has accepted bid with UPI ID submitted
+     */
+    @GetMapping("/task/{taskId}/has-upi-submitted")
+    public ResponseEntity<?> hasAcceptedBidWithUpiIdForTask(@PathVariable Long taskId) {
+        log.info("🔍 Checking if task ID: {} has accepted bid with UPI ID submitted", taskId);
+        
+        try {
+            boolean hasUpiId = biddingService.hasAcceptedBidWithUpiIdForTask(taskId);
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("taskId", taskId);
+            response.put("hasUpiIdSubmitted", hasUpiId);
+            
+            log.info("✅ Check completed: Task ID: {}, Has UPI ID: {}", taskId, hasUpiId);
+            
+            return ResponseEntity.ok(response);
+            
+        } catch (Exception e) {
+            log.error("❌ Failed to check UPI ID status for task ID: {} - Error: {}", taskId, e.getMessage(), e);
+            
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Failed to check UPI ID status");
+            errorResponse.put("message", e.getMessage());
+            
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
+    }
+    
+    /**
+     * Check if task has accepted bid with UPI ID viewed
+     */
+    @GetMapping("/task/{taskId}/has-upi-viewed")
+    public ResponseEntity<?> hasAcceptedBidWithViewedUpiIdForTask(@PathVariable Long taskId) {
+        log.info("🔍 Checking if task ID: {} has accepted bid with UPI ID viewed", taskId);
+        
+        try {
+            boolean hasUpiIdViewed = biddingService.hasAcceptedBidWithViewedUpiIdForTask(taskId);
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("taskId", taskId);
+            response.put("hasUpiIdViewed", hasUpiIdViewed);
+            
+            log.info("✅ Check completed: Task ID: {}, Has UPI ID Viewed: {}", taskId, hasUpiIdViewed);
+            
+            return ResponseEntity.ok(response);
+            
+        } catch (Exception e) {
+            log.error("❌ Failed to check UPI ID viewed status for task ID: {} - Error: {}", taskId, e.getMessage(), e);
+            
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Failed to check UPI ID viewed status");
+            errorResponse.put("message", e.getMessage());
+            
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
+    }
+    
+    /**
+     * Auto-cancel expired tasks and their bids
+     */
+    @PostMapping("/auto-cancel-expired")
+    public ResponseEntity<?> autoCancelExpiredTasks() {
+        log.info("🔄 Manually triggering auto-cancellation of expired tasks");
+        
+        try {
+            biddingService.autoCancelExpiredTasks();
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Auto-cancellation of expired tasks completed");
+            response.put("triggeredAt", LocalDateTime.now());
+            
+            log.info("✅ Auto-cancellation of expired tasks completed successfully");
+            
+            return ResponseEntity.ok(response);
+            
+        } catch (Exception e) {
+            log.error("❌ Failed to auto-cancel expired tasks - Error: {}", e.getMessage(), e);
+            
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Failed to auto-cancel expired tasks");
+            errorResponse.put("message", e.getMessage());
+            
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
+    }
+    
+    /**
+     * Delete a bid (only for rejected bids)
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteBid(@PathVariable Long id, HttpServletRequest httpRequest) {
+        String userId = httpRequest.getHeader("X-User-Id");
+        
+        log.info("🗑️ Deleting bid ID: {} by user ID: {}", id, userId);
+        
+        try {
+            biddingService.deleteBid(id, Long.parseLong(userId));
+            
+            log.info("✅ Bid deleted successfully: ID: {}", id);
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Bid deleted successfully");
+            response.put("bidId", id);
+            
+            return ResponseEntity.ok(response);
+            
+        } catch (Exception e) {
+            log.error("❌ Failed to delete bid ID: {} - Error: {}", id, e.getMessage(), e);
+            
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Failed to delete bid");
+            errorResponse.put("message", e.getMessage());
+            
+            return ResponseEntity.badRequest().body(errorResponse);
         }
     }
     
@@ -608,5 +894,13 @@ public class BidController {
     @lombok.Data
     public static class RejectBidRequest {
         private String rejectionReason;
+    }
+    
+    /**
+     * Submit UPI ID Request DTO
+     */
+    @lombok.Data
+    public static class SubmitUpiIdRequest {
+        private String upiId;
     }
 }

@@ -51,12 +51,16 @@ CREATE TABLE IF NOT EXISTS bids (
     bidder_email VARCHAR(255) NOT NULL,
     amount DECIMAL(10,2) NOT NULL,
     proposal TEXT,
-    status VARCHAR(50) NOT NULL DEFAULT 'PENDING',
+    status VARCHAR(20) NOT NULL DEFAULT 'PENDING',
     is_winning BOOLEAN DEFAULT FALSE,
     is_accepted BOOLEAN DEFAULT FALSE,
     accepted_at DATETIME,
     rejected_at DATETIME,
     rejection_reason TEXT,
+    upi_id VARCHAR(255),
+    upi_id_viewed BOOLEAN DEFAULT FALSE,
+    upi_id_submitted_at DATETIME,
+    upi_id_viewed_at DATETIME,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     
@@ -64,7 +68,8 @@ CREATE TABLE IF NOT EXISTS bids (
     INDEX idx_bidder_id (bidder_id),
     INDEX idx_status (status),
     INDEX idx_is_winning (is_winning),
-    INDEX idx_amount (amount)
+    INDEX idx_amount (amount),
+    INDEX idx_upi_id_viewed (upi_id_viewed)
 );
 
 -- =============================================
@@ -80,22 +85,14 @@ CREATE TABLE IF NOT EXISTS profiles (
     user_email VARCHAR(255) NOT NULL UNIQUE,
     first_name VARCHAR(100),
     last_name VARCHAR(100),
-    bio TEXT,
     university VARCHAR(255),
     major VARCHAR(255),
-    academic_year VARCHAR(50),
-    skills TEXT,
-    experience_years INT DEFAULT 0,
-    experience_description TEXT,
-    rating DECIMAL(3,2) DEFAULT 0.00,
-    total_ratings INT DEFAULT 0,
+    academic_year INT,
     completed_tasks INT DEFAULT 0,
     successful_tasks INT DEFAULT 0,
     total_earnings DECIMAL(10,2) DEFAULT 0.00,
     is_verified BOOLEAN DEFAULT FALSE,
     is_public BOOLEAN DEFAULT TRUE,
-    preferred_categories TEXT,
-    hourly_rate DECIMAL(8,2),
     availability_status VARCHAR(50) DEFAULT 'AVAILABLE',
     last_active DATETIME DEFAULT CURRENT_TIMESTAMP,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -105,11 +102,31 @@ CREATE TABLE IF NOT EXISTS profiles (
     INDEX idx_user_email (user_email),
     INDEX idx_university (university),
     INDEX idx_major (major),
-    INDEX idx_rating (rating),
     INDEX idx_availability_status (availability_status),
     INDEX idx_is_verified (is_verified),
     INDEX idx_is_public (is_public)
 );
+
+-- Migration for existing databases: drop removed columns if they exist
+-- Note: MySQL prior to 8.0.19 does not support IF EXISTS on DROP COLUMN within ALTER TABLE.
+-- Run these individually or ignore errors if the column does not exist.
+-- ALTER TABLE profiles DROP COLUMN bio;
+-- ALTER TABLE profiles DROP COLUMN skills;
+-- ALTER TABLE profiles DROP COLUMN experience_years;
+-- ALTER TABLE profiles DROP COLUMN experience_description;
+-- ALTER TABLE profiles DROP COLUMN rating;
+-- ALTER TABLE profiles DROP COLUMN total_ratings;
+-- ALTER TABLE profiles DROP COLUMN hourly_rate;
+-- ALTER TABLE profiles DROP COLUMN preferred_categories;
+-- ALTER TABLE profiles MODIFY COLUMN academic_year INT;
+
+-- Migration for existing bidding database: add UPI ID columns if they don't exist
+-- Run these individually or ignore errors if the column already exists.
+-- ALTER TABLE bids ADD COLUMN upi_id VARCHAR(255);
+-- ALTER TABLE bids ADD COLUMN upi_id_viewed BOOLEAN DEFAULT FALSE;
+-- ALTER TABLE bids ADD COLUMN upi_id_submitted_at DATETIME;
+-- ALTER TABLE bids ADD COLUMN upi_id_viewed_at DATETIME;
+-- ALTER TABLE bids ADD INDEX idx_upi_id_viewed (upi_id_viewed);
 
 -- =============================================
 -- Verification
