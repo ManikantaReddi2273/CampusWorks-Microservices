@@ -6291,3 +6291,33 @@ java.nio.file.NoSuchFileException: C:\Users\ManishReddy\Downloads\spring-tool-su
 	at org.eclipse.ecf.provider.filetransfer.browse.URLFileSystemBrowser.runRequest(URLFileSystemBrowser.java:120)
 	at org.eclipse.ecf.provider.filetransfer.browse.AbstractFileSystemBrowser$DirectoryJob.run(AbstractFileSystemBrowser.java:71)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-09-06 11:31:41.096
+!MESSAGE The artifact mysql:mysql-connector-java:jar:8.0.33 has been relocated to com.mysql:mysql-connector-j:jar:8.0.33: MySQL Connector/J artifacts moved to reverse-DNS compliant Maven 2+ coordinates.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-09-06 11:31:43.582
+!MESSAGE The artifact mysql:mysql-connector-java:jar:8.0.33 has been relocated to com.mysql:mysql-connector-j:jar:8.0.33: MySQL Connector/J artifacts moved to reverse-DNS compliant Maven 2+ coordinates.
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-09-06 11:31:57.763
+!MESSAGE Classpath changed for project: auth-service
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-09-06 11:31:57.767
+!MESSAGE Classpath changed for project: api-gateway
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-09-06 11:32:08.911
+!MESSAGE Classpath changed for project: auth-service
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-09-06 11:32:08.912
+!MESSAGE Classpath changed for project: profile-service
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-09-06 11:32:08.923
+!MESSAGE Classpath changed for project: bidding-service
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-09-06 11:32:08.926
+!MESSAGE Classpath changed for project: eureka-server
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-09-06 11:32:13.216
+!MESSAGE Classpath changed for project: profile-service
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-09-06 11:32:13.218
+!MESSAGE Classpath changed for project: task-service
