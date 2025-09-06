@@ -10,6 +10,7 @@ import theme from '@theme';
 
 // Components
 import ProtectedRoute from '@components/organisms/ProtectedRoute';
+import ToastContainer from '@components/atoms/ToastContainer';
 
 // Pages
 import LoginPage from '@pages/auth/LoginPage';
@@ -25,7 +26,7 @@ import MyTasksPage from '@pages/tasks/MyTasksPage';
 import BidsPage from '@pages/bids/BidsPage';
 import MyBidsPage from '@pages/bids/MyBidsPage';
 import ProfilePage from '@pages/profile/ProfilePage';
-import PaymentsPage from '@pages/payments/PaymentsPage';
+
 
 // Test Components
 import CountdownTest from '@components/test/CountdownTest';
@@ -147,14 +148,6 @@ function App() {
                 </ProtectedRoute>
               } 
             />
-            <Route 
-              path={ROUTES.PAYMENTS} 
-              element={
-                <ProtectedRoute>
-                  <PaymentsPage />
-                </ProtectedRoute>
-              } 
-            />
             
             {/* Test Route */}
             <Route 
@@ -173,6 +166,7 @@ function App() {
             <Route path="*" element={<Navigate to={ROUTES.DASHBOARD} replace />} />
           </Routes>
         </Router>
+        <ToastContainer />
       </ThemeProvider>
     </Provider>
   );

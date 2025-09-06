@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Container, Typography, Paper, Grid, Button, Box, Chip } from '@mui/material';
-import { Add, Assignment, Gavel, AccountBalanceWallet, TrendingUp, AssignmentTurnedIn } from '@mui/icons-material';
+import { Add, Assignment, Gavel, TrendingUp, AssignmentTurnedIn } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import Layout from '@components/templates/Layout';
 import { selectAuth } from '@store/slices/authSlice';
@@ -40,13 +40,6 @@ const DashboardPage = () => {
       action: () => navigate(ROUTES.MY_BIDS),
       color: 'info'
     },
-    {
-      title: 'Wallet',
-      description: 'View your earnings and transactions',
-      icon: <AccountBalanceWallet />,
-      action: () => navigate(ROUTES.PAYMENTS),
-      color: 'success'
-    }
   ];
 
   return (
@@ -152,7 +145,7 @@ const DashboardPage = () => {
                   Build your reputation through quality work
                 </Typography>
                 <Typography component="li" variant="body2">
-                  Manage payments securely through our escrow system
+                  Manage payments securely through UPI id
                 </Typography>
               </Box>
             </Paper>
@@ -169,20 +162,17 @@ const DashboardPage = () => {
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                   <Typography variant="body2">Tasks Created:</Typography>
-                  <Chip label="0" size="small" />
+                  <Chip label="0" size="small"  color="success"/>
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                   <Typography variant="body2">Bids Placed:</Typography>
-                  <Chip label="0" size="small" />
+                  <Chip label="0" size="small" color="success" />
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                   <Typography variant="body2">Tasks Completed:</Typography>
-                  <Chip label="0" size="small" />
+                  <Chip label="0" size="small" color="success"/>
                 </Box>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Typography variant="body2">Total Earnings:</Typography>
-                  <Chip label="₹0.00" size="small" color="success" />
-                </Box>
+                
               </Box>
               <Typography variant="caption" color="text.secondary" sx={{ mt: 2, display: 'block' }}>
                 * Stats will update as you use the platform
@@ -196,3 +186,5 @@ const DashboardPage = () => {
 };
 
 export default DashboardPage;
+
+

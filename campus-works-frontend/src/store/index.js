@@ -6,6 +6,7 @@ import authReducer from './slices/authSlice';
 import tasksReducer from './slices/tasksSlice';
 import bidsReducer from './slices/bidsSlice';
 import paymentsReducer from './slices/paymentsSlice';
+import toastReducer from '../services/toastService';
 
 // Configure store
 export const store = configureStore({
@@ -13,7 +14,8 @@ export const store = configureStore({
     auth: authReducer,
     tasks: tasksReducer,
     bids: bidsReducer,
-    payments: paymentsReducer
+    payments: paymentsReducer,
+    toast: toastReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

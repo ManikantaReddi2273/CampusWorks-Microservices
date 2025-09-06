@@ -41,7 +41,8 @@ const TaskCard = ({
   onComplete,
   onViewUpi,
   className = '',
-  sx = {}
+  sx = {},
+  variant = 'default' // 'default' or 'compact'
 }) => {
   // State for winning bid details
   const [winningBid, setWinningBid] = useState(null);
@@ -124,20 +125,33 @@ const TaskCard = ({
   const timeRemaining = getTimeRemaining(task.biddingDeadline);
   const isExpired = timeRemaining.expired;
 
+  // Determine card dimensions based on variant
+  const cardStyles = variant === 'compact' ? {
+    height: '400px',
+    minHeight: '400px',
+    maxHeight: '400px',
+    width: '350px',
+    minWidth: '350px',
+    maxWidth: '350px'
+  } : {
+    height: '500px',
+    minHeight: '500px',
+    maxHeight: '500px',
+    width: '100%',
+    minWidth: '100%',
+    maxWidth: '100%'
+  };
+
   return (
     <Card 
       className={className}
       sx={{ 
-        height: '500px !important', // Fixed height for 3-column layout
-        maxHeight: '500px !important', // Prevent any expansion
-        minHeight: '500px !important', // Ensure minimum height
-        width: '100% !important', // Force full width
-        maxWidth: '100% !important', // Prevent horizontal expansion
-        minWidth: '100% !important', // Ensure minimum width
+        ...cardStyles,
         display: 'flex', 
         flexDirection: 'column',
-        overflow: 'hidden', // Prevent card from expanding
-        boxSizing: 'border-box', // Include padding in width calculation
+        overflow: 'hidden',
+        boxSizing: 'border-box',
+        flexShrink: 0, // Prevent card from shrinking in flex container
         ...sx 
       }}
     >
@@ -148,7 +162,7 @@ const TaskCard = ({
         borderBottom: '1px solid', 
         borderColor: 'divider',
         flexShrink: 0, // Prevent header from shrinking
-        height: '80px', // Fixed header height for 500px card
+        height: variant === 'compact' ? '70px' : '80px', // Responsive header height
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -197,8 +211,8 @@ const TaskCard = ({
           flex: 1,
           overflow: 'auto !important',
           p: 2,
-          height: 'calc(500px - 160px)', // Fixed body height (500px - header 80px - footer 80px)
-          maxHeight: 'calc(500px - 160px)',
+          height: variant === 'compact' ? 'calc(400px - 140px)' : 'calc(500px - 160px)', // Responsive body height
+          maxHeight: variant === 'compact' ? 'calc(400px - 140px)' : 'calc(500px - 160px)',
           minHeight: 0,
           width: '100%', // Ensure full width
           overflowX: 'auto', // Horizontal scroll when needed
@@ -413,9 +427,9 @@ const TaskCard = ({
         justifyContent: 'space-between',
         alignItems: 'center',
         flexShrink: 0, // Prevent footer from shrinking
-        height: '80px', // Fixed footer height for 500px card
-        minHeight: '80px',
-        maxHeight: '80px',
+        height: variant === 'compact' ? '70px' : '80px', // Responsive footer height
+        minHeight: variant === 'compact' ? '70px' : '80px',
+        maxHeight: variant === 'compact' ? '70px' : '80px',
         width: '100%', // Ensure full width
         overflow: 'hidden' // Prevent horizontal overflow
       }}>

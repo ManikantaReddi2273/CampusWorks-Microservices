@@ -1,22 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
   Typography,
   Paper,
   Box,
-  Card,
-  CardContent,
-  CardActions,
   Button,
-  Chip,
-  Grid,
   CircularProgress,
   Alert,
-  IconButton,
-  Tooltip,
-  Divider,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -26,29 +18,20 @@ import {
 } from '@mui/material';
 import {
   Gavel,
-  Visibility,
   Assignment,
-  AttachMoney,
-  Schedule,
-  Person,
   Refresh,
-  TrendingUp,
-  CheckCircle,
-  Cancel,
-  Pending,
-  TaskAlt,
-  Payment,
-  Delete
+  Payment
 } from '@mui/icons-material';
 import Layout from '@components/templates/Layout';
+import MyBidCard from '@components/molecules/MyBidCard';
 import { selectAuth } from '@store/slices/authSlice';
-import { ROUTES, CATEGORY_LABELS } from '@constants';
+import { ROUTES } from '@constants';
 import apiService from '@services/api';
-import { isDeadlineExpired, getDeadlineWarning, getDeadlineStatusColor } from '@utils/deadlineUtils';
-import CountdownTimer from '@components/common/CountdownTimer';
+import { showEmailSuccessToast, showEmailErrorToast } from '@services/toastService';
 
 const MyBidsPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { user } = useSelector(selectAuth);
 
   const [bids, setBids] = useState([]);
@@ -193,6 +176,9 @@ const MyBidsPage = () => {
           )
         );
         
+        // Show success toast notification
+        dispatch(showEmailSuccessToast('upi_submitted'));
+        
         setUpiDialogOpen(false);
         setSelectedBid(null);
         setUpiId('');
@@ -200,6 +186,9 @@ const MyBidsPage = () => {
     } catch (error) {
       console.error('Error submitting UPI ID:', error);
       setUpiError(error.response?.data?.message || 'Failed to submit UPI ID. Please try again.');
+      
+      // Show error toast notification
+      dispatch(showEmailErrorToast('upi_submitted'));
     } finally {
       setSubmittingUpi(false);
     }
@@ -213,68 +202,6 @@ const MyBidsPage = () => {
     setLoadingTaskDetails(false);
   };
 
-  const canCompleteTask = (bid) => {
-    return bid.status === 'ACCEPTED' && 
-           !bid.upiId && 
-           !isDeadlineExpired(bid.task?.completionDeadline);
-  };
-
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 'PENDING':
-        return 'warning';
-      case 'ACCEPTED':
-        return 'success';
-      case 'REJECTED':
-        return 'error';
-      case 'WITHDRAWN':
-        return 'default';
-      case 'COMPLETED':
-        return 'success';
-      case 'CANCELLED':
-        return 'error';
-      default:
-        return 'default';
-    }
-  };
-
-  const getStatusIcon = (status) => {
-    switch (status) {
-      case 'PENDING':
-        return <Pending />;
-      case 'ACCEPTED':
-        return <CheckCircle />;
-      case 'REJECTED':
-        return <Cancel />;
-      case 'WITHDRAWN':
-        return <Cancel />;
-      case 'COMPLETED':
-        return <TaskAlt />;
-      case 'CANCELLED':
-        return <Cancel />;
-      default:
-        return <Pending />;
-    }
-  };
-
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  };
-
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('en-IN', {
-      style: 'currency',
-      currency: 'INR',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(amount);
-  };
 
   if (loading) {
     return (
@@ -289,14 +216,8 @@ const MyBidsPage = () => {
   }
 
   return (
-    <Box sx={{ 
-      minHeight: '100vh',
-      background: 'transparent',
-      py: 4,
-      px: 2
-    }}>
-      <Layout>
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+    <Layout>
+      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           {/* Header */}
           <Box sx={{ mb: 4 }}>
             <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
@@ -348,292 +269,39 @@ const MyBidsPage = () => {
               </Button>
             </Paper>
           ) : (
-            <Grid container spacing={3}>
+            <Box sx={{ 
+              display: 'flex', 
+              gap: 2, 
+              overflowX: 'auto',
+              overflowY: 'hidden',
+              pb: 2,
+              '&::-webkit-scrollbar': {
+                height: '8px',
+              },
+              '&::-webkit-scrollbar-track': {
+                background: '#f1f1f1',
+                borderRadius: '4px',
+              },
+              '&::-webkit-scrollbar-thumb': {
+                background: '#888',
+                borderRadius: '4px',
+              },
+              '&::-webkit-scrollbar-thumb:hover': {
+                background: '#555',
+              }
+            }}>
               {bids.map((bid) => (
-                <Grid item xs={12} key={bid.id}>
-                  <Card sx={{ 
-                    height: '100%', 
-                    display: 'flex', 
-                    flexDirection: 'column',
-                    background: 'rgba(255, 255, 255, 0.95)',
-                    backdropFilter: 'blur(10px)',
-                    border: '1px solid rgba(255, 255, 255, 0.2)'
-                  }}>
-                    <CardContent sx={{ flexGrow: 1 }}>
-                      {/* Bid Header */}
-                      <Box display="flex" justifyContent="space-between" alignItems="flex-start" sx={{ mb: 2 }}>
-                        <Box sx={{ flexGrow: 1 }}>
-                                                     <Typography variant="h6" component="h2" sx={{ 
-                             fontWeight: 'bold',
-                             mb: 1
-                           }}>
-                             {bid.task?.title || 'Loading...'}
-                           </Typography>
-                          <Box display="flex" alignItems="center" gap={1} sx={{ mb: 1 }}>
-                            <Chip
-                              icon={getStatusIcon(bid.status)}
-                              label={bid.status}
-                              color={getStatusColor(bid.status)}
-                              size="small"
-                              sx={{ fontWeight: 'bold' }}
-                            />
-                                                         {bid.task?.category && (
-                               <Chip
-                                 label={CATEGORY_LABELS[bid.task.category] || bid.task.category}
-                                 size="small"
-                                 variant="outlined"
-                                 sx={{ 
-                                   background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                                   color: 'white',
-                                   fontWeight: 'bold'
-                                 }}
-                               />
-                             )}
-                          </Box>
-                        </Box>
-                        <Box display="flex" alignItems="center" gap={1}>
-                          <TrendingUp sx={{ color: 'success.main' }} />
-                          <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'success.main' }}>
-                            {formatCurrency(bid.amount)}
-                          </Typography>
-                        </Box>
-                      </Box>
-
-                      <Divider sx={{ my: 2 }} />
-
-                      {/* Bid Details */}
-                      <Grid container spacing={2}>
-                        <Grid item xs={12} md={6}>
-                          <Box sx={{ mb: 2 }}>
-                            <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                              <AttachMoney sx={{ mr: 1, fontSize: 16 }} />
-                              <strong>Your Bid:</strong> {formatCurrency(bid.amount)}
-                            </Typography>
-                                                         {bid.task?.budget && (
-                               <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                                 <AttachMoney sx={{ mr: 1, fontSize: 16 }} />
-                                 <strong>Task Budget:</strong> {formatCurrency(bid.task.budget)}
-                               </Typography>
-                             )}
-                             {bid.task?.ownerEmail && (
-                               <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                                 <Person sx={{ mr: 1, fontSize: 16 }} />
-                                 <strong>Task Owner:</strong> {bid.task.ownerEmail}
-                               </Typography>
-                             )}
-                          </Box>
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                          <Box sx={{ mb: 2 }}>
-                            <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                              <Schedule sx={{ mr: 1, fontSize: 16 }} />
-                              <strong>Bid Placed:</strong> {formatDate(bid.createdAt)}
-                            </Typography>
-                            {bid.task?.completionDeadline && (
-                              <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                                <Schedule sx={{ mr: 1, fontSize: 16 }} />
-                                <strong>Task Deadline:</strong> {formatDate(bid.task.completionDeadline)}
-                              </Typography>
-                            )}
-                            
-                            {/* Live Countdown Timer for Accepted Bids */}
-                            {bid.status === 'ACCEPTED' && bid.task?.completionDeadline && !isDeadlineExpired(bid.task.completionDeadline) && (
-                              <Box sx={{ mt: 1, mb: 1 }}>
-                                <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', mb: 0.5, fontWeight: 'bold' }}>
-                                  <Schedule sx={{ mr: 1, fontSize: 16 }} />
-                                  Time Remaining:
-                                </Typography>
-                                <CountdownTimer 
-                                  deadline={bid.task.completionDeadline}
+                <MyBidCard
+                  key={bid.id}
+                  bid={bid}
                                   variant="compact"
-                                  size="small"
-                                />
-                              </Box>
-                            )}
-                            {bid.updatedAt && bid.updatedAt !== bid.createdAt && (
-                              <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                                <Schedule sx={{ mr: 1, fontSize: 16 }} />
-                                <strong>Last Updated:</strong> {formatDate(bid.updatedAt)}
-                              </Typography>
-                            )}
-                            {bid.acceptedAt && (
-                              <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', mb: 1, color: 'success.main' }}>
-                                <CheckCircle sx={{ mr: 1, fontSize: 16 }} />
-                                <strong>Accepted At:</strong> {formatDate(bid.acceptedAt)}
-                              </Typography>
-                            )}
-                            {bid.rejectedAt && (
-                              <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', mb: 1, color: 'error.main' }}>
-                                <Cancel sx={{ mr: 1, fontSize: 16 }} />
-                                <strong>Rejected At:</strong> {formatDate(bid.rejectedAt)}
-                              </Typography>
-                            )}
-                          </Box>
-                        </Grid>
-                      </Grid>
-
-                      {/* Bid Proposal */}
-                      {bid.proposal && (
-                        <Box sx={{ mt: 2 }}>
-                          <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>
-                            Your Proposal:
-                          </Typography>
-                          <Typography
-                            variant="body2"
-                            color="text.secondary"
-                            sx={{
-                              p: 2,
-                              backgroundColor: 'rgba(102, 126, 234, 0.05)',
-                              borderRadius: 1,
-                              border: '1px solid rgba(102, 126, 234, 0.1)',
-                              fontStyle: 'italic'
-                            }}
-                          >
-                            {bid.proposal}
-                          </Typography>
-                        </Box>
-                      )}
-
-                      {/* Rejection Reason */}
-                      {bid.status === 'REJECTED' && bid.rejectionReason && (
-                        <Box sx={{ mt: 2 }}>
-                          <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1, color: 'error.main' }}>
-                            Rejection Reason:
-                          </Typography>
-                          <Typography
-                            variant="body2"
-                            color="error.main"
-                            sx={{
-                              p: 2,
-                              backgroundColor: 'rgba(244, 67, 54, 0.05)',
-                              borderRadius: 1,
-                              border: '1px solid rgba(244, 67, 54, 0.1)',
-                              fontStyle: 'italic'
-                            }}
-                          >
-                            {bid.rejectionReason}
-                          </Typography>
-                        </Box>
-                      )}
-
-                      {/* Task Description */}
-                      {bid.task?.description && (
-                        <Box sx={{ mt: 2 }}>
-                          <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>
-                            Task Description:
-                          </Typography>
-                          <Typography
-                            variant="body2"
-                            color="text.secondary"
-                            sx={{
-                              overflow: 'hidden',
-                              textOverflow: 'ellipsis',
-                              display: '-webkit-box',
-                              WebkitLineClamp: 3,
-                              WebkitBoxOrient: 'vertical'
-                            }}
-                          >
-                            {bid.task.description}
-                          </Typography>
-                        </Box>
-                      )}
-                    </CardContent>
-
-                      {/* Bid Actions */}
-                      <CardActions sx={{ p: 2, pt: 0 }}>
-                        <Tooltip title={bid.taskId ? "View Task Details" : "Task ID not available"}>
-                          <span>
-                            <IconButton
-                              size="small"
-                              onClick={() => handleViewTask(bid.taskId)}
-                              disabled={!bid.taskId}
-                              sx={{
-                                color: '#000000',
-                                '&:hover': {
-                                  color: '#1976d2',
-                                  backgroundColor: 'rgba(25, 118, 210, 0.1)'
-                                },
-                                '&:disabled': {
-                                  color: '#ccc'
-                                }
-                              }}
-                            >
-                              <Visibility />
-                            </IconButton>
-                          </span>
-                        </Tooltip>
-                        
-                        {/* Delete Button for Rejected Bids */}
-                        {bid.status === 'REJECTED' && (
-                          <Tooltip title="Delete Rejected Bid">
-                            <IconButton
-                              size="small"
-                              onClick={() => handleDeleteBid(bid.id)}
-                              color="error"
-                              disabled={deletingBid === bid.id}
-                            >
-                              {deletingBid === bid.id ? <CircularProgress size={16} /> : <Delete />}
-                            </IconButton>
-                          </Tooltip>
-                        )}
-                        
-                        {/* Complete Task Button */}
-                        {canCompleteTask(bid) && (
-                          <Tooltip title="Complete Task - Submit UPI ID">
-                            <Button
-                              size="small"
-                              variant="contained"
-                              startIcon={<Payment />}
-                              onClick={() => handleCompleteTask(bid)}
-                              sx={{
-                                background: 'linear-gradient(135deg, #4caf50 0%, #45a049 100%)',
-                                '&:hover': {
-                                  background: 'linear-gradient(135deg, #45a049 0%, #3d8b40 100%)',
-                                }
-                              }}
-                            >
-                              Complete Task
-                            </Button>
-                          </Tooltip>
-                        )}
-                        
-                        {/* UPI ID Submitted Status */}
-                        {bid.status === 'ACCEPTED' && bid.upiId && (
-                          <Chip
-                            icon={<Payment />}
-                            label="UPI ID Submitted"
-                            color="info"
-                            size="small"
-                            sx={{ ml: 1 }}
-                          />
-                        )}
-                        
-                        {/* Task Deadline Expired Warning */}
-                        {bid.status === 'ACCEPTED' && isDeadlineExpired(bid.task?.completionDeadline) && (
-                          <Chip
-                            icon={<Schedule />}
-                            label="Deadline Expired"
-                            color="error"
-                            size="small"
-                            sx={{ ml: 1 }}
-                          />
-                        )}
-                        
-                        {/* Deadline Warning */}
-                        {bid.status === 'ACCEPTED' && !isDeadlineExpired(bid.task?.completionDeadline) && getDeadlineWarning(bid.task?.completionDeadline) && (
-                          <Chip
-                            icon={<Schedule />}
-                            label="Deadline Soon"
-                            color={getDeadlineStatusColor(bid.task?.completionDeadline)}
-                            size="small"
-                            sx={{ ml: 1 }}
-                          />
-                        )}
-                      </CardActions>
-                  </Card>
-                </Grid>
+                  onView={handleViewTask}
+                  onDelete={handleDeleteBid}
+                  onComplete={handleCompleteTask}
+                  deletingBid={deletingBid}
+                />
               ))}
-            </Grid>
+            </Box>
           )}
 
           {/* UPI ID Submission Dialog */}
@@ -724,9 +392,8 @@ const MyBidsPage = () => {
               </Button>
             </DialogActions>
           </Dialog>
-        </Container>
-      </Layout>
-    </Box>
+      </Container>
+    </Layout>
   );
 };
 

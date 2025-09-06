@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   Container,
   Typography,
@@ -42,12 +42,14 @@ import Layout from '@components/templates/Layout';
 import { selectAuth } from '@store/slices/authSlice';
 import { ROUTES, CATEGORY_LABELS } from '@constants';
 import apiService from '@services/api';
+import { showEmailSuccessToast, showEmailErrorToast } from '@services/toastService';
 import { isDeadlineExpired, getDeadlineWarning, getDeadlineStatusColor } from '@utils/deadlineUtils';
 import CountdownTimer from '@components/common/CountdownTimer';
 
 const TaskDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { user } = useSelector(selectAuth);
   
   const [task, setTask] = useState(null);
@@ -278,12 +280,18 @@ const TaskDetailPage = () => {
         setTask(prev => ({ ...prev, status: 'COMPLETED' }));
         setAcceptWorkDialogOpen(false);
         
+        // Show success toast notification
+        dispatch(showEmailSuccessToast('work_accepted'));
+        
         // Refresh task details to get updated status
         await fetchTaskDetails();
       }
     } catch (error) {
       console.error('Error accepting work:', error);
       setUpiError(error.response?.data?.message || 'Failed to accept work. Please try again.');
+      
+      // Show error toast notification
+      dispatch(showEmailErrorToast('work_accepted'));
     } finally {
       setAcceptingWork(false);
     }

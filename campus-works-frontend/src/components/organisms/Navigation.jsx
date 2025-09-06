@@ -20,7 +20,6 @@ import {
   Assignment,
   Gavel,
   Person,
-  Payment,
   ExitToApp
 } from '@mui/icons-material';
 import { logoutUser, selectAuth, selectAuthLoading } from '@store/slices/authSlice';
@@ -71,8 +70,7 @@ const Navigation = () => {
     { label: 'Dashboard', path: ROUTES.DASHBOARD, icon: <Dashboard /> },
     { label: 'Tasks', path: ROUTES.TASKS, icon: <Assignment /> },
     { label: 'Bids', path: ROUTES.BIDS, icon: <Gavel /> },
-    { label: 'Profile', path: ROUTES.PROFILE, icon: <Person /> },
-    { label: 'Payments', path: ROUTES.PAYMENTS, icon: <Payment /> }
+    { label: 'Profile', path: ROUTES.PROFILE, icon: <Person /> }
   ];
 
   return (

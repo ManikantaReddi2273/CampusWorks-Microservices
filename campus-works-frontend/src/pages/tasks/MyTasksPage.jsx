@@ -423,7 +423,27 @@ const MyTasksPage = () => {
               </Alert>
             )}
             
-            <Grid container spacing={3} sx={{ alignItems: 'stretch' }}>
+            <Box sx={{ 
+              display: 'flex', 
+              gap: 2, 
+              overflowX: 'auto',
+              overflowY: 'hidden',
+              pb: 2,
+              '&::-webkit-scrollbar': {
+                height: '8px',
+              },
+              '&::-webkit-scrollbar-track': {
+                background: '#f1f1f1',
+                borderRadius: '4px',
+              },
+              '&::-webkit-scrollbar-thumb': {
+                background: '#888',
+                borderRadius: '4px',
+              },
+              '&::-webkit-scrollbar-thumb:hover': {
+                background: '#555',
+              }
+            }}>
               {tasks.map((task) => {
                 const canRepost = canRepostTask(task);
                 const canEditDelete = canEditOrDeleteTask(task);
@@ -442,39 +462,22 @@ const MyTasksPage = () => {
                 };
                 
                 return (
-                  <Grid item xs={12} sm={6} md={4} key={task.id} sx={{ 
-                    display: 'flex',
-                    height: '500px !important', // Fixed height for 3-column layout
-                    minHeight: '500px !important',
-                    maxHeight: '500px !important',
-                    width: '100% !important', // Force equal width
-                    minWidth: '100% !important',
-                    maxWidth: '100% !important',
-                    overflow: 'hidden' // Prevent expansion
-                  }}>
-                    <TaskCard
-                      task={task}
-                      showBidCount={task.status === 'OPEN'}
-                      bidCount={bidCount}
-                      actions={actions}
-                      onView={(task) => handleViewTask(task.id)}
-                      onEdit={(task) => handleEditTask(task.id)}
-                      onDelete={(task) => handleDeleteTask(task.id)}
-                      onRepost={(task) => handleRepostTask(task.id)}
-                      onViewUpi={(task) => handleViewUpiId(task)}
-                      sx={{ 
-                        width: '100% !important',
-                        height: '500px !important',
-                        minHeight: '500px !important',
-                        maxHeight: '500px !important',
-                        minWidth: '100% !important',
-                        maxWidth: '100% !important'
-                      }}
-                    />
-                  </Grid>
+                  <TaskCard
+                    key={task.id}
+                    task={task}
+                    variant="compact"
+                    showBidCount={task.status === 'OPEN'}
+                    bidCount={bidCount}
+                    actions={actions}
+                    onView={(task) => handleViewTask(task.id)}
+                    onEdit={(task) => handleEditTask(task.id)}
+                    onDelete={(task) => handleDeleteTask(task.id)}
+                    onRepost={(task) => handleRepostTask(task.id)}
+                    onViewUpi={(task) => handleViewUpiId(task)}
+                  />
                 );
               })}
-            </Grid>
+            </Box>
           </>
         )}
 

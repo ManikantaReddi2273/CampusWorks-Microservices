@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.scheduling.annotation.Scheduled;
 import com.campusworks.bidding.dto.TaskAssignmentRequest;
 import com.campusworks.bidding.dto.TaskOwnershipResponse;
+import com.campusworks.bidding.service.MailService;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -38,6 +39,9 @@ public class BiddingService {
     
     @Autowired
     private TaskServiceClient taskServiceClient;
+    
+    @Autowired
+    private MailService mailService;
     
     @Value("${bidding.min-amount:50.00}")
     private BigDecimal minBidAmount;
@@ -338,6 +342,36 @@ public class BiddingService {
             } catch (Exception e) {
                 log.warn("⚠️ Failed to synchronize task acceptance timestamp: {}", e.getMessage());
                 // Continue with bid acceptance even if task service update fails
+            }
+            
+            // Send email notifications
+            try {
+                var taskResponse = taskServiceClient.getTaskById(bid.getTaskId());
+                if (taskResponse != null) {
+                    // Send email to bidder
+                    mailService.sendTaskAssignmentEmailToBidder(
+                        savedBid.getBidderEmail(),
+                        taskResponse.getOwnerEmail(),
+                        taskResponse.getTitle(),
+                        taskResponse.getCompletionDeadline(),
+                        savedBid.getAmount()
+                    );
+                    
+                    // Send email to task owner
+                    mailService.sendTaskAssignmentEmailToOwner(
+                        taskResponse.getOwnerEmail(),
+                        taskResponse.getTitle(),
+                        savedBid.getBidderEmail(),
+                        savedBid.getAmount(),
+                        savedBid.getProposal()
+                    );
+                    
+                    log.info("📧 Email notifications sent for manual bid acceptance: {}", savedBid.getId());
+                }
+            } catch (Exception e) {
+                log.warn("⚠️ Failed to send email notifications for bid acceptance: {}. Error: {}", 
+                        savedBid.getId(), e.getMessage());
+                // Continue even if email fails
             }
             
             log.info("✅ Bid accepted successfully: ID: {}, Amount: ${}, Bidder: {}", 
@@ -797,6 +831,37 @@ public class BiddingService {
             // Automatically assign the task to the winning bidder via Task Service
             assignTaskToWinningBidder(taskId, winningBid);
             
+            // Send email notifications
+            try {
+                // Get task details for email
+                var taskResponse = taskServiceClient.getTaskById(taskId);
+                if (taskResponse != null) {
+                    // Send email to bidder
+                    mailService.sendTaskAssignmentEmailToBidder(
+                        winningBid.getBidderEmail(),
+                        taskResponse.getOwnerEmail(),
+                        taskResponse.getTitle(),
+                        taskResponse.getCompletionDeadline(),
+                        winningBid.getAmount()
+                    );
+                    
+                    // Send email to task owner
+                    mailService.sendTaskAssignmentEmailToOwner(
+                        taskResponse.getOwnerEmail(),
+                        taskResponse.getTitle(),
+                        winningBid.getBidderEmail(),
+                        winningBid.getAmount(),
+                        winningBid.getProposal()
+                    );
+                    
+                    log.info("📧 Email notifications sent for task assignment: {}", taskId);
+                }
+            } catch (Exception e) {
+                log.warn("⚠️ Failed to send email notifications for task assignment: {}. Error: {}", 
+                        taskId, e.getMessage());
+                // Continue even if email fails
+            }
+            
             log.info("🎉 Task ID: {} automatically assigned to winning bidder: {} (${})", 
                     taskId, winningBid.getBidderEmail(), winningBid.getAmount());
             
@@ -932,6 +997,23 @@ public class BiddingService {
             bid.submitUpiId(upiId.trim());
             Bid savedBid = bidRepository.save(bid);
             
+            // Send email notification to task owner
+            try {
+                var taskResponse = taskServiceClient.getTaskById(bid.getTaskId());
+                if (taskResponse != null) {
+                    mailService.sendUpiSubmissionEmailToOwner(
+                        taskResponse.getOwnerEmail(),
+                        taskResponse.getTitle(),
+                        bid.getBidderEmail(),
+                        upiId.trim()
+                    );
+                    log.info("📧 UPI submission email sent to task owner: {}", taskResponse.getOwnerEmail());
+                }
+            } catch (Exception e) {
+                log.warn("⚠️ Failed to send UPI submission email: {}", e.getMessage());
+                // Continue even if email fails
+            }
+            
             log.info("✅ UPI ID submitted successfully for bid ID: {}, Task: {}", savedBid.getId(), savedBid.getTaskId());
             
             return savedBid;
@@ -1053,6 +1135,22 @@ public class BiddingService {
             } catch (Exception e) {
                 log.warn("⚠️ Failed to synchronize task completion timestamp: {}", e.getMessage());
                 // Continue with bid completion even if task service update fails
+            }
+            
+            // Send email notification to bidder
+            try {
+                var taskResponse = taskServiceClient.getTaskById(bid.getTaskId());
+                if (taskResponse != null) {
+                    mailService.sendWorkAcceptanceEmailToBidder(
+                        bid.getBidderEmail(),
+                        taskResponse.getTitle(),
+                        taskResponse.getOwnerEmail()
+                    );
+                    log.info("📧 Work acceptance email sent to bidder: {}", bid.getBidderEmail());
+                }
+            } catch (Exception e) {
+                log.warn("⚠️ Failed to send work acceptance email: {}", e.getMessage());
+                // Continue even if email fails
             }
             
             log.info("✅ Work accepted successfully for bid ID: {}, Task: {}", savedBid.getId(), savedBid.getTaskId());
