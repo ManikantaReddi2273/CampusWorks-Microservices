@@ -24,7 +24,6 @@ import java.util.Optional;
 @RequestMapping("/tasks")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins = "*")
 public class TaskController {
     
     private final TaskService taskService;

@@ -32,7 +32,8 @@ import {
   Save,
   Cancel,
   Visibility,
-  VisibilityOff
+  VisibilityOff,
+  ArrowBack
 } from '@mui/icons-material';
 import Layout from '@components/templates/Layout';
 import { selectAuth, logoutUser, updateUser } from '@store/slices/authSlice';
@@ -391,9 +392,64 @@ const ProfilePage = () => {
       <Box sx={{ minHeight: '100vh', py: 4 }}>
         <Container maxWidth="lg">
         <Box sx={{ mb: 4 }}>
-          <Typography variant="h4" component="h1" gutterBottom>
-            Profile & Settings
-          </Typography>
+          <Box display="flex" alignItems="center" gap={2} sx={{ mb: 2 }}>
+            <Button
+              variant="outlined"
+              startIcon={<ArrowBack />}
+              onClick={() => navigate(-1)}
+              sx={{
+                borderColor: '#90caf9', // Light blue border
+                color: '#1976d2', // Blue text
+                backgroundColor: 'transparent',
+                position: 'relative',
+                overflow: 'hidden',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                '&:hover': {
+                  borderColor: '#1976d2',
+                  color: '#1976d2',
+                  backgroundColor: 'rgba(25, 118, 210, 0.08)',
+                  transform: 'translateX(-4px) scale(1.05)',
+                  boxShadow: '0 8px 25px rgba(25, 118, 210, 0.3), 0 0 0 3px rgba(25, 118, 210, 0.15), inset 0 0 0 1px rgba(25, 118, 210, 0.2)',
+                  '&::before': {
+                    transform: 'translateX(0)',
+                    opacity: 1
+                  },
+                  '& .MuiButton-startIcon': {
+                    transform: 'translateX(-2px)',
+                    transition: 'transform 0.3s ease',
+                    color: '#1976d2'
+                  }
+                },
+                '&:active': {
+                  transform: 'translateX(-2px) scale(1.02)',
+                  transition: 'all 0.1s ease'
+                },
+                '&::before': {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  background: 'linear-gradient(45deg, rgba(25, 118, 210, 0.12), rgba(25, 118, 210, 0.06))',
+                  transform: 'translateX(-100%)',
+                  transition: 'transform 0.6s ease',
+                  opacity: 0,
+                  zIndex: 0
+                },
+                '& .MuiButton-startIcon': {
+                  position: 'relative',
+                  zIndex: 1,
+                  transition: 'transform 0.3s ease'
+                }
+              }}
+            >
+              Back
+            </Button>
+            <Typography variant="h4" component="h1">
+              Profile & Settings
+            </Typography>
+          </Box>
           <Typography variant="body1" color="text.secondary">
             Manage your account settings and preferences
           </Typography>

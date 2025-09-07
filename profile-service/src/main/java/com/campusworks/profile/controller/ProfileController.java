@@ -22,7 +22,6 @@ import java.util.Map;
 @RequestMapping("/profiles")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins = "*")
 public class ProfileController {
     
     private final ProfileService profileService;

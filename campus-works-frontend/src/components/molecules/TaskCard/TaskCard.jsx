@@ -21,9 +21,11 @@ import {
   Category,
   Person,
   Publish,
-  Payment
+  Payment,
+  Chat
 } from '@mui/icons-material';
 import CountdownTimer from '@components/common/CountdownTimer';
+import ChatButton from '@components/chat/ChatButton';
 import { CATEGORY_LABELS, STATUS_COLORS } from '@constants';
 import apiService from '@services/api';
 
@@ -40,6 +42,8 @@ const TaskCard = ({
   onRepost,
   onComplete,
   onViewUpi,
+  onChat,
+  currentUser,
   className = '',
   sx = {},
   variant = 'default' // 'default' or 'compact'
@@ -152,11 +156,42 @@ const TaskCard = ({
         overflow: 'hidden',
         boxSizing: 'border-box',
         flexShrink: 0, // Prevent card from shrinking in flex container
+        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        cursor: 'pointer',
+        '&:hover, &:active, &:focus': {
+          transform: 'translateY(-8px) scale(1.02)',
+          boxShadow: '0 20px 40px rgba(255, 111, 0, 0.15), 0 8px 16px rgba(0, 0, 0, 0.1)',
+          border: '2px solid rgba(255, 111, 0, 0.6)',
+          background: 'rgba(255, 255, 255, 1)',
+          '& .card-header': {
+            background: 'linear-gradient(135deg, rgba(255, 111, 0, 0.05) 0%, rgba(255, 165, 0, 0.05) 100%)',
+          },
+          '& .card-content': {
+            background: 'rgba(255, 111, 0, 0.02)',
+          }
+        },
+        // Touch device specific styles
+        '@media (hover: none) and (pointer: coarse)': {
+          '&:active': {
+            transform: 'translateY(-4px) scale(1.01)',
+            boxShadow: '0 12px 24px rgba(255, 111, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.15)',
+            border: '2px solid rgba(255, 111, 0, 0.8)',
+            background: 'rgba(255, 255, 255, 1)',
+            '& .card-header': {
+              background: 'linear-gradient(135deg, rgba(255, 111, 0, 0.08) 0%, rgba(255, 165, 0, 0.08) 100%)',
+            },
+            '& .card-content': {
+              background: 'rgba(255, 111, 0, 0.03)',
+            }
+          }
+        },
         ...sx 
       }}
     >
       {/* HEADER - Task Title and Status */}
-      <Box sx={{ 
+      <Box 
+        className="card-header"
+        sx={{ 
         p: 2, 
         pb: 1, 
         borderBottom: '1px solid', 
@@ -168,7 +203,8 @@ const TaskCard = ({
         justifyContent: 'center',
         overflow: 'hidden', // Prevent horizontal overflow
         width: '100%' // Ensure full width
-      }}>
+        }}
+      >
         <Box sx={{ 
           display: 'flex', 
           justifyContent: 'space-between', 
@@ -207,6 +243,7 @@ const TaskCard = ({
 
       {/* BODY - All Task Details (Scrollable) */}
       <CardContent 
+        className="card-content"
         sx={{ 
           flex: 1,
           overflow: 'auto !important',
@@ -440,14 +477,28 @@ const TaskCard = ({
               label="Completed"
               color="success"
               size="small"
-              sx={{ fontWeight: 'bold' }}
+              sx={{ 
+                fontWeight: 'bold',
+                backgroundColor: '#e8f5e8',
+                color: '#2e7d32',
+                '&:hover': {
+                  backgroundColor: '#c8e6c9'
+                }
+              }}
             />
           ) : isExpired ? (
             <Chip
               label="Expired"
               color="error"
               size="small"
-              sx={{ fontWeight: 'bold' }}
+              sx={{ 
+                fontWeight: 'bold',
+                backgroundColor: '#ffebee',
+                color: '#c62828',
+                '&:hover': {
+                  backgroundColor: '#ffcdd2'
+                }
+              }}
             />
           ) : (
             <CountdownTimer 
@@ -468,13 +519,39 @@ const TaskCard = ({
                 onClick={() => onView(task)}
                 sx={{
                   color: '#000000',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                   '&:hover': {
                     color: '#1976d2',
-                    backgroundColor: 'rgba(25, 118, 210, 0.1)'
+                    backgroundColor: 'rgba(25, 118, 210, 0.1)',
+                    transform: 'translateY(-2px) scale(1.1)',
+                    boxShadow: '0 8px 20px rgba(25, 118, 210, 0.3), 0 0 0 2px rgba(25, 118, 210, 0.2)',
+                    '&::before': {
+                      transform: 'scale(1)',
+                      opacity: 1
+                    }
+                  },
+                  '&:active': {
+                    transform: 'translateY(0) scale(1.05)',
+                    transition: 'all 0.1s ease'
+                  },
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: '0',
+                    height: '0',
+                    background: 'radial-gradient(circle, rgba(25, 118, 210, 0.2) 0%, transparent 70%)',
+                    transform: 'translate(-50%, -50%) scale(0)',
+                    transition: 'all 0.4s ease',
+                    opacity: 0,
+                    zIndex: 0
                   }
                 }}
               >
-                <Visibility />
+                <Visibility sx={{ position: 'relative', zIndex: 1 }} />
               </IconButton>
             </Tooltip>
           )}
@@ -487,13 +564,39 @@ const TaskCard = ({
                 onClick={() => onEdit(task)}
                 sx={{
                   color: '#000000',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                   '&:hover': {
                     color: '#1976d2',
-                    backgroundColor: 'rgba(25, 118, 210, 0.1)'
+                    backgroundColor: 'rgba(25, 118, 210, 0.1)',
+                    transform: 'translateY(-2px) scale(1.1)',
+                    boxShadow: '0 8px 20px rgba(25, 118, 210, 0.3), 0 0 0 2px rgba(25, 118, 210, 0.2)',
+                    '&::before': {
+                      transform: 'scale(1)',
+                      opacity: 1
+                    }
+                  },
+                  '&:active': {
+                    transform: 'translateY(0) scale(1.05)',
+                    transition: 'all 0.1s ease'
+                  },
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: '0',
+                    height: '0',
+                    background: 'radial-gradient(circle, rgba(25, 118, 210, 0.2) 0%, transparent 70%)',
+                    transform: 'translate(-50%, -50%) scale(0)',
+                    transition: 'all 0.4s ease',
+                    opacity: 0,
+                    zIndex: 0
                   }
                 }}
               >
-                <Edit />
+                <Edit sx={{ position: 'relative', zIndex: 1 }} />
               </IconButton>
             </Tooltip>
           )}
@@ -506,13 +609,39 @@ const TaskCard = ({
                 onClick={() => onDelete(task)}
                 sx={{
                   color: '#d32f2f',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                   '&:hover': {
                     color: '#b71c1c',
-                    backgroundColor: 'rgba(211, 47, 47, 0.1)'
+                    backgroundColor: 'rgba(211, 47, 47, 0.1)',
+                    transform: 'translateY(-2px) scale(1.1)',
+                    boxShadow: '0 8px 20px rgba(211, 47, 47, 0.3), 0 0 0 2px rgba(211, 47, 47, 0.2)',
+                    '&::before': {
+                      transform: 'scale(1)',
+                      opacity: 1
+                    }
+                  },
+                  '&:active': {
+                    transform: 'translateY(0) scale(1.05)',
+                    transition: 'all 0.1s ease'
+                  },
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: '0',
+                    height: '0',
+                    background: 'radial-gradient(circle, rgba(211, 47, 47, 0.2) 0%, transparent 70%)',
+                    transform: 'translate(-50%, -50%) scale(0)',
+                    transition: 'all 0.4s ease',
+                    opacity: 0,
+                    zIndex: 0
                   }
                 }}
               >
-                <Delete />
+                <Delete sx={{ position: 'relative', zIndex: 1 }} />
               </IconButton>
             </Tooltip>
           )}
@@ -525,13 +654,39 @@ const TaskCard = ({
                 onClick={() => onBid(task)}
                 sx={{
                   color: '#000000',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                   '&:hover': {
                     color: '#1976d2',
-                    backgroundColor: 'rgba(25, 118, 210, 0.1)'
+                    backgroundColor: 'rgba(25, 118, 210, 0.1)',
+                    transform: 'translateY(-2px) scale(1.1)',
+                    boxShadow: '0 8px 20px rgba(25, 118, 210, 0.3), 0 0 0 2px rgba(25, 118, 210, 0.2)',
+                    '&::before': {
+                      transform: 'scale(1)',
+                      opacity: 1
+                    }
+                  },
+                  '&:active': {
+                    transform: 'translateY(0) scale(1.05)',
+                    transition: 'all 0.1s ease'
+                  },
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: '0',
+                    height: '0',
+                    background: 'radial-gradient(circle, rgba(25, 118, 210, 0.2) 0%, transparent 70%)',
+                    transform: 'translate(-50%, -50%) scale(0)',
+                    transition: 'all 0.4s ease',
+                    opacity: 0,
+                    zIndex: 0
                   }
                 }}
               >
-                <Gavel />
+                <Gavel sx={{ position: 'relative', zIndex: 1 }} />
               </IconButton>
             </Tooltip>
           )}
@@ -544,13 +699,39 @@ const TaskCard = ({
                 onClick={() => onRepost(task)}
                 sx={{
                   color: '#000000',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                   '&:hover': {
                     color: '#1976d2',
-                    backgroundColor: 'rgba(25, 118, 210, 0.1)'
+                    backgroundColor: 'rgba(25, 118, 210, 0.1)',
+                    transform: 'translateY(-2px) scale(1.1)',
+                    boxShadow: '0 8px 20px rgba(25, 118, 210, 0.3), 0 0 0 2px rgba(25, 118, 210, 0.2)',
+                    '&::before': {
+                      transform: 'scale(1)',
+                      opacity: 1
+                    }
+                  },
+                  '&:active': {
+                    transform: 'translateY(0) scale(1.05)',
+                    transition: 'all 0.1s ease'
+                  },
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: '0',
+                    height: '0',
+                    background: 'radial-gradient(circle, rgba(25, 118, 210, 0.2) 0%, transparent 70%)',
+                    transform: 'translate(-50%, -50%) scale(0)',
+                    transition: 'all 0.4s ease',
+                    opacity: 0,
+                    zIndex: 0
                   }
                 }}
               >
-                <Publish />
+                <Publish sx={{ position: 'relative', zIndex: 1 }} />
               </IconButton>
             </Tooltip>
           )}
@@ -565,8 +746,43 @@ const TaskCard = ({
                 onClick={() => onComplete(task)}
                 sx={{
                   background: 'linear-gradient(135deg, #4caf50 0%, #45a049 100%)',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                   '&:hover': {
                     background: 'linear-gradient(135deg, #45a049 0%, #3d8b40 100%)',
+                    transform: 'translateY(-2px) scale(1.05)',
+                    boxShadow: '0 8px 25px rgba(76, 175, 80, 0.4), 0 0 0 3px rgba(76, 175, 80, 0.2)',
+                    '&::before': {
+                      transform: 'scale(1)',
+                      opacity: 1
+                    },
+                    '& .MuiButton-startIcon': {
+                      transform: 'rotate(360deg)',
+                      transition: 'transform 0.6s ease'
+                    }
+                  },
+                  '&:active': {
+                    transform: 'translateY(0) scale(1.02)',
+                    transition: 'all 0.1s ease'
+                  },
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: '0',
+                    height: '0',
+                    background: 'radial-gradient(circle, rgba(76, 175, 80, 0.2) 0%, transparent 70%)',
+                    transform: 'translate(-50%, -50%) scale(0)',
+                    transition: 'all 0.6s ease',
+                    opacity: 0,
+                    zIndex: 0
+                  },
+                  '& .MuiButton-startIcon': {
+                    position: 'relative',
+                    zIndex: 1,
+                    transition: 'transform 0.3s ease'
                   }
                 }}
               >
@@ -585,15 +801,65 @@ const TaskCard = ({
                 onClick={() => onViewUpi(task)}
                 color="info"
                 sx={{
-                  background: 'linear-gradient(135deg, #2196f3 0%, #1976d2 100%)',
+                  background: 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)',
+                  color: '#1976d2',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                   '&:hover': {
-                    background: 'linear-gradient(135deg, #1976d2 0%, #1565c0 100%)',
+                    background: 'linear-gradient(135deg, #bbdefb 0%, #90caf9 100%)',
+                    color: '#1565c0',
+                    transform: 'translateY(-2px) scale(1.05)',
+                    boxShadow: '0 8px 25px rgba(33, 150, 243, 0.3), 0 0 0 3px rgba(33, 150, 243, 0.15)',
+                    '&::before': {
+                      transform: 'scale(1)',
+                      opacity: 1
+                    },
+                    '& .MuiButton-startIcon': {
+                      transform: 'rotate(360deg)',
+                      transition: 'transform 0.6s ease',
+                      color: '#1565c0'
+                    }
+                  },
+                  '&:active': {
+                    transform: 'translateY(0) scale(1.02)',
+                    transition: 'all 0.1s ease'
+                  },
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: '0',
+                    height: '0',
+                    background: 'radial-gradient(circle, rgba(33, 150, 243, 0.15) 0%, transparent 70%)',
+                    transform: 'translate(-50%, -50%) scale(0)',
+                    transition: 'all 0.6s ease',
+                    opacity: 0,
+                    zIndex: 0
+                  },
+                  '& .MuiButton-startIcon': {
+                    position: 'relative',
+                    zIndex: 1,
+                    transition: 'transform 0.3s ease',
+                    color: '#1976d2'
                   }
                 }}
               >
                 View UPI
               </Button>
             </Tooltip>
+          )}
+
+          {/* Chat Action */}
+          {actions.chat && currentUser && (
+            <ChatButton
+              taskId={task.id}
+              taskTitle={task.title}
+              currentUser={currentUser}
+              variant="icon"
+              size="small"
+            />
           )}
         </Box>
       </CardActions>

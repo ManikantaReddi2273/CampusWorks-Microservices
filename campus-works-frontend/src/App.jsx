@@ -13,6 +13,7 @@ import ProtectedRoute from '@components/organisms/ProtectedRoute';
 import ToastContainer from '@components/atoms/ToastContainer';
 
 // Pages
+import LandingPage from '@pages/LandingPage';
 import LoginPage from '@pages/auth/LoginPage';
 import RegisterPage from '@pages/auth/RegisterPage';
 import EmailVerificationPage from '@pages/auth/EmailVerificationPage';
@@ -41,6 +42,12 @@ function App() {
         <CssBaseline />
         <Router>
           <Routes>
+            {/* Landing Page */}
+            <Route 
+              path={ROUTES.HOME} 
+              element={<LandingPage />} 
+            />
+            
             {/* Public Routes */}
             <Route 
               path={ROUTES.LOGIN} 
@@ -159,11 +166,8 @@ function App() {
               } 
             />
 
-            {/* Default redirect */}
-            <Route path={ROUTES.HOME} element={<Navigate to={ROUTES.DASHBOARD} replace />} />
-            
-            {/* Catch all - redirect to dashboard */}
-            <Route path="*" element={<Navigate to={ROUTES.DASHBOARD} replace />} />
+            {/* Catch all - redirect to home */}
+            <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
           </Routes>
         </Router>
         <ToastContainer />

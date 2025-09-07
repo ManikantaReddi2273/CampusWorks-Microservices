@@ -47,7 +47,8 @@ import {
   Clear,
   Search,
   TrendingUp,
-  TrendingDown
+  TrendingDown,
+  ArrowBack
 } from '@mui/icons-material';
 import Layout from '@components/templates/Layout';
 import TaskCard from '@components/molecules/TaskCard';
@@ -440,27 +441,136 @@ const TasksPage = () => {
       minHeight: '100vh',
       background: 'transparent',
       py: 4,
-      px: 2
+      px: 2,
+      '@keyframes spin': {
+        '0%': {
+          transform: 'rotate(0deg)',
+        },
+        '100%': {
+          transform: 'rotate(360deg)',
+        },
+      },
     }}>
       <Layout>
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         {/* Header */}
         <Box sx={{ mb: 4 }}>
-          <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
+          <Box display="flex" alignItems="center" gap={2} sx={{ mb: 2 }}>
+            <Button
+              variant="outlined"
+              startIcon={<ArrowBack />}
+              onClick={() => navigate(-1)}
+              sx={{
+                borderColor: '#90caf9', // Light blue border
+                color: '#1976d2', // Blue text
+                backgroundColor: 'transparent',
+                position: 'relative',
+                overflow: 'hidden',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                '&:hover': {
+                  borderColor: '#1976d2',
+                  color: '#1976d2',
+                  backgroundColor: 'rgba(25, 118, 210, 0.08)',
+                  transform: 'translateX(-4px) scale(1.05)',
+                  boxShadow: '0 8px 25px rgba(25, 118, 210, 0.3), 0 0 0 3px rgba(25, 118, 210, 0.15), inset 0 0 0 1px rgba(25, 118, 210, 0.2)',
+                  '&::before': {
+                    transform: 'translateX(0)',
+                    opacity: 1
+                  },
+                  '& .MuiButton-startIcon': {
+                    transform: 'translateX(-2px)',
+                    transition: 'transform 0.3s ease',
+                    color: '#1976d2'
+                  }
+                },
+                '&:active': {
+                  transform: 'translateX(-2px) scale(1.02)',
+                  transition: 'all 0.1s ease'
+                },
+                '&::before': {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  background: 'linear-gradient(45deg, rgba(25, 118, 210, 0.12), rgba(25, 118, 210, 0.06))',
+                  transform: 'translateX(-100%)',
+                  transition: 'transform 0.6s ease',
+                  opacity: 0,
+                  zIndex: 0
+                },
+                '& .MuiButton-startIcon': {
+                  position: 'relative',
+                  zIndex: 1,
+                  transition: 'transform 0.3s ease'
+                }
+              }}
+            >
+              Back
+            </Button>
             <Typography variant="h4" component="h1">
               Browse Tasks
+            </Typography>
+          </Box>
+          <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
+            <Typography variant="body1" color="text.secondary">
+              Browse active tasks available for bidding and earn money
             </Typography>
             <Button
               variant="outlined"
               startIcon={<Refresh />}
               onClick={fetchAllTasks}
+              sx={{
+                borderColor: '#90caf9', // Light blue border
+                color: '#1976d2', // Blue text
+                backgroundColor: 'transparent',
+                position: 'relative',
+                overflow: 'hidden',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                '&:hover': {
+                  borderColor: '#1976d2',
+                  color: '#1976d2',
+                  backgroundColor: 'rgba(25, 118, 210, 0.08)',
+                  transform: 'translateY(-2px) scale(1.08)',
+                  boxShadow: '0 12px 30px rgba(25, 118, 210, 0.3), 0 0 0 3px rgba(25, 118, 210, 0.15), inset 0 0 0 1px rgba(25, 118, 210, 0.2)',
+                  '&::before': {
+                    transform: 'scale(1)',
+                    opacity: 1
+                  },
+                  '& .MuiButton-startIcon': {
+                    animation: 'spin 0.8s ease-in-out',
+                    transform: 'rotate(360deg)',
+                    color: '#1976d2'
+                  }
+                },
+                '&:active': {
+                  transform: 'translateY(0) scale(1.02)',
+                  transition: 'all 0.1s ease'
+                },
+                '&::before': {
+                  content: '""',
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  width: '0',
+                  height: '0',
+                  background: 'radial-gradient(circle, rgba(25, 118, 210, 0.15) 0%, transparent 70%)',
+                  transform: 'translate(-50%, -50%) scale(0)',
+                  transition: 'all 0.6s ease',
+                  opacity: 0,
+                  zIndex: 0
+                },
+                '& .MuiButton-startIcon': {
+                  position: 'relative',
+                  zIndex: 1,
+                  transition: 'transform 0.3s ease'
+                }
+              }}
             >
               Refresh
             </Button>
           </Box>
-          <Typography variant="body1" color="text.secondary">
-            Browse active tasks available for bidding and earn money
-          </Typography>
         </Box>
 
         {/* Error Alert */}
@@ -645,7 +755,53 @@ const TasksPage = () => {
                       }}
                       color="secondary"
                       fullWidth
-                      sx={{ height: 56 }}
+                      sx={{ 
+                        height: 56,
+                        borderColor: '#90caf9', // Light blue border
+                        color: '#1976d2', // Blue text
+                        backgroundColor: 'transparent',
+                        position: 'relative',
+                        overflow: 'hidden',
+                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                        '&:hover': {
+                          borderColor: '#1976d2',
+                          color: '#1976d2',
+                          backgroundColor: 'rgba(25, 118, 210, 0.08)',
+                          transform: 'translateY(-2px) scale(1.05)',
+                          boxShadow: '0 8px 25px rgba(25, 118, 210, 0.3), 0 0 0 3px rgba(25, 118, 210, 0.15)',
+                          '&::before': {
+                            transform: 'scale(1)',
+                            opacity: 1
+                          },
+                          '& .MuiButton-startIcon': {
+                            transform: 'rotate(180deg)',
+                            transition: 'transform 0.6s ease',
+                            color: '#1976d2'
+                          }
+                        },
+                        '&:active': {
+                          transform: 'translateY(0) scale(1.02)',
+                          transition: 'all 0.1s ease'
+                        },
+                        '&::before': {
+                          content: '""',
+                          position: 'absolute',
+                          top: '50%',
+                          left: '50%',
+                          width: '0',
+                          height: '0',
+                          background: 'radial-gradient(circle, rgba(25, 118, 210, 0.15) 0%, transparent 70%)',
+                          transform: 'translate(-50%, -50%) scale(0)',
+                          transition: 'all 0.6s ease',
+                          opacity: 0,
+                          zIndex: 0
+                        },
+                        '& .MuiButton-startIcon': {
+                          position: 'relative',
+                          zIndex: 1,
+                          transition: 'transform 0.3s ease'
+                        }
+                      }}
                     >
                       Clear Filters
                     </Button>
@@ -669,7 +825,50 @@ const TasksPage = () => {
                   sx={{ ml: 1 }}
                 />
               )}
-              sx={{ textTransform: 'none' }}
+              sx={{ 
+                textTransform: 'none',
+                color: '#1976d2', // Blue text
+                position: 'relative',
+                overflow: 'hidden',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                '&:hover': {
+                  color: '#1565c0',
+                  backgroundColor: 'rgba(25, 118, 210, 0.08)',
+                  transform: 'translateY(-2px) scale(1.05)',
+                  boxShadow: '0 6px 20px rgba(25, 118, 210, 0.2)',
+                  '&::before': {
+                    transform: 'scale(1)',
+                    opacity: 1
+                  },
+                  '& .MuiButton-startIcon': {
+                    transform: 'rotate(180deg)',
+                    transition: 'transform 0.6s ease',
+                    color: '#1565c0'
+                  }
+                },
+                '&:active': {
+                  transform: 'translateY(0) scale(1.02)',
+                  transition: 'all 0.1s ease'
+                },
+                '&::before': {
+                  content: '""',
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  width: '0',
+                  height: '0',
+                  background: 'radial-gradient(circle, rgba(25, 118, 210, 0.15) 0%, transparent 70%)',
+                  transform: 'translate(-50%, -50%) scale(0)',
+                  transition: 'all 0.6s ease',
+                  opacity: 0,
+                  zIndex: 0
+                },
+                '& .MuiButton-startIcon': {
+                  position: 'relative',
+                  zIndex: 1,
+                  transition: 'transform 0.3s ease'
+                }
+              }}
             >
               {showFilters ? 'Hide Advanced Filters' : 'Show Advanced Filters'}
             </Button>
@@ -680,7 +879,50 @@ const TasksPage = () => {
                 startIcon={<Clear />}
                 onClick={clearAllFilters}
                 color="secondary"
-                sx={{ textTransform: 'none' }}
+                sx={{ 
+                  textTransform: 'none',
+                  color: '#1976d2', // Blue text
+                  position: 'relative',
+                  overflow: 'hidden',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  '&:hover': {
+                    color: '#1565c0',
+                    backgroundColor: 'rgba(25, 118, 210, 0.08)',
+                    transform: 'translateY(-2px) scale(1.05)',
+                    boxShadow: '0 6px 20px rgba(25, 118, 210, 0.2)',
+                    '&::before': {
+                      transform: 'scale(1)',
+                      opacity: 1
+                    },
+                    '& .MuiButton-startIcon': {
+                      transform: 'rotate(180deg)',
+                      transition: 'transform 0.6s ease',
+                      color: '#1565c0'
+                    }
+                  },
+                  '&:active': {
+                    transform: 'translateY(0) scale(1.02)',
+                    transition: 'all 0.1s ease'
+                  },
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: '0',
+                    height: '0',
+                    background: 'radial-gradient(circle, rgba(25, 118, 210, 0.15) 0%, transparent 70%)',
+                    transform: 'translate(-50%, -50%) scale(0)',
+                    transition: 'all 0.6s ease',
+                    opacity: 0,
+                    zIndex: 0
+                  },
+                  '& .MuiButton-startIcon': {
+                    position: 'relative',
+                    zIndex: 1,
+                    transition: 'transform 0.3s ease'
+                  }
+                }}
               >
                 Clear All Filters
               </Button>
@@ -858,7 +1100,51 @@ const TasksPage = () => {
                 variant="contained"
                 startIcon={<Clear />}
                 onClick={clearAllFilters}
-                sx={{ mt: 1 }}
+                sx={{ 
+                  mt: 1,
+                  background: 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)',
+                  color: '#1976d2',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  '&:hover': {
+                    background: 'linear-gradient(135deg, #bbdefb 0%, #90caf9 100%)',
+                    color: '#1565c0',
+                    transform: 'translateY(-2px) scale(1.05)',
+                    boxShadow: '0 8px 25px rgba(25, 118, 210, 0.3), 0 0 0 3px rgba(25, 118, 210, 0.15)',
+                    '&::before': {
+                      transform: 'scale(1)',
+                      opacity: 1
+                    },
+                    '& .MuiButton-startIcon': {
+                      transform: 'rotate(180deg)',
+                      transition: 'transform 0.6s ease',
+                      color: '#1565c0'
+                    }
+                  },
+                  '&:active': {
+                    transform: 'translateY(0) scale(1.02)',
+                    transition: 'all 0.1s ease'
+                  },
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: '0',
+                    height: '0',
+                    background: 'radial-gradient(circle, rgba(25, 118, 210, 0.15) 0%, transparent 70%)',
+                    transform: 'translate(-50%, -50%) scale(0)',
+                    transition: 'all 0.6s ease',
+                    opacity: 0,
+                    zIndex: 0
+                  },
+                  '& .MuiButton-startIcon': {
+                    position: 'relative',
+                    zIndex: 1,
+                    transition: 'transform 0.3s ease'
+                  }
+                }}
               >
                 Clear All Filters
               </Button>
@@ -866,8 +1152,14 @@ const TasksPage = () => {
           </Paper>
         ) : (
           <Box sx={{ 
-            display: 'flex', 
+            display: 'grid',
+            gridTemplateColumns: {
+              xs: '1fr',
+              sm: 'repeat(2, 1fr)',
+              md: 'repeat(3, 1fr)'
+            },
             gap: 2, 
+            maxWidth: '100%',
             overflowX: 'auto',
             overflowY: 'hidden',
             pb: 2,
@@ -891,8 +1183,18 @@ const TasksPage = () => {
               const canBid = canPlaceBid(task);
               
               return (
-                <TaskCard
+                <Box
                   key={task.id}
+                  sx={{
+                    width: {
+                      xs: '100%',
+                      sm: '350px',
+                      md: '350px'
+                    },
+                    justifySelf: 'center'
+                  }}
+                >
+                  <TaskCard
                   task={task}
                   variant="compact"
                   showBidCount={true}
@@ -905,6 +1207,7 @@ const TasksPage = () => {
                   onView={(task) => handleViewTask(task.id)}
                   onBid={(task) => handlePlaceBid(task)}
                 />
+                </Box>
               );
             })}
           </Box>

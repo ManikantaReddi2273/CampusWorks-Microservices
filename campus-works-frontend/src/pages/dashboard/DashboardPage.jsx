@@ -58,6 +58,52 @@ const DashboardPage = () => {
             color="primary" 
             variant="outlined" 
             icon={<TrendingUp />}
+            sx={{
+              borderColor: '#31258E', // Light blue border
+              color: '#31258E', // Light blue text
+              backgroundColor: 'rgba(49, 37, 142, 0.05)', // Very light blue background
+              position: 'relative',
+              overflow: 'hidden',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              '&:hover': {
+                borderColor: '#4A3A9E',
+                color: '#4A3A9E',
+                backgroundColor: 'rgba(49, 37, 142, 0.1)',
+                transform: 'translateY(-2px) scale(1.05)',
+                boxShadow: '0 8px 25px rgba(49, 37, 142, 0.3), 0 0 0 3px rgba(49, 37, 142, 0.15)',
+                '&::before': {
+                  transform: 'scale(1)',
+                  opacity: 1
+                },
+                '& .MuiChip-icon': {
+                  transform: 'rotate(360deg)',
+                  transition: 'transform 0.6s ease',
+                  color: '#4A3A9E'
+                }
+              },
+              '&:active': {
+                transform: 'translateY(0) scale(1.02)',
+                transition: 'all 0.1s ease'
+              },
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                width: '0',
+                height: '0',
+                background: 'radial-gradient(circle, rgba(49, 37, 142, 0.15) 0%, transparent 70%)',
+                transform: 'translate(-50%, -50%) scale(0)',
+                transition: 'all 0.6s ease',
+                opacity: 0,
+                zIndex: 0
+              },
+              '& .MuiChip-icon': {
+                position: 'relative',
+                zIndex: 1,
+                transition: 'transform 0.3s ease'
+              }
+            }}
           />
         </Box>
 
@@ -73,18 +119,42 @@ const DashboardPage = () => {
                 sx={{ 
                   p: 3, 
                   height: '100%',
+
                   display: 'flex',
                   flexDirection: 'column',
                   cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                  '&:hover': {
-                    transform: 'translateY(-4px)',
-                    boxShadow: 4
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  '&:hover, &:active, &:focus': {
+                    transform: 'translateY(-8px) scale(1.02)',
+                    boxShadow: '0 20px 40px rgba(230, 135, 231, 0.15), 0 8px 16px rgba(0, 0, 0, 0.1)',
+                    border: '2px solid rgba(230, 135, 231, 0.6)',
+                    background: 'rgba(255, 255, 255, 1)',
+                    '& .card-header': {
+                      background: 'linear-gradient(135deg, rgba(230, 135, 231, 0.05) 0%, rgba(186, 104, 200, 0.05) 100%)',
+                    },
+                    '& .card-content': {
+                      background: 'rgba(230, 135, 231, 0.02)',
+                    }
+                  },
+                  // Touch device specific styles
+                  '@media (hover: none) and (pointer: coarse)': {
+                    '&:active': {
+                      transform: 'translateY(-4px) scale(1.01)',
+                      boxShadow: '0 12px 24px rgba(230, 135, 231, 0.2), 0 4px 8px rgba(0, 0, 0, 0.15)',
+                      border: '2px solid rgba(230, 135, 231, 0.8)',
+                      background: 'rgba(255, 255, 255, 1)',
+                      '& .card-header': {
+                        background: 'linear-gradient(135deg, rgba(230, 135, 231, 0.08) 0%, rgba(186, 104, 200, 0.08) 100%)',
+                      },
+                      '& .card-content': {
+                        background: 'rgba(230, 135, 231, 0.03)',
+                      }
+                    }
                   }
                 }}
                 onClick={action.action}
               >
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                <Box className="card-header" sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                   <Box 
                     sx={{ 
                       p: 1, 
@@ -100,20 +170,51 @@ const DashboardPage = () => {
                     {action.title}
                   </Typography>
                 </Box>
-                <Typography variant="body2" color="text.secondary" sx={{ flexGrow: 1 }}>
+                <Typography className="card-content" variant="body2" color="text.secondary" sx={{ flexGrow: 1 }}>
                   {action.description}
                 </Typography>
                 <Button 
                   variant="outlined" 
                   color={action.color}
                   size="small"
-                  sx={{ mt: 2, alignSelf: 'flex-start' }}
+                  sx={{ 
+                    mt: 2, 
+                    alignSelf: 'flex-start',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    '&:hover': {
+                      transform: 'translateY(-2px) scale(1.05)',
+                      boxShadow: '0 6px 20px rgba(0, 0, 0, 0.15)',
+                      '&::before': {
+                        transform: 'scale(1)',
+                        opacity: 1
+                      }
+                    },
+                    '&:active': {
+                      transform: 'translateY(0) scale(1.02)',
+                      transition: 'all 0.1s ease'
+                    },
+                    '&::before': {
+                      content: '""',
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      width: '0',
+                      height: '0',
+                      background: 'radial-gradient(circle, rgba(0, 0, 0, 0.1) 0%, transparent 70%)',
+                      transform: 'translate(-50%, -50%) scale(0)',
+                      transition: 'all 0.4s ease',
+                      opacity: 0,
+                      zIndex: 0
+                    }
+                  }}
                   onClick={(e) => {
                     e.stopPropagation();
                     action.action();
                   }}
                 >
-                  Go
+                  <span style={{ position: 'relative', zIndex: 1 }}>Go</span>
                 </Button>
               </Paper>
             </Grid>
@@ -126,15 +227,48 @@ const DashboardPage = () => {
         </Typography>
         
         <Grid container spacing={3}>
-          <Grid item xs={12} md={6}>
-            <Paper sx={{ p: 3 }}>
-              <Typography variant="h6" gutterBottom color="primary">
+          <Grid item xs={12}>
+            <Paper 
+              sx={{ 
+                p: 3,
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                cursor: 'pointer',
+                '&:hover, &:active, &:focus': {
+                  transform: 'translateY(-8px) scale(1.02)',
+                  boxShadow: '0 20px 40px rgba(230, 135, 231, 0.15), 0 8px 16px rgba(0, 0, 0, 0.1)',
+                  border: '2px solid rgba(230, 135, 231, 0.6)',
+                  background: 'rgba(255, 255, 255, 1)',
+                  '& .card-header': {
+                    background: 'linear-gradient(135deg, rgba(230, 135, 231, 0.05) 0%, rgba(186, 104, 200, 0.05) 100%)',
+                  },
+                  '& .card-content': {
+                    background: 'rgba(230, 135, 231, 0.02)',
+                  }
+                },
+                // Touch device specific styles
+                '@media (hover: none) and (pointer: coarse)': {
+                  '&:active': {
+                    transform: 'translateY(-4px) scale(1.01)',
+                    boxShadow: '0 12px 24px rgba(230, 135, 231, 0.2), 0 4px 8px rgba(0, 0, 0, 0.15)',
+                    border: '2px solid rgba(230, 135, 231, 0.8)',
+                    background: 'rgba(255, 255, 255, 1)',
+                    '& .card-header': {
+                      background: 'linear-gradient(135deg, rgba(230, 135, 231, 0.08) 0%, rgba(186, 104, 200, 0.08) 100%)',
+                    },
+                    '& .card-content': {
+                      background: 'rgba(230, 135, 231, 0.03)',
+                    }
+                  }
+                }
+              }}
+            >
+              <Typography className="card-header" variant="h6" gutterBottom color="primary">
                 🎯 Getting Started
               </Typography>
-              <Typography variant="body1" paragraph>
+              <Typography className="card-content" variant="body1" paragraph>
                 Welcome to CampusWorks! Here you can:
               </Typography>
-              <Box component="ul" sx={{ pl: 2 }}>
+              <Box className="card-content" component="ul" sx={{ pl: 2 }}>
                 <Typography component="li" variant="body2" sx={{ mb: 1 }}>
                   Post academic tasks and get help from fellow students
                 </Typography>
@@ -151,34 +285,6 @@ const DashboardPage = () => {
             </Paper>
           </Grid>
           
-          <Grid item xs={12} md={6}>
-            <Paper sx={{ p: 3 }}>
-              <Typography variant="h6" gutterBottom color="secondary">
-                📊 Quick Stats
-              </Typography>
-              <Typography variant="body1" paragraph>
-                Your activity summary:
-              </Typography>
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Typography variant="body2">Tasks Created:</Typography>
-                  <Chip label="0" size="small"  color="success"/>
-                </Box>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Typography variant="body2">Bids Placed:</Typography>
-                  <Chip label="0" size="small" color="success" />
-                </Box>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Typography variant="body2">Tasks Completed:</Typography>
-                  <Chip label="0" size="small" color="success"/>
-                </Box>
-                
-              </Box>
-              <Typography variant="caption" color="text.secondary" sx={{ mt: 2, display: 'block' }}>
-                * Stats will update as you use the platform
-              </Typography>
-            </Paper>
-          </Grid>
         </Grid>
       </Container>
     </Layout>

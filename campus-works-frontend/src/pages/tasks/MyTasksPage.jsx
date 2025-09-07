@@ -27,15 +27,17 @@ import {
   Delete,
   Visibility,
   Add,
-  Refresh,
   Publish,
   Warning,
   Info,
   Payment,
-  ContentCopy
+  ContentCopy,
+  Chat,
+  ArrowBack
 } from '@mui/icons-material';
 import Layout from '@components/templates/Layout';
 import TaskCard from '@components/molecules/TaskCard';
+import ChatButton from '@components/chat/ChatButton';
 import { selectAuth } from '@store/slices/authSlice';
 import { ROUTES, CATEGORY_LABELS, TASK_STATUS } from '@constants';
 import apiService from '@services/api';
@@ -256,6 +258,15 @@ const MyTasksPage = () => {
     );
   };
 
+  // Helper function to check if task should show chat button
+  const canShowChat = (task) => {
+    return (
+      task.status === 'IN_PROGRESS' &&
+      task.assignedUserEmail &&
+      isBiddingDeadlinePassed(task.biddingDeadline)
+    );
+  };
+
   // Helper function to check if task can be edited or deleted
   const canEditOrDeleteTask = (task) => {
     // If task is not OPEN, cannot edit/delete
@@ -355,28 +366,251 @@ const MyTasksPage = () => {
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         {/* Header */}
         <Box sx={{ mb: 4 }}>
-          <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
+          {/* Desktop Layout */}
+          <Box 
+            display={{ xs: 'none', md: 'flex' }} 
+            justifyContent="space-between" 
+            alignItems="center" 
+            sx={{ mb: 2 }}
+          >
+            <Box display="flex" alignItems="center" gap={2}>
+              <Button
+                variant="outlined"
+                startIcon={<ArrowBack />}
+                onClick={() => navigate(-1)}
+                sx={{
+                  borderColor: '#ff6f00',
+                  color: '#ff6f00',
+                  backgroundColor: 'transparent',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  '&:hover': {
+                    borderColor: '#ff6f00',
+                    color: '#ff6f00',
+                    backgroundColor: 'rgba(255, 111, 0, 0.08)',
+                    transform: 'translateX(-4px) scale(1.05)',
+                    boxShadow: '0 8px 25px rgba(255, 111, 0, 0.4), 0 0 0 3px rgba(255, 111, 0, 0.2), inset 0 0 0 1px rgba(255, 111, 0, 0.3)',
+                    '&::before': {
+                      transform: 'translateX(0)',
+                      opacity: 1
+                    },
+                    '& .MuiButton-startIcon': {
+                      transform: 'translateX(-2px)',
+                      transition: 'transform 0.3s ease',
+                      color: '#ff6f00'
+                    }
+                  },
+                  '&:active': {
+                    transform: 'translateX(-2px) scale(1.02)',
+                    transition: 'all 0.1s ease'
+                  },
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: 'linear-gradient(45deg, rgba(255, 111, 0, 0.15), rgba(255, 111, 0, 0.08))',
+                    transform: 'translateX(-100%)',
+                    transition: 'transform 0.6s ease',
+                    opacity: 0,
+                    zIndex: 0
+                  },
+                  '& .MuiButton-startIcon': {
+                    position: 'relative',
+                    zIndex: 1,
+                    transition: 'transform 0.3s ease'
+                  }
+                }}
+              >
+                Back
+              </Button>
             <Typography variant="h4" component="h1">
               My Tasks
             </Typography>
+            </Box>
             <Box>
-              <Button
-                variant="outlined"
-                startIcon={<Refresh />}
-                onClick={fetchMyTasks}
-                sx={{ mr: 2 }}
-              >
-                Refresh
-              </Button>
               <Button
                 variant="contained"
                 startIcon={<Add />}
                 onClick={() => navigate(ROUTES.CREATE_TASK)}
+                sx={{
+                  background: 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)',
+                  color: '#1976d2',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  '&:hover': {
+                    background: 'linear-gradient(135deg, #bbdefb 0%, #90caf9 100%)',
+                    color: '#1565c0',
+                    transform: 'translateY(-2px) scale(1.05)',
+                    boxShadow: '0 8px 25px rgba(33, 150, 243, 0.3), 0 0 0 3px rgba(33, 150, 243, 0.15)',
+                    '&::before': {
+                      transform: 'scale(1)',
+                      opacity: 1
+                    },
+                    '& .MuiButton-startIcon': {
+                      transform: 'rotate(360deg)',
+                      transition: 'transform 0.6s ease',
+                      color: '#1565c0'
+                    }
+                  },
+                  '&:active': {
+                    transform: 'translateY(0) scale(1.02)',
+                    transition: 'all 0.1s ease'
+                  },
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: '0',
+                    height: '0',
+                    background: 'radial-gradient(circle, rgba(33, 150, 243, 0.15) 0%, transparent 70%)',
+                    transform: 'translate(-50%, -50%) scale(0)',
+                    transition: 'all 0.6s ease',
+                    opacity: 0,
+                    zIndex: 0
+                  },
+                  '& .MuiButton-startIcon': {
+                    position: 'relative',
+                    zIndex: 1,
+                    transition: 'transform 0.3s ease',
+                    color: '#1976d2'
+                  }
+                }}
               >
                 Create New Task
               </Button>
             </Box>
           </Box>
+
+          {/* Mobile Layout */}
+          <Box 
+            display={{ xs: 'flex', md: 'none' }} 
+            flexDirection="column" 
+            gap={2} 
+            sx={{ mb: 2 }}
+          >
+            {/* Mobile Header Row 1: Back Button + Title */}
+            <Box display="flex" alignItems="center" gap={2}>
+              <Button
+                variant="outlined"
+                startIcon={<ArrowBack />}
+                onClick={() => navigate(-1)}
+                sx={{
+                  borderColor: '#ff6f00',
+                  color: '#ff6f00',
+                  backgroundColor: 'transparent',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  '&:hover': {
+                    borderColor: '#ff6f00',
+                    color: '#ff6f00',
+                    backgroundColor: 'rgba(255, 111, 0, 0.08)',
+                    transform: 'translateX(-4px) scale(1.05)',
+                    boxShadow: '0 8px 25px rgba(255, 111, 0, 0.4), 0 0 0 3px rgba(255, 111, 0, 0.2), inset 0 0 0 1px rgba(255, 111, 0, 0.3)',
+                    '&::before': {
+                      transform: 'translateX(0)',
+                      opacity: 1
+                    },
+                    '& .MuiButton-startIcon': {
+                      transform: 'translateX(-2px)',
+                      transition: 'transform 0.3s ease',
+                      color: '#ff6f00'
+                    }
+                  },
+                  '&:active': {
+                    transform: 'translateX(-2px) scale(1.02)',
+                    transition: 'all 0.1s ease'
+                  },
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: 'linear-gradient(45deg, rgba(255, 111, 0, 0.15), rgba(255, 111, 0, 0.08))',
+                    transform: 'translateX(-100%)',
+                    transition: 'transform 0.6s ease',
+                    opacity: 0,
+                    zIndex: 0
+                  },
+                  '& .MuiButton-startIcon': {
+                    position: 'relative',
+                    zIndex: 1,
+                    transition: 'transform 0.3s ease'
+                  }
+                }}
+              >
+                Back
+              </Button>
+              <Typography variant="h4" component="h1">
+                My Tasks
+              </Typography>
+            </Box>
+
+            {/* Mobile Header Row 2: Action Buttons */}
+            <Box display="flex" justifyContent="flex-end" gap={1}>
+              <Button
+                variant="contained"
+                startIcon={<Add />}
+                onClick={() => navigate(ROUTES.CREATE_TASK)}
+                sx={{
+                  background: 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)',
+                  color: '#1976d2',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  '&:hover': {
+                    background: 'linear-gradient(135deg, #bbdefb 0%, #90caf9 100%)',
+                    color: '#1565c0',
+                    transform: 'translateY(-2px) scale(1.05)',
+                    boxShadow: '0 8px 25px rgba(33, 150, 243, 0.3), 0 0 0 3px rgba(33, 150, 243, 0.15)',
+                    '&::before': {
+                      transform: 'scale(1)',
+                      opacity: 1
+                    },
+                    '& .MuiButton-startIcon': {
+                      transform: 'rotate(360deg)',
+                      transition: 'transform 0.6s ease',
+                      color: '#1565c0'
+                    }
+                  },
+                  '&:active': {
+                    transform: 'translateY(0) scale(1.02)',
+                    transition: 'all 0.1s ease'
+                  },
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: '0',
+                    height: '0',
+                    background: 'radial-gradient(circle, rgba(33, 150, 243, 0.15) 0%, transparent 70%)',
+                    transform: 'translate(-50%, -50%) scale(0)',
+                    transition: 'all 0.6s ease',
+                    opacity: 0,
+                    zIndex: 0
+                  },
+                  '& .MuiButton-startIcon': {
+                    position: 'relative',
+                    zIndex: 1,
+                    transition: 'transform 0.3s ease',
+                    color: '#1976d2'
+                  }
+                }}
+              >
+                Create New Task
+              </Button>
+            </Box>
+          </Box>
+
           <Typography variant="body1" color="text.secondary">
             Manage and track all the tasks you've created
           </Typography>
@@ -425,10 +659,12 @@ const MyTasksPage = () => {
             
             <Box sx={{ 
               display: 'flex', 
+              flexDirection: 'column',
               gap: 2, 
               overflowX: 'auto',
               overflowY: 'hidden',
               pb: 2,
+              alignItems: 'center',
               '&::-webkit-scrollbar': {
                 height: '8px',
               },
@@ -444,6 +680,26 @@ const MyTasksPage = () => {
                 background: '#555',
               }
             }}>
+              {/* Responsive Grid Layout */}
+              <Box
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns: {
+                    xs: '1fr', // 1 column on mobile
+                    sm: 'repeat(2, 1fr)', // 2 columns on small screens
+                    md: 'repeat(3, 1fr)', // 3 columns on medium screens and up (laptop/desktop)
+                  },
+                  gap: 2,
+                  width: '100%',
+                  maxWidth: {
+                    xs: '100%', // Full width on mobile
+                    sm: 'calc(350px * 2 + 16px)', // Fixed width for 2 cards on small screens
+                    md: 'calc(350px * 3 + 32px)', // Fixed width for 3 cards on laptop/desktop
+                  },
+                  justifyContent: 'center',
+                  justifyItems: 'center'
+                }}
+              >
               {tasks.map((task) => {
                 const canRepost = canRepostTask(task);
                 const canEditDelete = canEditOrDeleteTask(task);
@@ -458,7 +714,8 @@ const MyTasksPage = () => {
                   edit: canEditDelete && !isBiddingActive,
                   delete: canEditDelete && !isBiddingActive,
                   repost: canRepost,
-                  viewUpi: canViewUpiId(task)
+                  viewUpi: canViewUpiId(task),
+                  chat: canShowChat(task)
                 };
                 
                 return (
@@ -469,14 +726,28 @@ const MyTasksPage = () => {
                     showBidCount={task.status === 'OPEN'}
                     bidCount={bidCount}
                     actions={actions}
+                    currentUser={user}
                     onView={(task) => handleViewTask(task.id)}
                     onEdit={(task) => handleEditTask(task.id)}
                     onDelete={(task) => handleDeleteTask(task.id)}
                     onRepost={(task) => handleRepostTask(task.id)}
                     onViewUpi={(task) => handleViewUpiId(task)}
+                      sx={{
+                        width: {
+                          xs: '100%', // Full width on mobile
+                          sm: '350px', // Fixed width on small screens
+                          md: '350px', // Fixed width on laptop/desktop
+                        },
+                        maxWidth: {
+                          xs: '100%',
+                          sm: '350px',
+                          md: '350px'
+                        }
+                      }}
                   />
                 );
               })}
+              </Box>
             </Box>
           </>
         )}

@@ -22,11 +22,13 @@ import {
   Cancel,
   Delete,
   Payment,
-  TrendingUp
+  TrendingUp,
+  Chat
 } from '@mui/icons-material';
 import { CATEGORY_LABELS } from '@constants';
 import { isDeadlineExpired, getDeadlineWarning, getDeadlineStatusColor } from '@utils/deadlineUtils';
 import CountdownTimer from '@components/common/CountdownTimer';
+import ChatButton from '@components/chat/ChatButton';
 
 const MyBidCard = ({
   bid,
@@ -34,6 +36,7 @@ const MyBidCard = ({
   onDelete,
   onComplete,
   deletingBid,
+  currentUser,
   className = '',
   sx = {},
   variant = 'default' // 'default' or 'compact'
@@ -95,6 +98,10 @@ const MyBidCard = ({
     return bid.status === 'ACCEPTED' && !bid.upiId && !isDeadlineExpired(bid.task?.completionDeadline);
   };
 
+  const canShowChat = (bid) => {
+    return bid.status === 'ACCEPTED' && bid.taskId;
+  };
+
   return (
     <Card 
       className={className}
@@ -108,23 +115,55 @@ const MyBidCard = ({
         background: 'rgba(255, 255, 255, 0.95)',
         backdropFilter: 'blur(10px)',
         border: '1px solid rgba(255, 255, 255, 0.2)',
+        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        cursor: 'pointer',
+        '&:hover, &:active, &:focus': {
+          transform: 'translateY(-8px) scale(1.02)',
+          boxShadow: '0 20px 40px rgba(102, 126, 234, 0.15), 0 8px 16px rgba(0, 0, 0, 0.1)',
+          border: '2px solid rgba(33, 150, 243, 0.6)',
+          background: 'rgba(255, 255, 255, 1)',
+          '& .card-header': {
+            background: 'linear-gradient(135deg, rgba(33, 150, 243, 0.05) 0%, rgba(102, 126, 234, 0.05) 100%)',
+          },
+          '& .card-content': {
+            background: 'rgba(33, 150, 243, 0.02)',
+          }
+        },
+        // Touch device specific styles
+        '@media (hover: none) and (pointer: coarse)': {
+          '&:active': {
+            transform: 'translateY(-4px) scale(1.01)',
+            boxShadow: '0 12px 24px rgba(102, 126, 234, 0.2), 0 4px 8px rgba(0, 0, 0, 0.15)',
+            border: '2px solid rgba(33, 150, 243, 0.8)',
+            background: 'rgba(255, 255, 255, 1)',
+            '& .card-header': {
+              background: 'linear-gradient(135deg, rgba(33, 150, 243, 0.08) 0%, rgba(102, 126, 234, 0.08) 100%)',
+            },
+            '& .card-content': {
+              background: 'rgba(33, 150, 243, 0.03)',
+            }
+          }
+        },
         ...sx 
       }}
     >
       {/* HEADER - Status, Title, and Amount */}
-      <Box sx={{ 
-        p: 2, 
-        pb: 1, 
-        borderBottom: '1px solid', 
-        borderColor: 'divider',
-        flexShrink: 0, // Prevent header from shrinking
-        height: variant === 'compact' ? '100px' : '120px', // Responsive header height
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        overflow: 'hidden', // Prevent horizontal overflow
-        width: '100%' // Ensure full width
-      }}>
+      <Box 
+        className="card-header"
+        sx={{ 
+          p: 2, 
+          pb: 1, 
+          borderBottom: '1px solid', 
+          borderColor: 'divider',
+          flexShrink: 0, // Prevent header from shrinking
+          height: variant === 'compact' ? '100px' : '120px', // Responsive header height
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          overflow: 'hidden', // Prevent horizontal overflow
+          width: '100%', // Ensure full width
+          transition: 'background 0.3s ease'
+        }}>
         {/* Title and Status */}
         <Box sx={{ 
           display: 'flex', 
@@ -196,6 +235,7 @@ const MyBidCard = ({
 
       {/* BODY - All Bid Details (Scrollable) */}
       <CardContent 
+        className="card-content"
         sx={{ 
           flex: 1,
           overflow: 'auto !important',
@@ -206,6 +246,7 @@ const MyBidCard = ({
           width: '100%', // Ensure full width
           overflowX: 'auto', // Horizontal scroll when needed
           overflowY: 'auto', // Vertical scroll when needed
+          transition: 'background 0.3s ease',
           '&::-webkit-scrollbar': {
             width: '8px',
             height: '8px', // For horizontal scrollbar
@@ -441,6 +482,17 @@ const MyBidCard = ({
                 Complete Task
               </Button>
             </Tooltip>
+          )}
+
+          {/* Chat Button */}
+          {canShowChat(bid) && currentUser && (
+            <ChatButton
+              taskId={bid.taskId}
+              taskTitle={bid.task?.title || 'Task'}
+              currentUser={currentUser}
+              variant="icon"
+              size="small"
+            />
           )}
         </Box>
 

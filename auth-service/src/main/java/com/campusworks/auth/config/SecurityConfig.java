@@ -9,17 +9,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import com.campusworks.auth.security.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Arrays;
-
 /**
  * Security Configuration for Auth Service
- * Handles authentication, authorization, and CORS configuration
+ * Handles authentication and authorization only
+ * CORS is handled by API Gateway to prevent duplicate headers
  */
 @Configuration
 @EnableWebSecurity
@@ -31,6 +27,7 @@ public class SecurityConfig {
     /**
      * Security Filter Chain
      * Configures security rules and authentication
+     * CORS is disabled here as it's handled by API Gateway
      */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -38,8 +35,8 @@ public class SecurityConfig {
             // Disable CSRF for API usage
             .csrf(csrf -> csrf.disable())
             
-            // Configure CORS
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+            // Disable CORS - handled by API Gateway
+            .cors(cors -> cors.disable())
             
             // Configure session management
             .sessionManagement(session -> session
@@ -76,32 +73,5 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-    
-    /**
-     * CORS Configuration Source
-     * Handles cross-origin requests
-     */
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        
-        // Allow specific origins for development (frontend URL)
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-        
-        // Allow common HTTP methods
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        
-        // Allow all headers including Authorization
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        
-        // Allow credentials (cookies, authorization headers)
-        configuration.setAllowCredentials(true);
-        
-        // Apply CORS configuration to all paths
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        
-        return source;
     }
 }

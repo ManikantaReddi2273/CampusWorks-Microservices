@@ -1,0 +1,1002 @@
+{"host":"localhost","level":"info","message":"Connected to MongoDB","name":"campusworks_chat","port":27017,"service":"campusworks-chat","timestamp":"2025-09-06 20:58:48"}
+{"level":"info","message":"Database connected successfully","service":"campusworks-chat","timestamp":"2025-09-06 20:58:48"}
+{"level":"info","message":"Socket.io initialized","service":"campusworks-chat","timestamp":"2025-09-06 20:58:48"}
+{"corsOrigin":"http://localhost:3000","database":"mongodb://localhost:27017/campusworks_chat","environment":"development","level":"info","message":"Chat service started on port 3001","port":"3001","service":"campusworks-chat","timestamp":"2025-09-06 20:58:48"}
+{"level":"warn","message":"Local JWT validation failed, trying Spring Boot service","service":"campusworks-chat","timestamp":"2025-09-06 21:02:34"}
+{"level":"error","message":"Token validation failed:","service":"campusworks-chat","timestamp":"2025-09-06 21:02:35"}
+{"error":"Invalid or expired token","level":"error","message":"Socket authentication failed","service":"campusworks-chat","socketId":"nXiS-qYRN9rgTGEKAAAB","stack":"Error: Invalid or expired token\n    at AuthService.validateToken (C:\\Users\\ManishReddy\\OneDrive\\Desktop\\Campus_ works_Records\\campusworks-chat-service\\src\\services\\authService.js:56:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Array.authenticateSocket (C:\\Users\\ManishReddy\\OneDrive\\Desktop\\Campus_ works_Records\\campusworks-chat-service\\src\\middleware\\auth.js:63:18)","timestamp":"2025-09-06 21:02:35"}
+{"level":"warn","message":"Local JWT validation failed, trying Spring Boot service","service":"campusworks-chat","timestamp":"2025-09-06 21:02:40"}
+{"level":"error","message":"Token validation failed:","service":"campusworks-chat","timestamp":"2025-09-06 21:02:40"}
+{"error":"Invalid or expired token","level":"error","message":"Socket authentication failed","service":"campusworks-chat","socketId":"1_be4xJtEMZ_EKQEAAAD","stack":"Error: Invalid or expired token\n    at AuthService.validateToken (C:\\Users\\ManishReddy\\OneDrive\\Desktop\\Campus_ works_Records\\campusworks-chat-service\\src\\services\\authService.js:56:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Array.authenticateSocket (C:\\Users\\ManishReddy\\OneDrive\\Desktop\\Campus_ works_Records\\campusworks-chat-service\\src\\middleware\\auth.js:63:18)","timestamp":"2025-09-06 21:02:40"}
+{"level":"warn","message":"Local JWT validation failed, trying Spring Boot service","service":"campusworks-chat","timestamp":"2025-09-06 21:05:59"}
+{"level":"error","message":"Token validation failed:","service":"campusworks-chat","timestamp":"2025-09-06 21:05:59"}
+{"error":"Invalid or expired token","level":"error","message":"Socket authentication failed","service":"campusworks-chat","socketId":"leRxSR7cd7wrTqVDAAAF","stack":"Error: Invalid or expired token\n    at AuthService.validateToken (C:\\Users\\ManishReddy\\OneDrive\\Desktop\\Campus_ works_Records\\campusworks-chat-service\\src\\services\\authService.js:56:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Array.authenticateSocket (C:\\Users\\ManishReddy\\OneDrive\\Desktop\\Campus_ works_Records\\campusworks-chat-service\\src\\middleware\\auth.js:63:18)","timestamp":"2025-09-06 21:05:59"}
+{"level":"info","message":"Received SIGINT, starting graceful shutdown","service":"campusworks-chat","timestamp":"2025-09-06 21:07:58"}
+{"host":"localhost","level":"info","message":"Connected to MongoDB","name":"campusworks_chat","port":27017,"service":"campusworks-chat","timestamp":"2025-09-06 21:08:17"}
+{"level":"info","message":"Database connected successfully","service":"campusworks-chat","timestamp":"2025-09-06 21:08:17"}
+{"level":"info","message":"Socket.io initialized","service":"campusworks-chat","timestamp":"2025-09-06 21:08:17"}
+{"corsOrigin":"http://localhost:3000","database":"mongodb://localhost:27017/campusworks_chat","environment":"development","level":"info","message":"Chat service started on port 3001","port":"3001","service":"campusworks-chat","timestamp":"2025-09-06 21:08:17"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"Df33iqTo-X0vdvhoAAAB","timestamp":"2025-09-06 21:08:26","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210432@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:08:26","userId":"3"}
+{"jwtSecret":"mysupersec...","level":"info","message":"Validating token","service":"campusworks-chat","timestamp":"2025-09-06 21:08:27","tokenLength":251,"tokenStart":"eyJhbGciOiJIUzI1NiJ9"}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210432@rguktn.ac.in","level":"info","message":"Local JWT validation successful","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:08:27","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Socket authentication successful","service":"campusworks-chat","socketId":"Df33iqTo-X0vdvhoAAAB","timestamp":"2025-09-06 21:08:27","userId":"3"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"Df33iqTo-X0vdvhoAAAB","timestamp":"2025-09-06 21:08:27","userId":"3"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"Df33iqTo-X0vdvhoAAAB","timestamp":"2025-09-06 21:08:37","userId":"3"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"MuCXd2WXhFrvNUeaAAAD","timestamp":"2025-09-06 21:08:41","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210432@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:08:41","userId":"3"}
+{"jwtSecret":"mysupersec...","level":"info","message":"Validating token","service":"campusworks-chat","timestamp":"2025-09-06 21:08:41","tokenLength":251,"tokenStart":"eyJhbGciOiJIUzI1NiJ9"}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210432@rguktn.ac.in","level":"info","message":"Local JWT validation successful","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:08:41","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Socket authentication successful","service":"campusworks-chat","socketId":"MuCXd2WXhFrvNUeaAAAD","timestamp":"2025-09-06 21:08:41","userId":"3"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"MuCXd2WXhFrvNUeaAAAD","timestamp":"2025-09-06 21:08:41","userId":"3"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"MuCXd2WXhFrvNUeaAAAD","timestamp":"2025-09-06 21:08:44","userId":"3"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"KyS6pPt3uo35RKwKAAAF","timestamp":"2025-09-06 21:08:44","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210432@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:08:44","userId":"3"}
+{"jwtSecret":"mysupersec...","level":"info","message":"Validating token","service":"campusworks-chat","timestamp":"2025-09-06 21:08:44","tokenLength":251,"tokenStart":"eyJhbGciOiJIUzI1NiJ9"}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210432@rguktn.ac.in","level":"info","message":"Local JWT validation successful","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:08:44","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Socket authentication successful","service":"campusworks-chat","socketId":"KyS6pPt3uo35RKwKAAAF","timestamp":"2025-09-06 21:08:44","userId":"3"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"KyS6pPt3uo35RKwKAAAF","timestamp":"2025-09-06 21:08:44","userId":"3"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"KyS6pPt3uo35RKwKAAAF","timestamp":"2025-09-06 21:13:48","userId":"3"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"dVtnWuciUTZrHWg9AAAH","timestamp":"2025-09-06 21:14:14","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:14:14","userId":"1"}
+{"jwtSecret":"mysupersec...","level":"info","message":"Validating token","service":"campusworks-chat","timestamp":"2025-09-06 21:14:14","tokenLength":251,"tokenStart":"eyJhbGciOiJIUzI1NiJ9"}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Local JWT validation successful","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:14:14","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Socket authentication successful","service":"campusworks-chat","socketId":"dVtnWuciUTZrHWg9AAAH","timestamp":"2025-09-06 21:14:14","userId":"1"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"dVtnWuciUTZrHWg9AAAH","timestamp":"2025-09-06 21:14:14","userId":"1"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"dVtnWuciUTZrHWg9AAAH","timestamp":"2025-09-06 21:15:07","userId":"1"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"e7Wtq4fDXItikT0jAAAJ","timestamp":"2025-09-06 21:15:08","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:15:08","userId":"1"}
+{"jwtSecret":"mysupersec...","level":"info","message":"Validating token","service":"campusworks-chat","timestamp":"2025-09-06 21:15:08","tokenLength":251,"tokenStart":"eyJhbGciOiJIUzI1NiJ9"}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Local JWT validation successful","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:15:08","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Socket authentication successful","service":"campusworks-chat","socketId":"e7Wtq4fDXItikT0jAAAJ","timestamp":"2025-09-06 21:15:08","userId":"1"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"e7Wtq4fDXItikT0jAAAJ","timestamp":"2025-09-06 21:15:08","userId":"1"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"e7Wtq4fDXItikT0jAAAJ","timestamp":"2025-09-06 21:16:27","userId":"1"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"xkKCr__BkfEM6JXRAAAL","timestamp":"2025-09-06 21:16:28","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:16:28","userId":"1"}
+{"jwtSecret":"mysupersec...","level":"info","message":"Validating token","service":"campusworks-chat","timestamp":"2025-09-06 21:16:28","tokenLength":251,"tokenStart":"eyJhbGciOiJIUzI1NiJ9"}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Local JWT validation successful","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:16:28","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Socket authentication successful","service":"campusworks-chat","socketId":"xkKCr__BkfEM6JXRAAAL","timestamp":"2025-09-06 21:16:28","userId":"1"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"xkKCr__BkfEM6JXRAAAL","timestamp":"2025-09-06 21:16:28","userId":"1"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"xkKCr__BkfEM6JXRAAAL","timestamp":"2025-09-06 21:16:29","userId":"1"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"JGsqcRlJQqTnm0MzAAAN","timestamp":"2025-09-06 21:16:29","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:16:29","userId":"1"}
+{"jwtSecret":"mysupersec...","level":"info","message":"Validating token","service":"campusworks-chat","timestamp":"2025-09-06 21:16:29","tokenLength":251,"tokenStart":"eyJhbGciOiJIUzI1NiJ9"}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Local JWT validation successful","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:16:29","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Socket authentication successful","service":"campusworks-chat","socketId":"JGsqcRlJQqTnm0MzAAAN","timestamp":"2025-09-06 21:16:29","userId":"1"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"JGsqcRlJQqTnm0MzAAAN","timestamp":"2025-09-06 21:16:29","userId":"1"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"JGsqcRlJQqTnm0MzAAAN","timestamp":"2025-09-06 21:16:40","userId":"1"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"WLPMLisA7Xgr24JTAAAP","timestamp":"2025-09-06 21:16:40","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:16:40","userId":"1"}
+{"jwtSecret":"mysupersec...","level":"info","message":"Validating token","service":"campusworks-chat","timestamp":"2025-09-06 21:16:40","tokenLength":251,"tokenStart":"eyJhbGciOiJIUzI1NiJ9"}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Local JWT validation successful","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:16:40","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Socket authentication successful","service":"campusworks-chat","socketId":"WLPMLisA7Xgr24JTAAAP","timestamp":"2025-09-06 21:16:40","userId":"1"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"WLPMLisA7Xgr24JTAAAP","timestamp":"2025-09-06 21:16:40","userId":"1"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"WLPMLisA7Xgr24JTAAAP","timestamp":"2025-09-06 21:17:10","userId":"1"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"8jZ1PJ4Zes6xPqQyAAAR","timestamp":"2025-09-06 21:17:10","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:17:10","userId":"1"}
+{"jwtSecret":"mysupersec...","level":"info","message":"Validating token","service":"campusworks-chat","timestamp":"2025-09-06 21:17:10","tokenLength":251,"tokenStart":"eyJhbGciOiJIUzI1NiJ9"}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Local JWT validation successful","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:17:10","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Socket authentication successful","service":"campusworks-chat","socketId":"8jZ1PJ4Zes6xPqQyAAAR","timestamp":"2025-09-06 21:17:10","userId":"1"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"8jZ1PJ4Zes6xPqQyAAAR","timestamp":"2025-09-06 21:17:10","userId":"1"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"8jZ1PJ4Zes6xPqQyAAAR","timestamp":"2025-09-06 21:17:13","userId":"1"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"LQJcq0YNIDz0I8P9AAAT","timestamp":"2025-09-06 21:17:13","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:17:13","userId":"1"}
+{"jwtSecret":"mysupersec...","level":"info","message":"Validating token","service":"campusworks-chat","timestamp":"2025-09-06 21:17:13","tokenLength":251,"tokenStart":"eyJhbGciOiJIUzI1NiJ9"}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Local JWT validation successful","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:17:13","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Socket authentication successful","service":"campusworks-chat","socketId":"LQJcq0YNIDz0I8P9AAAT","timestamp":"2025-09-06 21:17:13","userId":"1"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"LQJcq0YNIDz0I8P9AAAT","timestamp":"2025-09-06 21:17:13","userId":"1"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"LQJcq0YNIDz0I8P9AAAT","timestamp":"2025-09-06 21:22:24","userId":"1"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"eOspLF8TtpgYjdIuAAAV","timestamp":"2025-09-06 21:22:49","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:22:49","userId":"1"}
+{"jwtSecret":"mysupersec...","level":"info","message":"Validating token","service":"campusworks-chat","timestamp":"2025-09-06 21:22:49","tokenLength":251,"tokenStart":"eyJhbGciOiJIUzI1NiJ9"}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Local JWT validation successful","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:22:49","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Socket authentication successful","service":"campusworks-chat","socketId":"eOspLF8TtpgYjdIuAAAV","timestamp":"2025-09-06 21:22:49","userId":"1"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"eOspLF8TtpgYjdIuAAAV","timestamp":"2025-09-06 21:22:49","userId":"1"}
+{"level":"error","message":"Failed to get task:","service":"campusworks-chat","timestamp":"2025-09-06 21:22:49"}
+{"level":"error","message":"Failed to validate task access:","service":"campusworks-chat","timestamp":"2025-09-06 21:22:49"}
+{"level":"error","message":"Failed to get task:","service":"campusworks-chat","timestamp":"2025-09-06 21:22:49"}
+{"level":"error","message":"Failed to validate task access:","service":"campusworks-chat","timestamp":"2025-09-06 21:22:49"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"eOspLF8TtpgYjdIuAAAV","timestamp":"2025-09-06 21:23:01","userId":"1"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"OBKah2Poc1NgnwoZAAAX","timestamp":"2025-09-06 21:23:01","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:23:01","userId":"1"}
+{"jwtSecret":"mysupersec...","level":"info","message":"Validating token","service":"campusworks-chat","timestamp":"2025-09-06 21:23:01","tokenLength":251,"tokenStart":"eyJhbGciOiJIUzI1NiJ9"}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Local JWT validation successful","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:23:01","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Socket authentication successful","service":"campusworks-chat","socketId":"OBKah2Poc1NgnwoZAAAX","timestamp":"2025-09-06 21:23:01","userId":"1"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"OBKah2Poc1NgnwoZAAAX","timestamp":"2025-09-06 21:23:01","userId":"1"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"OBKah2Poc1NgnwoZAAAX","timestamp":"2025-09-06 21:23:04","userId":"1"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"_Dh_Gb-dHrXATO1XAAAZ","timestamp":"2025-09-06 21:23:05","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:23:05","userId":"1"}
+{"jwtSecret":"mysupersec...","level":"info","message":"Validating token","service":"campusworks-chat","timestamp":"2025-09-06 21:23:05","tokenLength":251,"tokenStart":"eyJhbGciOiJIUzI1NiJ9"}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Local JWT validation successful","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:23:05","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Socket authentication successful","service":"campusworks-chat","socketId":"_Dh_Gb-dHrXATO1XAAAZ","timestamp":"2025-09-06 21:23:05","userId":"1"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"_Dh_Gb-dHrXATO1XAAAZ","timestamp":"2025-09-06 21:23:05","userId":"1"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"_Dh_Gb-dHrXATO1XAAAZ","timestamp":"2025-09-06 21:23:34","userId":"1"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"tyL9PIlV50PIMG-iAAAb","timestamp":"2025-09-06 21:23:34","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:23:34","userId":"1"}
+{"jwtSecret":"mysupersec...","level":"info","message":"Validating token","service":"campusworks-chat","timestamp":"2025-09-06 21:23:34","tokenLength":251,"tokenStart":"eyJhbGciOiJIUzI1NiJ9"}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Local JWT validation successful","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:23:34","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Socket authentication successful","service":"campusworks-chat","socketId":"tyL9PIlV50PIMG-iAAAb","timestamp":"2025-09-06 21:23:35","userId":"1"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"tyL9PIlV50PIMG-iAAAb","timestamp":"2025-09-06 21:23:35","userId":"1"}
+{"level":"error","message":"Failed to get task:","service":"campusworks-chat","timestamp":"2025-09-06 21:23:44"}
+{"level":"error","message":"Failed to validate task access:","service":"campusworks-chat","timestamp":"2025-09-06 21:23:44"}
+{"level":"error","message":"Failed to get task:","service":"campusworks-chat","timestamp":"2025-09-06 21:23:44"}
+{"level":"error","message":"Failed to validate task access:","service":"campusworks-chat","timestamp":"2025-09-06 21:23:44"}
+{"level":"error","message":"Failed to get task:","service":"campusworks-chat","timestamp":"2025-09-06 21:24:57"}
+{"level":"error","message":"Failed to validate task access:","service":"campusworks-chat","timestamp":"2025-09-06 21:24:57"}
+{"level":"error","message":"Failed to get task:","service":"campusworks-chat","timestamp":"2025-09-06 21:24:57"}
+{"level":"error","message":"Failed to validate task access:","service":"campusworks-chat","timestamp":"2025-09-06 21:24:57"}
+{"level":"error","message":"Failed to get task:","service":"campusworks-chat","timestamp":"2025-09-06 21:26:13"}
+{"level":"error","message":"Failed to validate task access:","service":"campusworks-chat","timestamp":"2025-09-06 21:26:13"}
+{"level":"error","message":"Failed to get task:","service":"campusworks-chat","timestamp":"2025-09-06 21:26:13"}
+{"level":"error","message":"Failed to validate task access:","service":"campusworks-chat","timestamp":"2025-09-06 21:26:13"}
+{"duration":"18ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"campusworks-chat","status":404,"timestamp":"2025-09-06 21:32:14","url":"/","userAgent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.19041.6216"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"campusworks-chat","status":404,"timestamp":"2025-09-06 21:32:23","url":"/","userAgent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.19041.6216"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"campusworks-chat","status":404,"timestamp":"2025-09-06 21:33:02","url":"/","userAgent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.19041.6216"}
+{"level":"info","message":"Received SIGINT, starting graceful shutdown","service":"campusworks-chat","timestamp":"2025-09-06 21:34:26"}
+{"host":"localhost","level":"info","message":"Connected to MongoDB","name":"campusworks_chat","port":27017,"service":"campusworks-chat","timestamp":"2025-09-06 21:36:01"}
+{"level":"info","message":"Database connected successfully","service":"campusworks-chat","timestamp":"2025-09-06 21:36:01"}
+{"level":"info","message":"Socket.io initialized","service":"campusworks-chat","timestamp":"2025-09-06 21:36:01"}
+{"corsOrigin":"http://localhost:3000","database":"mongodb://localhost:27017/campusworks_chat","environment":"development","level":"info","message":"Chat service started on port 3001","port":"3001","service":"campusworks-chat","timestamp":"2025-09-06 21:36:01"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"h1MrqhSFMQhZCu3tAAAB","timestamp":"2025-09-06 21:36:20","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210432@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:36:20","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-06 21:36:20","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"h1MrqhSFMQhZCu3tAAAB","timestamp":"2025-09-06 21:36:20","userId":"3"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"h1MrqhSFMQhZCu3tAAAB","timestamp":"2025-09-06 21:36:20","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:36:21","userId":"3"}
+{"baseUrl":"http://localhost:8080","level":"info","message":"Fetching task from Spring Boot","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:36:21"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:36:21","userId":"3"}
+{"baseUrl":"http://localhost:8080","level":"info","message":"Fetching task from Spring Boot","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:36:21"}
+{"data":"","error":"Request failed with status code 401","level":"error","message":"Failed to get task:","service":"campusworks-chat","status":401,"taskId":6,"timestamp":"2025-09-06 21:36:21"}
+{"error":"Task not found","level":"error","message":"Task validation failed","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:36:21","userId":"3"}
+{"level":"warn","message":"Creating room with fallback data for testing","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:36:21","userId":"3"}
+{"data":"","error":"Request failed with status code 401","level":"error","message":"Failed to get task:","service":"campusworks-chat","status":401,"taskId":6,"timestamp":"2025-09-06 21:36:21"}
+{"error":"Task not found","level":"error","message":"Task validation failed","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:36:21","userId":"3"}
+{"level":"warn","message":"Creating room with fallback data for testing","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:36:21","userId":"3"}
+{"data":{"taskId":6},"error":"E11000 duplicate key error collection: campusworks_chat.chatrooms index: taskId_1 dup key: { taskId: 6 }","level":"error","message":"Join task room error","service":"campusworks-chat","stack":"MongoServerError: E11000 duplicate key error collection: campusworks_chat.chatrooms index: taskId_1 dup key: { taskId: 6 }\n    at InsertOneOperation.execute (C:\\Users\\ManishReddy\\OneDrive\\Desktop\\Campus_ works_Records\\campusworks-chat-service\\node_modules\\mongodb\\lib\\operations\\insert.js:51:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async tryOperation (C:\\Users\\ManishReddy\\OneDrive\\Desktop\\Campus_ works_Records\\campusworks-chat-service\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:207:20)\n    at async executeOperation (C:\\Users\\ManishReddy\\OneDrive\\Desktop\\Campus_ works_Records\\campusworks-chat-service\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:75:16)\n    at async Collection.insertOne (C:\\Users\\ManishReddy\\OneDrive\\Desktop\\Campus_ works_Records\\campusworks-chat-service\\node_modules\\mongodb\\lib\\collection.js:157:16)","timestamp":"2025-09-06 21:36:21","userId":"3"}
+{"level":"info","message":"User joined task room (fallback)","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:36:21","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:36:21","userId":"3"}
+{"baseUrl":"http://localhost:8080","level":"info","message":"Fetching task from Spring Boot","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:36:21"}
+{"data":"","error":"Request failed with status code 401","level":"error","message":"Failed to get task:","service":"campusworks-chat","status":401,"taskId":6,"timestamp":"2025-09-06 21:36:21"}
+{"error":"Task not found","level":"error","message":"Task validation failed","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:36:21","userId":"3"}
+{"level":"warn","message":"Creating room with fallback data for testing","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:36:21","userId":"3"}
+{"level":"info","message":"User joined task room (fallback)","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:36:21","userId":"3"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"h1MrqhSFMQhZCu3tAAAB","timestamp":"2025-09-06 21:39:18","userId":"3"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"JWIWniKv56tFYYitAAAD","timestamp":"2025-09-06 21:39:18","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210432@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:39:18","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-06 21:39:18","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"JWIWniKv56tFYYitAAAD","timestamp":"2025-09-06 21:39:18","userId":"3"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"JWIWniKv56tFYYitAAAD","timestamp":"2025-09-06 21:39:18","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:39:18","userId":"3"}
+{"baseUrl":"http://localhost:8080","level":"info","message":"Fetching task from Spring Boot","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:39:18"}
+{"data":"","error":"Request failed with status code 401","level":"error","message":"Failed to get task:","service":"campusworks-chat","status":401,"taskId":6,"timestamp":"2025-09-06 21:39:18"}
+{"error":"Task not found","level":"error","message":"Task validation failed","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:39:18","userId":"3"}
+{"level":"warn","message":"Creating room with fallback data for testing","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:39:18","userId":"3"}
+{"level":"info","message":"User joined task room (fallback)","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:39:18","userId":"3"}
+{"level":"info","message":"Received SIGINT, starting graceful shutdown","service":"campusworks-chat","timestamp":"2025-09-06 21:40:18"}
+{"host":"localhost","level":"info","message":"Connected to MongoDB","name":"campusworks_chat","port":27017,"service":"campusworks-chat","timestamp":"2025-09-06 21:40:33"}
+{"level":"info","message":"Database connected successfully","service":"campusworks-chat","timestamp":"2025-09-06 21:40:33"}
+{"level":"info","message":"Socket.io initialized","service":"campusworks-chat","timestamp":"2025-09-06 21:40:33"}
+{"corsOrigin":"http://localhost:3000","database":"mongodb://localhost:27017/campusworks_chat","environment":"development","level":"info","message":"Chat service started on port 3001","port":"3001","service":"campusworks-chat","timestamp":"2025-09-06 21:40:33"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"dZtjzgMuHlLHgK_3AAAB","timestamp":"2025-09-06 21:40:33","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210432@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:40:33","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-06 21:40:33","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"dZtjzgMuHlLHgK_3AAAB","timestamp":"2025-09-06 21:40:33","userId":"3"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"dZtjzgMuHlLHgK_3AAAB","timestamp":"2025-09-06 21:40:33","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:40:33","userId":"3"}
+{"baseUrl":"http://localhost:8080","hasToken":true,"level":"info","message":"Fetching task from Spring Boot","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:40:33"}
+{"level":"info","message":"Task fetched successfully","service":"campusworks-chat","status":"IN_PROGRESS","taskId":6,"timestamp":"2025-09-06 21:40:34","title":"komal's 4 th task for  testing TASK DEADLINE"}
+{"level":"info","message":"Task found","service":"campusworks-chat","status":"IN_PROGRESS","taskId":6,"taskTitle":"komal's 4 th task for  testing TASK DEADLINE","timestamp":"2025-09-06 21:40:34"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"dZtjzgMuHlLHgK_3AAAB","timestamp":"2025-09-06 21:40:46","userId":"3"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"h3dPNHnDAMrHJlQ9AAAD","timestamp":"2025-09-06 21:40:54","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210432@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:40:54","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-06 21:40:54","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"h3dPNHnDAMrHJlQ9AAAD","timestamp":"2025-09-06 21:40:54","userId":"3"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"h3dPNHnDAMrHJlQ9AAAD","timestamp":"2025-09-06 21:40:54","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:40:54","userId":"3"}
+{"baseUrl":"http://localhost:8080","hasToken":true,"level":"info","message":"Fetching task from Spring Boot","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:40:54"}
+{"level":"info","message":"Task fetched successfully","service":"campusworks-chat","status":"IN_PROGRESS","taskId":6,"timestamp":"2025-09-06 21:40:54","title":"komal's 4 th task for  testing TASK DEADLINE"}
+{"level":"info","message":"Task found","service":"campusworks-chat","status":"IN_PROGRESS","taskId":6,"taskTitle":"komal's 4 th task for  testing TASK DEADLINE","timestamp":"2025-09-06 21:40:54"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:40:54","userId":"3"}
+{"baseUrl":"http://localhost:8080","hasToken":true,"level":"info","message":"Fetching task from Spring Boot","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:40:54"}
+{"level":"info","message":"Task fetched successfully","service":"campusworks-chat","status":"IN_PROGRESS","taskId":6,"timestamp":"2025-09-06 21:40:54","title":"komal's 4 th task for  testing TASK DEADLINE"}
+{"level":"info","message":"Task found","service":"campusworks-chat","status":"IN_PROGRESS","taskId":6,"taskTitle":"komal's 4 th task for  testing TASK DEADLINE","timestamp":"2025-09-06 21:40:54"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"h3dPNHnDAMrHJlQ9AAAD","timestamp":"2025-09-06 21:41:05","userId":"3"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"MWZWc1_vXCRkK57nAAAF","timestamp":"2025-09-06 21:41:05","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210432@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:41:05","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-06 21:41:05","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"MWZWc1_vXCRkK57nAAAF","timestamp":"2025-09-06 21:41:05","userId":"3"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"MWZWc1_vXCRkK57nAAAF","timestamp":"2025-09-06 21:41:05","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:41:14","userId":"3"}
+{"baseUrl":"http://localhost:8080","hasToken":true,"level":"info","message":"Fetching task from Spring Boot","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:41:14"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:41:14","userId":"3"}
+{"baseUrl":"http://localhost:8080","hasToken":true,"level":"info","message":"Fetching task from Spring Boot","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:41:14"}
+{"level":"info","message":"Task fetched successfully","service":"campusworks-chat","status":"IN_PROGRESS","taskId":5,"timestamp":"2025-09-06 21:41:14","title":"komal 3 rd task  for testing  notification "}
+{"level":"info","message":"Task found","service":"campusworks-chat","status":"IN_PROGRESS","taskId":5,"taskTitle":"komal 3 rd task  for testing  notification ","timestamp":"2025-09-06 21:41:14"}
+{"level":"info","message":"Task fetched successfully","service":"campusworks-chat","status":"IN_PROGRESS","taskId":5,"timestamp":"2025-09-06 21:41:14","title":"komal 3 rd task  for testing  notification "}
+{"level":"info","message":"Task found","service":"campusworks-chat","status":"IN_PROGRESS","taskId":5,"taskTitle":"komal 3 rd task  for testing  notification ","timestamp":"2025-09-06 21:41:14"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:41:40","userId":"3"}
+{"baseUrl":"http://localhost:8080","hasToken":true,"level":"info","message":"Fetching task from Spring Boot","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:41:40"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:41:40","userId":"3"}
+{"baseUrl":"http://localhost:8080","hasToken":true,"level":"info","message":"Fetching task from Spring Boot","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:41:40"}
+{"level":"info","message":"Task fetched successfully","service":"campusworks-chat","status":"IN_PROGRESS","taskId":6,"timestamp":"2025-09-06 21:41:40","title":"komal's 4 th task for  testing TASK DEADLINE"}
+{"level":"info","message":"Task found","service":"campusworks-chat","status":"IN_PROGRESS","taskId":6,"taskTitle":"komal's 4 th task for  testing TASK DEADLINE","timestamp":"2025-09-06 21:41:40"}
+{"level":"info","message":"Task fetched successfully","service":"campusworks-chat","status":"IN_PROGRESS","taskId":6,"timestamp":"2025-09-06 21:41:40","title":"komal's 4 th task for  testing TASK DEADLINE"}
+{"level":"info","message":"Task found","service":"campusworks-chat","status":"IN_PROGRESS","taskId":6,"taskTitle":"komal's 4 th task for  testing TASK DEADLINE","timestamp":"2025-09-06 21:41:40"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"MWZWc1_vXCRkK57nAAAF","timestamp":"2025-09-06 21:41:50","userId":"3"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"-9rp09htFgMM_bbDAAAH","timestamp":"2025-09-06 21:42:00","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210432@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:42:00","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-06 21:42:00","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"-9rp09htFgMM_bbDAAAH","timestamp":"2025-09-06 21:42:00","userId":"3"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"-9rp09htFgMM_bbDAAAH","timestamp":"2025-09-06 21:42:00","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:42:00","userId":"3"}
+{"baseUrl":"http://localhost:8080","hasToken":true,"level":"info","message":"Fetching task from Spring Boot","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:42:00"}
+{"level":"info","message":"Task fetched successfully","service":"campusworks-chat","status":"IN_PROGRESS","taskId":6,"timestamp":"2025-09-06 21:42:00","title":"komal's 4 th task for  testing TASK DEADLINE"}
+{"level":"info","message":"Task found","service":"campusworks-chat","status":"IN_PROGRESS","taskId":6,"taskTitle":"komal's 4 th task for  testing TASK DEADLINE","timestamp":"2025-09-06 21:42:00"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:42:00","userId":"3"}
+{"baseUrl":"http://localhost:8080","hasToken":true,"level":"info","message":"Fetching task from Spring Boot","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:42:00"}
+{"level":"info","message":"Task fetched successfully","service":"campusworks-chat","status":"IN_PROGRESS","taskId":6,"timestamp":"2025-09-06 21:42:01","title":"komal's 4 th task for  testing TASK DEADLINE"}
+{"level":"info","message":"Task found","service":"campusworks-chat","status":"IN_PROGRESS","taskId":6,"taskTitle":"komal's 4 th task for  testing TASK DEADLINE","timestamp":"2025-09-06 21:42:01"}
+{"level":"info","message":"Received SIGINT, starting graceful shutdown","service":"campusworks-chat","timestamp":"2025-09-06 21:45:30"}
+{"host":"localhost","level":"info","message":"Connected to MongoDB","name":"campusworks_chat","port":27017,"service":"campusworks-chat","timestamp":"2025-09-06 21:45:59"}
+{"level":"info","message":"Database connected successfully","service":"campusworks-chat","timestamp":"2025-09-06 21:45:59"}
+{"level":"info","message":"Socket.io initialized","service":"campusworks-chat","timestamp":"2025-09-06 21:45:59"}
+{"corsOrigin":"http://localhost:3000","database":"mongodb://localhost:27017/campusworks_chat","environment":"development","level":"info","message":"Chat service started on port 3001","port":"3001","service":"campusworks-chat","timestamp":"2025-09-06 21:45:59"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"gxI6Y0xOCXQAo_afAAAB","timestamp":"2025-09-06 21:45:59","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210432@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:45:59","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-06 21:45:59","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"gxI6Y0xOCXQAo_afAAAB","timestamp":"2025-09-06 21:45:59","userId":"3"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"gxI6Y0xOCXQAo_afAAAB","timestamp":"2025-09-06 21:46:00","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:46:00","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:46:00","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:46:00"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:46:00"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:46:00","userId":"3"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:46:00","userId":"3"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"gxI6Y0xOCXQAo_afAAAB","timestamp":"2025-09-06 21:46:12","userId":"3"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"nFVxK_cPEfLRfiAyAAAD","timestamp":"2025-09-06 21:46:23","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210432@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 21:46:23","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-06 21:46:23","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"nFVxK_cPEfLRfiAyAAAD","timestamp":"2025-09-06 21:46:23","userId":"3"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"nFVxK_cPEfLRfiAyAAAD","timestamp":"2025-09-06 21:46:23","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:46:23","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:46:23"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:46:23","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:46:23","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:46:23"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:46:23","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:46:23","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:46:24"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:46:24","userId":"3"}
+{"level":"info","message":"Message sent","messageId":"68bc5e6091427d5565009a9c","messageLength":2,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:46:32","userId":"3"}
+{"level":"info","message":"Message sent","messageId":"68bc5e8391427d5565009aa0","messageLength":5,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:47:07","userId":"3"}
+{"level":"info","message":"Message sent","messageId":"68bc5e8691427d5565009aa4","messageLength":8,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:47:10","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:47:35","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:47:35"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:47:35","userId":"3"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:47:35","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:47:35"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:47:35","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:47:35","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:47:35"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:47:35","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:48:26","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:48:26"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:48:26","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:48:26","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:48:26"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:48:26","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:48:26","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:48:26"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:48:26","userId":"3"}
+{"level":"info","message":"Message sent","messageId":"68bc5edb91427d5565009aba","messageLength":17,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:48:35","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:49:04","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:49:04"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:49:04","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:49:04","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:49:04"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:49:04","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:49:04","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:49:04"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:49:04","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:49:26","userId":"3"}
+{"level":"info","message":"Creating new room for task","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:49:26","userId":"3"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:49:26","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:49:26","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:49:26"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:49:26","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:49:26","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:49:26"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:49:26","userId":"3"}
+{"level":"info","message":"Message sent","messageId":"68bc5f2091427d5565009acf","messageLength":32,"service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:49:44","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:50:00","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:50:00"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:50:00","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:50:00","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:50:00"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:50:00","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:50:00","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:50:00"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:50:00","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:53:40","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:53:40","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:53:40"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:53:40"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:53:41","userId":"3"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:53:41","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:53:41","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:53:41"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:53:41","userId":"3"}
+{"level":"info","message":"Message sent","messageId":"68bc602e91427d5565009ae5","messageLength":56,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:54:14","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:54:32","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:54:32"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:54:32","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:54:32","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:54:32"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:54:32","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:54:33","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:54:33"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:54:33","userId":"3"}
+{"level":"info","message":"Message sent","messageId":"68bc604991427d5565009af2","messageLength":10,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 21:54:41","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:54:49","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:54:49"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:54:49","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:54:49","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:54:49"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:54:49","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:54:49","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:54:49"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 21:54:49","userId":"3"}
+{"host":"localhost","level":"info","message":"Connected to MongoDB","name":"campusworks_chat","port":27017,"service":"campusworks-chat","timestamp":"2025-09-06 22:00:43"}
+{"level":"info","message":"Database connected successfully","service":"campusworks-chat","timestamp":"2025-09-06 22:00:43"}
+{"level":"info","message":"Socket.io initialized","service":"campusworks-chat","timestamp":"2025-09-06 22:00:43"}
+{"corsOrigin":"http://localhost:3000","database":"mongodb://localhost:27017/campusworks_chat","environment":"development","level":"info","message":"Chat service started on port 3001","port":"3001","service":"campusworks-chat","timestamp":"2025-09-06 22:00:43"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"0Vdkae2-BXPp2JyKAAAB","timestamp":"2025-09-06 22:00:57","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210432@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 22:00:57","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-06 22:00:57","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"0Vdkae2-BXPp2JyKAAAB","timestamp":"2025-09-06 22:00:57","userId":"3"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"0Vdkae2-BXPp2JyKAAAB","timestamp":"2025-09-06 22:00:57","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:00:57","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:00:57","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:00:57"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:00:57"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:00:57","userId":"3"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:00:57","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:00:58","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:00:58"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:00:58","userId":"3"}
+{"level":"info","message":"Message sent","messageId":"68bc61cda37e234a06146e3b","messageLength":14,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:01:09","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:01:53","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:01:53"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:01:53","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:01:53","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:01:53"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:01:53","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:01:53","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:01:53"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:01:53","userId":"3"}
+{"level":"info","message":"Message sent","messageId":"68bc6207a37e234a06146e48","messageLength":13,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:02:07","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 22:02:21","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 22:02:21"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 22:02:21","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 22:02:21","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 22:02:21"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 22:02:21","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 22:02:21","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 22:02:21"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-06 22:02:21","userId":"3"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"0Vdkae2-BXPp2JyKAAAB","timestamp":"2025-09-06 22:13:44","userId":"3"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"RAkBrNzaHV9eq4gdAAAD","timestamp":"2025-09-06 22:15:10","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 22:15:10","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-06 22:15:10","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"RAkBrNzaHV9eq4gdAAAD","timestamp":"2025-09-06 22:15:10","userId":"1"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"RAkBrNzaHV9eq4gdAAAD","timestamp":"2025-09-06 22:15:10","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:15:10","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:15:10"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:15:10","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:15:10","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:15:10"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:15:10","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:15:10","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:15:10"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:15:10","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:16:54","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:16:54"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:16:54","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:16:54","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:16:54"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:16:54","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:16:54","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:16:54"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-06 22:16:54","userId":"1"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"RAkBrNzaHV9eq4gdAAAD","timestamp":"2025-09-06 22:32:16","userId":"1"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"tqzjR1i-rPTYzLwPAAAF","timestamp":"2025-09-06 22:32:38","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 22:32:38","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-06 22:32:38","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"tqzjR1i-rPTYzLwPAAAF","timestamp":"2025-09-06 22:32:38","userId":"1"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"tqzjR1i-rPTYzLwPAAAF","timestamp":"2025-09-06 22:32:38","userId":"1"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"tqzjR1i-rPTYzLwPAAAF","timestamp":"2025-09-06 22:36:34","userId":"1"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"aMjP8acBpMqTEyAIAAAH","timestamp":"2025-09-06 23:09:14","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210419@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 23:09:14","userId":"2"}
+{"email":"n210419@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-06 23:09:14","userId":"2"}
+{"email":"n210419@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"aMjP8acBpMqTEyAIAAAH","timestamp":"2025-09-06 23:09:14","userId":"2"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"aMjP8acBpMqTEyAIAAAH","timestamp":"2025-09-06 23:09:14","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:09:14","userId":"2"}
+{"level":"info","message":"Creating new room for task","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:09:14","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:09:15","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:09:15"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:09:15","userId":"2"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:09:15","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:09:15","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:09:15"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:09:15","userId":"2"}
+{"level":"info","message":"Message sent","messageId":"68bc71d4a37e234a06146e78","messageLength":19,"service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:09:32","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:09:57","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:09:57"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:09:57","userId":"2"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:09:57","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:09:57"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:09:57","userId":"2"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:09:58","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:09:58"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:09:58","userId":"2"}
+{"level":"info","message":"Message sent","messageId":"68bc7200a37e234a06146e85","messageLength":20,"service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:10:16","userId":"2"}
+{"level":"info","message":"Message sent","messageId":"68bc7203a37e234a06146e89","messageLength":7,"service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:10:19","userId":"2"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"aMjP8acBpMqTEyAIAAAH","timestamp":"2025-09-06 23:10:35","userId":"2"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"YHfM3nQPrrTlkKeDAAAJ","timestamp":"2025-09-06 23:41:55","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210610@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-06 23:41:55","userId":"4"}
+{"email":"n210610@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-06 23:41:55","userId":"4"}
+{"email":"n210610@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"YHfM3nQPrrTlkKeDAAAJ","timestamp":"2025-09-06 23:41:55","userId":"4"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"YHfM3nQPrrTlkKeDAAAJ","timestamp":"2025-09-06 23:41:55","userId":"4"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:41:55","userId":"4"}
+{"level":"info","message":"Using existing room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:41:55"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:41:55","userId":"4"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:41:55","userId":"4"}
+{"level":"info","message":"Using existing room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:41:55"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:41:55","userId":"4"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:41:55","userId":"4"}
+{"level":"info","message":"Using existing room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:41:55"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:41:55","userId":"4"}
+{"level":"info","message":"Message sent","messageId":"68bc7980a37e234a06146e99","messageLength":6,"service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:42:16","userId":"4"}
+{"level":"info","message":"Message sent","messageId":"68bc7986a37e234a06146e9d","messageLength":5,"service":"campusworks-chat","taskId":7,"timestamp":"2025-09-06 23:42:22","userId":"4"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"YHfM3nQPrrTlkKeDAAAJ","timestamp":"2025-09-06 23:52:31","userId":"4"}
+{"host":"localhost","level":"info","message":"Connected to MongoDB","name":"campusworks_chat","port":27017,"service":"campusworks-chat","timestamp":"2025-09-07 09:53:59"}
+{"level":"info","message":"Database connected successfully","service":"campusworks-chat","timestamp":"2025-09-07 09:53:59"}
+{"level":"info","message":"Socket.io initialized","service":"campusworks-chat","timestamp":"2025-09-07 09:53:59"}
+{"corsOrigin":"http://localhost:3000","database":"mongodb://localhost:27017/campusworks_chat","environment":"development","level":"info","message":"Chat service started on port 3001","port":"3001","service":"campusworks-chat","timestamp":"2025-09-07 09:53:59"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"qyyVwPmQwgq8eWj6AAAB","timestamp":"2025-09-07 09:55:55","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210419@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-07 09:55:55","userId":"2"}
+{"email":"n210419@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-07 09:55:55","userId":"2"}
+{"email":"n210419@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"qyyVwPmQwgq8eWj6AAAB","timestamp":"2025-09-07 09:55:55","userId":"2"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"qyyVwPmQwgq8eWj6AAAB","timestamp":"2025-09-07 09:55:55","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 09:55:56","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 09:55:56","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 09:55:56"}
+{"level":"info","message":"Using existing room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 09:55:56"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 09:55:56","userId":"2"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 09:55:56","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 09:55:56","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 09:55:56"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 09:55:56","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 09:58:49","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 09:58:49"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 09:58:49","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 09:58:49","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 09:58:49"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 09:58:49","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 09:58:49","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 09:58:49"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 09:58:49","userId":"2"}
+{"level":"info","message":"Message sent","messageId":"68bd0a0b539a1ab6be2e2963","messageLength":21,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 09:58:59","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 09:59:34","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 09:59:34"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 09:59:34","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 09:59:34","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 09:59:34"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 09:59:34","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 09:59:34","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 09:59:34"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 09:59:34","userId":"2"}
+{"level":"info","message":"Message sent","messageId":"68bd0a3c539a1ab6be2e2970","messageLength":22,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 09:59:48","userId":"2"}
+{"level":"info","message":"Message sent","messageId":"68bd0a47539a1ab6be2e2974","messageLength":17,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 09:59:59","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:02:03","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:02:03"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:02:03","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:02:03","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:02:03"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:02:03","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:02:03","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:02:03"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:02:03","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 10:02:11","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 10:02:11"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 10:02:11","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 10:02:11","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 10:02:11"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 10:02:11","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 10:02:11","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 10:02:11"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 10:02:11","userId":"2"}
+{"level":"info","message":"Message sent","messageId":"68bd0ae9539a1ab6be2e298a","messageLength":61,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 10:02:41","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:03:27","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:03:27"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:03:27","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:03:27","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:03:27"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:03:27","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:03:27","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:03:27"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:03:27","userId":"2"}
+{"level":"info","message":"Message sent","messageId":"68bd0b21539a1ab6be2e2997","messageLength":22,"service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:03:37","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:06:02","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:06:02"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:06:02","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:06:02","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:06:02"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:06:02","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:06:03","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:06:03"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5f0e91427d5565009ac7","service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:06:03","userId":"2"}
+{"level":"info","message":"Message sent","messageId":"68bd0bb9539a1ab6be2e29a4","messageLength":15,"service":"campusworks-chat","taskId":5,"timestamp":"2025-09-07 10:06:09","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 10:23:16","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 10:23:16"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 10:23:16","userId":"2"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 10:23:16","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 10:23:16"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 10:23:16","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 10:23:16","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 10:23:16"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 10:23:16","userId":"2"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"sXGvzQzRy2fXrvE3AAAD","timestamp":"2025-09-07 11:48:38","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210419@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-07 11:48:38","userId":"2"}
+{"email":"n210419@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-07 11:48:38","userId":"2"}
+{"email":"n210419@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"sXGvzQzRy2fXrvE3AAAD","timestamp":"2025-09-07 11:48:38","userId":"2"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"sXGvzQzRy2fXrvE3AAAD","timestamp":"2025-09-07 11:48:38","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 11:48:38","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 11:48:38","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 11:48:38"}
+{"level":"info","message":"Using existing room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 11:48:38"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 11:48:38","userId":"2"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 11:48:38","userId":"2"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 11:48:38","userId":"2"}
+{"level":"info","message":"Using existing room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 11:48:38"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 11:48:38","userId":"2"}
+{"level":"info","message":"Message sent","messageId":"68bd23d4539a1ab6be2e29bc","messageLength":12,"service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 11:49:00","userId":"2"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"sXGvzQzRy2fXrvE3AAAD","timestamp":"2025-09-07 11:52:06","userId":"2"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"qyyVwPmQwgq8eWj6AAAB","timestamp":"2025-09-07 12:04:44","userId":"2"}
+{"host":"localhost","level":"info","message":"Connected to MongoDB","name":"campusworks_chat","port":27017,"service":"campusworks-chat","timestamp":"2025-09-07 12:22:00"}
+{"level":"info","message":"Database connected successfully","service":"campusworks-chat","timestamp":"2025-09-07 12:22:00"}
+{"level":"info","message":"Socket.io initialized","service":"campusworks-chat","timestamp":"2025-09-07 12:22:00"}
+{"corsOrigin":"http://localhost:3000","database":"mongodb://localhost:27017/campusworks_chat","environment":"development","level":"info","message":"Chat service started on port 3001","port":"3001","service":"campusworks-chat","timestamp":"2025-09-07 12:22:00"}
+{"host":"localhost","level":"info","message":"Connected to MongoDB","name":"campusworks_chat","port":27017,"service":"campusworks-chat","timestamp":"2025-09-07 13:15:04"}
+{"level":"info","message":"Database connected successfully","service":"campusworks-chat","timestamp":"2025-09-07 13:15:04"}
+{"level":"info","message":"Socket.io initialized","service":"campusworks-chat","timestamp":"2025-09-07 13:15:04"}
+{"corsOrigin":"http://localhost:3000","database":"mongodb://localhost:27017/campusworks_chat","environment":"development","level":"info","message":"Chat service started on port 3001","port":"3001","service":"campusworks-chat","timestamp":"2025-09-07 13:15:04"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"9T-KFo_wFZ0VzcBmAAAB","timestamp":"2025-09-07 14:21:51","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-07 14:21:51","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-07 14:21:51","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"9T-KFo_wFZ0VzcBmAAAB","timestamp":"2025-09-07 14:21:51","userId":"1"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"9T-KFo_wFZ0VzcBmAAAB","timestamp":"2025-09-07 14:21:52","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:21:52","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:21:52","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:21:52"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:21:52"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:21:52","userId":"1"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:21:52","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:21:52","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:21:52"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:21:52","userId":"1"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"9T-KFo_wFZ0VzcBmAAAB","timestamp":"2025-09-07 14:25:05","userId":"1"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"jIV32wk2n2ibKpDRAAAD","timestamp":"2025-09-07 14:28:49","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-07 14:28:49","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-07 14:28:49","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"jIV32wk2n2ibKpDRAAAD","timestamp":"2025-09-07 14:28:49","userId":"1"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"jIV32wk2n2ibKpDRAAAD","timestamp":"2025-09-07 14:28:49","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:28:49","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:28:49"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:28:49","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:28:49","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:28:49"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:28:49","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:28:49","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:28:49"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:28:49","userId":"1"}
+{"level":"info","message":"Message sent","messageId":"68bd4b8ca4d0522698bcf01a","messageLength":2,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:38:29","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:39:41","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:39:41"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:39:41","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:39:41","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:39:41"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:39:41","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:39:41","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:39:41"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:39:41","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:44:08","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:44:08"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:44:08","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:44:08"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:44:08","userId":"1"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:44:08","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:44:09","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:44:09"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:44:09","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:44:22","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:44:22"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:44:22","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:44:22","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:44:22"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:44:22","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:44:22","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:44:22"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:44:22","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:50:49","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:50:49"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:50:49","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:50:49","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:50:49"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:50:49","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:50:49","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:50:49"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:50:49","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:52:27","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:52:27"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:52:27","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:52:27","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:52:27"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:52:27","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:52:27","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:52:27"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:52:27","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:55:15","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:55:15","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:55:15"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:55:15"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:55:15","userId":"1"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:55:15","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:55:15","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:55:15"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 14:55:15","userId":"1"}
+{"level":"info","message":"Message sent","messageId":"68bd5151a4d0522698bcf054","messageLength":42,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:03:05","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:10:28","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:10:28"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:10:28","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:10:28","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:10:28"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:10:28","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:10:28","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:10:28"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:10:28","userId":"1"}
+{"level":"info","message":"Message sent","messageId":"68bd531da4d0522698bcf061","messageLength":26,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:10:45","userId":"1"}
+{"level":"info","message":"Message sent","messageId":"68bd5340a4d0522698bcf065","messageLength":30,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:11:20","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:11:45","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:11:45"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:11:45","userId":"1"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:11:45","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:11:45"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:11:45","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:11:45","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:11:45"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:11:45","userId":"1"}
+{"level":"info","message":"Message sent","messageId":"68bd536da4d0522698bcf072","messageLength":32,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:12:05","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:23:15","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:23:15"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:23:15","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:23:15"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:23:15","userId":"1"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:23:15","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:23:16","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:23:16"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:23:16","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:23:32","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:23:33"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:23:33","userId":"1"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:23:33","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:23:33"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:23:33","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:23:33","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:23:33"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:23:33","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:28:49","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:28:49"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:28:49","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:28:49","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:28:49"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:28:49","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:28:49","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:28:49"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:28:49","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:29:24","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:29:24"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:29:24","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:29:24","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:29:24"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:29:24","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:29:24","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:29:24"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:29:24","userId":"1"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"jIV32wk2n2ibKpDRAAAD","timestamp":"2025-09-07 15:32:25","userId":"1"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"1SarJtP0kw2EK41GAAAF","timestamp":"2025-09-07 15:33:46","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210432@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-07 15:33:46","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-07 15:33:46","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"1SarJtP0kw2EK41GAAAF","timestamp":"2025-09-07 15:33:46","userId":"3"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"1SarJtP0kw2EK41GAAAF","timestamp":"2025-09-07 15:33:46","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:33:46","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:33:46"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:33:46","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:33:46"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:33:46","userId":"3"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:33:46","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:33:46","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:33:46"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:33:46","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:34:26","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:34:26"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:34:26","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:34:26","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:34:26"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:34:26","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:34:26","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:34:26"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 15:34:26","userId":"3"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"1SarJtP0kw2EK41GAAAF","timestamp":"2025-09-07 16:01:02","userId":"3"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"DLbGpa7ar_MLH6NeAAAH","timestamp":"2025-09-07 16:14:46","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210432@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-07 16:14:46","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-07 16:14:46","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"DLbGpa7ar_MLH6NeAAAH","timestamp":"2025-09-07 16:14:46","userId":"3"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"DLbGpa7ar_MLH6NeAAAH","timestamp":"2025-09-07 16:14:46","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:14:46","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:14:46","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:14:46"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:14:47"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:14:47","userId":"3"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:14:47","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:14:47","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:14:47"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:14:47","userId":"3"}
+{"level":"info","message":"Message sent","messageId":"68bd622da4d0522698bcf0bb","messageLength":2,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:15:01","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:15:36","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:15:36"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:15:36","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:15:36","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:15:36"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:15:36","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:15:36","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:15:36"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:15:36","userId":"3"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"DLbGpa7ar_MLH6NeAAAH","timestamp":"2025-09-07 16:17:21","userId":"3"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"1GhmEq35A086_O0fAAAJ","timestamp":"2025-09-07 16:52:45","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-07 16:52:45","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-07 16:52:46","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"1GhmEq35A086_O0fAAAJ","timestamp":"2025-09-07 16:52:46","userId":"1"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"1GhmEq35A086_O0fAAAJ","timestamp":"2025-09-07 16:52:46","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:52:46","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:52:46"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:52:46","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:52:46","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:52:46"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:52:46","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:52:46","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:52:46"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 16:52:46","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 17:07:17","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 17:07:17"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 17:07:17","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 17:07:18"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 17:07:18","userId":"1"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 17:07:18","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 17:07:18","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 17:07:18"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc71c3a37e234a06146e70","service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 17:07:18","userId":"1"}
+{"level":"info","message":"Message sent","messageId":"68bd6e85a4d0522698bcf0dd","messageLength":41,"service":"campusworks-chat","taskId":7,"timestamp":"2025-09-07 17:07:41","userId":"1"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"1GhmEq35A086_O0fAAAJ","timestamp":"2025-09-07 18:14:18","userId":"1"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"yqJCMTIiiyrh_B2FAAAL","timestamp":"2025-09-07 18:44:06","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-07 18:44:06","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-07 18:44:06","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"yqJCMTIiiyrh_B2FAAAL","timestamp":"2025-09-07 18:44:06","userId":"1"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"yqJCMTIiiyrh_B2FAAAL","timestamp":"2025-09-07 18:44:06","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:44:06","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:44:06"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:44:06","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:44:06","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:44:06"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:44:06","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:44:06","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:44:06"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:44:06","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:44:20","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:44:20"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:44:20","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:44:20","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:44:20"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:44:20","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:44:20","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:44:20"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:44:20","userId":"1"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"yqJCMTIiiyrh_B2FAAAL","timestamp":"2025-09-07 18:51:48","userId":"1"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"zC6YEVOrTLNt1IG5AAAN","timestamp":"2025-09-07 18:51:55","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-07 18:51:55","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-07 18:51:55","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"zC6YEVOrTLNt1IG5AAAN","timestamp":"2025-09-07 18:51:55","userId":"1"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"zC6YEVOrTLNt1IG5AAAN","timestamp":"2025-09-07 18:51:55","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:51:55","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:51:55"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:51:55","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:51:56","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:51:56"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:51:56","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:51:56","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:51:56"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:51:56","userId":"1"}
+{"level":"info","message":"Message sent","messageId":"68bd87bea4d0522698bcf102","messageLength":2,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:55:18","userId":"1"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"uapfYJKJ4edEJTL3AAAP","timestamp":"2025-09-07 18:55:50","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210432@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-07 18:55:50","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-07 18:55:50","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"uapfYJKJ4edEJTL3AAAP","timestamp":"2025-09-07 18:55:50","userId":"3"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"uapfYJKJ4edEJTL3AAAP","timestamp":"2025-09-07 18:55:50","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:55:50","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:55:50"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:55:50","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:55:50","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:55:50"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:55:50","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:55:50","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:55:50"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:55:50","userId":"3"}
+{"level":"info","message":"Message sent","messageId":"68bd87efa4d0522698bcf111","messageLength":15,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:56:08","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:56:14","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:56:14"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:56:14","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:56:14","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:56:14"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:56:14","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:56:14","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:56:14"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:56:14","userId":"1"}
+{"level":"info","message":"Message sent","messageId":"68bd8854a4d0522698bcf11e","messageLength":4,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 18:57:48","userId":"3"}
+{"level":"info","message":"Message sent","messageId":"68bd88f7a4d0522698bcf122","messageLength":6,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:00:31","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:01:04","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:01:04"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:01:04","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:01:04","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:01:04"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:01:04","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:01:04","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:01:04"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:01:04","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:01:22","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:01:22"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:01:22","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:01:22","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:01:22"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:01:23","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:01:23","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:01:23"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:01:23","userId":"1"}
+{"level":"info","message":"Message sent","messageId":"68bd8934a4d0522698bcf138","messageLength":9,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:01:32","userId":"1"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"uapfYJKJ4edEJTL3AAAP","timestamp":"2025-09-07 19:08:11","userId":"3"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"zC6YEVOrTLNt1IG5AAAN","timestamp":"2025-09-07 19:27:46","userId":"1"}
+{"host":"localhost","level":"info","message":"Connected to MongoDB","name":"campusworks_chat","port":27017,"service":"campusworks-chat","timestamp":"2025-09-07 19:29:33"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"_Tmozt-Etjuel9AOAAAR","timestamp":"2025-09-07 19:42:38","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-07 19:42:38","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-07 19:42:38","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"_Tmozt-Etjuel9AOAAAR","timestamp":"2025-09-07 19:42:38","userId":"1"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"_Tmozt-Etjuel9AOAAAR","timestamp":"2025-09-07 19:42:38","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:42:38","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:42:38"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:42:38","userId":"1"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:42:38","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:42:38"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:42:38","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:42:38","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:42:38"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 19:42:38","userId":"1"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"_Tmozt-Etjuel9AOAAAR","timestamp":"2025-09-07 19:46:43","userId":"1"}
+{"host":"localhost","level":"info","message":"Connected to MongoDB","name":"campusworks_chat","port":27017,"service":"campusworks-chat","timestamp":"2025-09-07 20:34:17"}
+{"level":"info","message":"Database connected successfully","service":"campusworks-chat","timestamp":"2025-09-07 20:34:17"}
+{"level":"info","message":"Socket.io initialized","service":"campusworks-chat","timestamp":"2025-09-07 20:34:17"}
+{"corsOrigin":"http://localhost:3000","database":"mongodb://localhost:27017/campusworks_chat","environment":"development","level":"info","message":"Chat service started on port 3001","port":"3001","service":"campusworks-chat","timestamp":"2025-09-07 20:34:17"}
+{"host":"localhost","level":"info","message":"Connected to MongoDB","name":"campusworks_chat","port":27017,"service":"campusworks-chat","timestamp":"2025-09-07 21:02:45"}
+{"level":"info","message":"Database connected successfully","service":"campusworks-chat","timestamp":"2025-09-07 21:02:45"}
+{"level":"info","message":"Socket.io initialized","service":"campusworks-chat","timestamp":"2025-09-07 21:02:45"}
+{"corsOrigin":"http://localhost:3000","database":"mongodb://localhost:27017/campusworks_chat","environment":"development","level":"info","message":"Chat service started on port 3001","port":"3001","service":"campusworks-chat","timestamp":"2025-09-07 21:02:45"}
+{"host":"localhost","level":"info","message":"Connected to MongoDB","name":"campusworks_chat","port":27017,"service":"campusworks-chat","timestamp":"2025-09-07 21:18:55"}
+{"level":"info","message":"Database connected successfully","service":"campusworks-chat","timestamp":"2025-09-07 21:18:55"}
+{"level":"info","message":"Socket.io initialized","service":"campusworks-chat","timestamp":"2025-09-07 21:18:55"}
+{"corsOrigin":"http://localhost:3000","database":"mongodb://localhost:27017/campusworks_chat","environment":"development","level":"info","message":"Chat service started on port 3001","port":"3001","service":"campusworks-chat","timestamp":"2025-09-07 21:18:55"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"4JL0VwmDNO1PzJhyAAAB","timestamp":"2025-09-07 21:22:47","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-07 21:22:47","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-07 21:22:47","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"4JL0VwmDNO1PzJhyAAAB","timestamp":"2025-09-07 21:22:47","userId":"1"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"4JL0VwmDNO1PzJhyAAAB","timestamp":"2025-09-07 21:22:48","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:22:48","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:22:48","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:22:48"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:22:49"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:22:49","userId":"1"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:22:49","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:22:50","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:22:50"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:22:50","userId":"1"}
+{"level":"info","message":"Message sent","messageId":"68bdaa6cb3509991afd8f8c7","messageLength":2,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:23:16","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:24:05","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:24:05"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:24:05","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:24:05","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:24:05"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:24:05","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:24:05","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:24:05"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:24:05","userId":"1"}
+{"level":"info","message":"Message sent","messageId":"68bdaaa8b3509991afd8f8d4","messageLength":4,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:24:16","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:24:55","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:24:55"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:24:56","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:24:56","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:24:56"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:24:56","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:24:56","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:24:56"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:24:56","userId":"1"}
+{"level":"info","message":"Message sent","messageId":"68bdaaebb3509991afd8f8e1","messageLength":5,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:25:23","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:25:57","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:25:57"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:25:57","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:25:57","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:25:57"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:25:57","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:25:57","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:25:57"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:25:57","userId":"1"}
+{"level":"info","message":"Message sent","messageId":"68bdab29b3509991afd8f8ee","messageLength":2,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:26:25","userId":"1"}
+{"level":"info","message":"User disconnected","service":"campusworks-chat","socketId":"4JL0VwmDNO1PzJhyAAAB","timestamp":"2025-09-07 21:39:57","userId":"1"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"yr9px_ZPN1F3nD-bAAAD","timestamp":"2025-09-07 21:40:05","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210038@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-07 21:40:05","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-07 21:40:05","userId":"1"}
+{"email":"n210038@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"yr9px_ZPN1F3nD-bAAAD","timestamp":"2025-09-07 21:40:05","userId":"1"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"yr9px_ZPN1F3nD-bAAAD","timestamp":"2025-09-07 21:40:05","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:40:05","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:40:05"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:40:05","userId":"1"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:40:05","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:40:05"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:40:05","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:40:05","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:40:05"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:40:05","userId":"1"}
+{"level":"info","message":"Message sent","messageId":"68bdae69b3509991afd8f8fe","messageLength":18,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:40:17","userId":"1"}
+{"hasToken":true,"level":"info","message":"Socket authentication attempt","service":"campusworks-chat","socketId":"c8aZDx_yLsksCRwdAAAF","timestamp":"2025-09-07 21:40:44","tokenLength":251}
+{"allClaims":["sub","jti","email","roles","iat","exp"],"email":"n210432@rguktn.ac.in","level":"info","message":"Decoded token (without validation)","role":"STUDENT","service":"campusworks-chat","timestamp":"2025-09-07 21:40:44","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Using decoded token for authentication","service":"campusworks-chat","timestamp":"2025-09-07 21:40:44","userId":"3"}
+{"email":"n210432@rguktn.ac.in","level":"info","message":"Socket authentication successful (fallback)","service":"campusworks-chat","socketId":"c8aZDx_yLsksCRwdAAAF","timestamp":"2025-09-07 21:40:44","userId":"3"}
+{"level":"info","message":"User connected","service":"campusworks-chat","socketId":"c8aZDx_yLsksCRwdAAAF","timestamp":"2025-09-07 21:40:44","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:40:44","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:40:44"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:40:44","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:40:44","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:40:44"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:40:44","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:40:45","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:40:45"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:40:45","userId":"3"}
+{"level":"info","message":"Message sent","messageId":"68bdae8cb3509991afd8f90d","messageLength":13,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:40:52","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:41:06","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:41:06"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:41:06","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:41:06","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:41:06"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:41:06","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:41:06","userId":"1"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:41:06"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:41:06","userId":"1"}
+{"level":"info","message":"Message sent","messageId":"68bdaea0b3509991afd8f91a","messageLength":10,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:41:12","userId":"1"}
+{"level":"info","message":"Message sent","messageId":"68bdaeabb3509991afd8f91e","messageLength":6,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:41:23","userId":"3"}
+{"level":"info","message":"Message sent","messageId":"68bdaf54b3509991afd8f922","messageLength":5,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:44:13","userId":"1"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:44:21","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:44:21"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:44:21","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:44:21","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:44:21"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:44:21","userId":"3"}
+{"level":"info","message":"Attempting to join task room","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:44:22","userId":"3"}
+{"level":"info","message":"Using existing room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:44:22"}
+{"level":"info","message":"User successfully joined task room","roomId":"68bc5bfd56a2461af5449e34","service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:44:23","userId":"3"}
+{"level":"info","message":"Message sent","messageId":"68bdaf69b3509991afd8f92f","messageLength":4,"service":"campusworks-chat","taskId":6,"timestamp":"2025-09-07 21:44:34","userId":"3"}

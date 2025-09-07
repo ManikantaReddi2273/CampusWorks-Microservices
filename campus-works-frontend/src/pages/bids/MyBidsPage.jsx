@@ -20,10 +20,13 @@ import {
   Gavel,
   Assignment,
   Refresh,
-  Payment
+  Payment,
+  Chat,
+  ArrowBack
 } from '@mui/icons-material';
 import Layout from '@components/templates/Layout';
 import MyBidCard from '@components/molecules/MyBidCard';
+import ChatButton from '@components/chat/ChatButton';
 import { selectAuth } from '@store/slices/authSlice';
 import { ROUTES } from '@constants';
 import apiService from '@services/api';
@@ -230,13 +233,133 @@ const MyBidsPage = () => {
           {/* Header */}
           <Box sx={{ mb: 4 }}>
             <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
-              <Typography variant="h4" component="h1">
-                My Bids
-              </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                <Button
+                  variant="outlined"
+                  startIcon={<ArrowBack />}
+                  onClick={() => navigate(-1)}
+                  sx={{
+                    minWidth: 'auto',
+                    px: 2,
+                    py: 1,
+                    borderRadius: 2,
+                    borderColor: '#e0e0e0',
+                    color: '#666',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                    '&:hover': {
+                      borderColor: '#1976d2',
+                      color: '#1976d2',
+                      backgroundColor: 'rgba(25, 118, 210, 0.08)',
+                      transform: 'translateX(-4px) scale(1.05)',
+                      boxShadow: '0 8px 25px rgba(25, 118, 210, 0.4), 0 0 0 3px rgba(25, 118, 210, 0.2), inset 0 0 0 1px rgba(25, 118, 210, 0.3)',
+                      '&::before': {
+                        transform: 'translateX(0)',
+                        opacity: 1
+                      },
+                      '& .MuiButton-startIcon': {
+                        transform: 'translateX(-2px)',
+                        transition: 'transform 0.3s ease',
+                        color: '#1976d2'
+                      }
+                    },
+                    '&::before': {
+                      content: '""',
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      background: 'linear-gradient(45deg, rgba(25, 118, 210, 0.15), rgba(25, 118, 210, 0.08))',
+                      transform: 'translateX(-100%)',
+                      transition: 'all 0.4s ease',
+                      opacity: 0,
+                      zIndex: 0
+                    },
+                    '& .MuiButton-startIcon': {
+                      position: 'relative',
+                      zIndex: 1,
+                      transition: 'transform 0.3s ease'
+                    },
+                    '& .MuiButton-label': {
+                      position: 'relative',
+                      zIndex: 1
+                    }
+                  }}
+                >
+                  Back
+                </Button>
+                <Typography variant="h4" component="h1">
+                  My Bids
+                </Typography>
+              </Box>
               <Button
                 variant="outlined"
                 startIcon={<Refresh />}
                 onClick={fetchMyBids}
+                sx={{
+                  minWidth: 'auto',
+                  px: 2,
+                  py: 1,
+                  borderRadius: 2,
+                  borderColor: '#e0e0e0',
+                  color: '#666',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                  '&:hover': {
+                    borderColor: '#1976d2',
+                    color: '#1976d2',
+                    backgroundColor: 'rgba(25, 118, 210, 0.08)',
+                    transform: 'translateY(-2px) scale(1.08)',
+                    boxShadow: '0 12px 30px rgba(25, 118, 210, 0.4), 0 0 0 3px rgba(25, 118, 210, 0.2), inset 0 0 0 1px rgba(25, 118, 210, 0.3)',
+                    '&::before': {
+                      transform: 'scale(1)',
+                      opacity: 1
+                    },
+                    '& .MuiButton-startIcon': {
+                      animation: 'spin 0.8s ease-in-out',
+                      transform: 'rotate(360deg)',
+                      color: '#1976d2'
+                    }
+                  },
+                  '&:active': {
+                    transform: 'translateY(0) scale(1.02)',
+                    transition: 'all 0.1s ease'
+                  },
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: '0',
+                    height: '0',
+                    background: 'radial-gradient(circle, rgba(25, 118, 210, 0.15) 0%, transparent 70%)',
+                    borderRadius: '50%',
+                    transform: 'translate(-50%, -50%) scale(0)',
+                    transition: 'all 0.4s ease',
+                    opacity: 0,
+                    zIndex: 0
+                  },
+                  '& .MuiButton-startIcon': {
+                    position: 'relative',
+                    zIndex: 1,
+                    transition: 'transform 0.3s ease'
+                  },
+                  '& .MuiButton-label': {
+                    position: 'relative',
+                    zIndex: 1
+                  },
+                  '@keyframes spin': {
+                    '0%': {
+                      transform: 'rotate(0deg)'
+                    },
+                    '100%': {
+                      transform: 'rotate(360deg)'
+                    }
+                  }
+                }}
               >
                 Refresh
               </Button>
@@ -279,11 +402,13 @@ const MyBidsPage = () => {
             </Paper>
           ) : (
             <Box sx={{ 
-              display: 'flex', 
-              gap: 2, 
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 2,
               overflowX: 'auto',
               overflowY: 'hidden',
               pb: 2,
+              alignItems: 'center',
               '&::-webkit-scrollbar': {
                 height: '8px',
               },
@@ -299,17 +424,51 @@ const MyBidsPage = () => {
                 background: '#555',
               }
             }}>
-              {bids.map((bid) => (
-                <MyBidCard
-                  key={bid.id}
-                  bid={bid}
-                                  variant="compact"
-                  onView={handleViewTask}
-                  onDelete={handleDeleteBid}
-                  onComplete={handleCompleteTask}
-                  deletingBid={deletingBid}
-                />
-              ))}
+              {/* Responsive Grid Layout */}
+              <Box
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns: {
+                    xs: '1fr', // 1 column on mobile
+                    sm: 'repeat(2, 1fr)', // 2 columns on small screens
+                    md: 'repeat(3, 1fr)', // 3 columns on medium screens and up (laptop/desktop)
+                  },
+                  gap: 2,
+                  width: '100%',
+                  maxWidth: {
+                    xs: '100%', // Full width on mobile
+                    sm: 'calc(350px * 2 + 16px)', // Fixed width for 2 cards on small screens
+                    md: 'calc(350px * 3 + 32px)', // Fixed width for 3 cards on laptop/desktop
+                  },
+                  justifyContent: 'center',
+                  justifyItems: 'center'
+                }}
+              >
+                {bids.map((bid) => (
+                  <MyBidCard
+                    key={bid.id}
+                    bid={bid}
+                    variant="compact"
+                    currentUser={user}
+                    onView={handleViewTask}
+                    onDelete={handleDeleteBid}
+                    onComplete={handleCompleteTask}
+                    deletingBid={deletingBid}
+                    sx={{
+                      width: {
+                        xs: '100%', // Full width on mobile
+                        sm: '350px', // Fixed width on small screens
+                        md: '350px', // Fixed width on laptop/desktop
+                      },
+                      maxWidth: {
+                        xs: '100%',
+                        sm: '350px',
+                        md: '350px'
+                      }
+                    }}
+                  />
+                ))}
+              </Box>
             </Box>
           )}
 

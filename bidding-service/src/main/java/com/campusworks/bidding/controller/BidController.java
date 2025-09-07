@@ -21,7 +21,6 @@ import java.util.Map;
 @RequestMapping("/bids")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins = "*")
 public class BidController {
     
     private final BiddingService biddingService;

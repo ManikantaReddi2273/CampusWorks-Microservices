@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -69,6 +69,9 @@ const TaskDetailPage = () => {
   const [acceptingWork, setAcceptingWork] = useState(false);
   const [upiError, setUpiError] = useState('');
   const [upiCopied, setUpiCopied] = useState(false);
+  
+  // Ref to track if UPI was viewed in current session
+  const upiViewedInSession = useRef(false);
 
   useEffect(() => {
     if (id) {
@@ -184,6 +187,8 @@ const TaskDetailPage = () => {
 
   const fetchAcceptedBidDetails = async () => {
     try {
+      console.log('Fetching accepted bid details for task:', id);
+      
       // Check if there's an accepted bid with UPI ID
       const [upiResponse, bidResponse, upiSubmittedResponse, upiViewedResponse] = await Promise.all([
         apiService.bids.getAcceptedBidWithUpi(id).catch(() => null),
@@ -192,6 +197,14 @@ const TaskDetailPage = () => {
         apiService.bids.hasUpiViewed(id).catch(() => ({ data: { hasUpiIdViewed: false } }))
       ]);
 
+      console.log('API responses:', {
+        upiResponse: upiResponse?.data,
+        bidResponse: bidResponse?.data,
+        upiSubmittedResponse: upiSubmittedResponse.data,
+        upiViewedResponse: upiViewedResponse.data,
+        upiViewedInSession: upiViewedInSession.current
+      });
+
       if (upiResponse?.data) {
         setAcceptedBid(upiResponse.data);
       } else if (bidResponse?.data) {
@@ -199,7 +212,17 @@ const TaskDetailPage = () => {
       }
 
       setHasUpiSubmitted(upiSubmittedResponse.data.hasUpiIdSubmitted);
-      setHasUpiViewed(upiViewedResponse.data.hasUpiIdViewed);
+      
+      // Only update hasUpiViewed if it's not already viewed in current session
+      // This prevents overwriting the state when user has just viewed UPI ID
+      if (!upiViewedInSession.current) {
+        console.log('Setting hasUpiViewed from API:', upiViewedResponse.data.hasUpiIdViewed);
+        setHasUpiViewed(upiViewedResponse.data.hasUpiIdViewed);
+      } else {
+        // If viewed in current session, ensure state is true
+        console.log('UPI viewed in session, setting hasUpiViewed to true');
+        setHasUpiViewed(true);
+      }
       
     } catch (error) {
       console.error('Error fetching accepted bid details:', error);
@@ -246,13 +269,18 @@ const TaskDetailPage = () => {
       setLoadingUpi(true);
       setUpiError('');
 
+      console.log('Viewing UPI ID for bid:', acceptedBid.id);
       const response = await apiService.bids.viewUpiId(acceptedBid.id);
       
       if (response.data) {
+        console.log('UPI ID viewed successfully, updating state');
         setUpiDialogOpen(true);
         setHasUpiViewed(true);
+        upiViewedInSession.current = true; // Mark as viewed in current session
         // Update the accepted bid with the viewed status
         setAcceptedBid(prev => ({ ...prev, upiIdViewed: true, upiIdViewedAt: response.data.upiIdViewedAt }));
+        
+        console.log('State updated - hasUpiViewed:', true, 'upiViewedInSession:', upiViewedInSession.current);
       }
     } catch (error) {
       console.error('Error viewing UPI ID:', error);
@@ -338,11 +366,24 @@ const TaskDetailPage = () => {
   };
 
   const canAcceptWork = () => {
-    return isOwner && 
+    const canAccept = isOwner && 
            acceptedBid && 
            hasUpiSubmitted && 
-           hasUpiViewed && 
+           (hasUpiViewed || upiViewedInSession.current) && 
            !isDeadlineExpired(task?.completionDeadline);
+    
+    // Debug logging
+    console.log('canAcceptWork check:', {
+      isOwner,
+      hasAcceptedBid: !!acceptedBid,
+      hasUpiSubmitted,
+      hasUpiViewed,
+      upiViewedInSession: upiViewedInSession.current,
+      isDeadlineExpired: isDeadlineExpired(task?.completionDeadline),
+      canAccept
+    });
+    
+    return canAccept;
   };
 
   const getStatusColor = (status) => {
