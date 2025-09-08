@@ -60,6 +60,12 @@ const FormField = ({
                         borderWidth: 2,
                       },
                     },
+                    '&.Mui-error': {
+                      '& .MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#d32f2f',
+                        borderWidth: 2,
+                      },
+                    },
                     '& .MuiOutlinedInput-notchedOutline': {
                       borderColor: 'rgba(102, 126, 234, 0.3)',
                       borderWidth: 1,
@@ -77,12 +83,19 @@ const FormField = ({
                       color: '#333',
                       fontWeight: 600,
                     },
+                    '&.Mui-error': {
+                      color: '#d32f2f',
+                    },
                   },
                   '& .MuiFormHelperText-root': {
                     fontWeight: 500,
                     fontSize: '0.875rem',
                     color: '#666',
                     marginTop: '4px',
+                    '&.Mui-error': {
+                      color: '#d32f2f',
+                      fontWeight: 600,
+                    },
                   },
                 }}
                 {...props}
@@ -119,6 +132,12 @@ const FormField = ({
                           borderWidth: 2,
                         },
                       },
+                      '&.Mui-error': {
+                        '& .MuiOutlinedInput-notchedOutline': {
+                          borderColor: '#d32f2f',
+                          borderWidth: 2,
+                        },
+                      },
                       '& .MuiOutlinedInput-notchedOutline': {
                         borderColor: 'rgba(102, 126, 234, 0.3)',
                         borderWidth: 1,
@@ -136,13 +155,20 @@ const FormField = ({
                         color: '#333',
                         fontWeight: 600,
                       },
+                      '&.Mui-error': {
+                        color: '#d32f2f',
+                      },
                     },
-                    '& .MuiFormHelperText-root': {
-                      fontWeight: 500,
-                      fontSize: '0.875rem',
-                      color: '#666',
-                      marginTop: '4px',
+                  '& .MuiFormHelperText-root': {
+                    fontWeight: 500,
+                    fontSize: '0.875rem',
+                    color: '#666',
+                    marginTop: '4px',
+                    '&.Mui-error': {
+                      color: '#d32f2f',
+                      fontWeight: 600,
                     },
+                  },
                   }}
                   {...props}
                 />

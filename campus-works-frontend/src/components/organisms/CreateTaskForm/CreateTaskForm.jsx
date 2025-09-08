@@ -70,14 +70,15 @@ const CreateTaskForm = () => {
       let formattedDeadline = null;
       if (data.deadline) {
         const deadlineDate = new Date(data.deadline);
-        // Ensure deadline is at least 24 hours from now
-        const minDeadline = new Date(Date.now() + 24 * 60 * 60 * 1000);
-        if (deadlineDate < minDeadline) {
-          console.warn('Deadline is too soon, setting to minimum 24 hours from now');
-          formattedDeadline = minDeadline.toISOString();
-        } else {
-          formattedDeadline = deadlineDate.toISOString();
+        const now = new Date();
+        const biddingDeadline = new Date(now.getTime() + 24 * 60 * 60 * 1000); // 24 hours from now
+        const minCompletionDeadline = new Date(biddingDeadline.getTime() + 30 * 60 * 60 * 1000); // 30 hours after bidding deadline
+        
+        if (deadlineDate < minCompletionDeadline) {
+          console.error('Deadline validation failed: completion deadline must be at least 30 hours after bidding deadline');
+          return; // Don't submit if deadline is invalid
         }
+        formattedDeadline = deadlineDate.toISOString();
       }
       
       console.log('Original deadline from form:', data.deadline);
@@ -205,14 +206,14 @@ const CreateTaskForm = () => {
                 placeholder="Enter a clear, descriptive title for your task"
                 required
                 rules={{
-                  required: 'Task title is required',
+                  required: '❌ Task title is required',
                   minLength: {
                     value: 10,
-                    message: 'Title must be at least 10 characters long'
+                    message: '❌ Title must be at least 10 characters long'
                   },
                   maxLength: {
                     value: 100,
-                    message: 'Title must not exceed 100 characters'
+                    message: '❌ Title must not exceed 100 characters'
                   }
                 }}
               />
@@ -227,14 +228,14 @@ const CreateTaskForm = () => {
                 rows={5}
                 required
                 rules={{
-                  required: 'Task description is required',
+                  required: '❌ Task description is required',
                   minLength: {
                     value: 50,
-                    message: 'Description must be at least 50 characters long'
+                    message: '❌ Description must be at least 50 characters long'
                   },
                   maxLength: {
                     value: 1000,
-                    message: 'Description must not exceed 1000 characters'
+                    message: '❌ Description must not exceed 1000 characters'
                   }
                 }}
               />
@@ -247,7 +248,7 @@ const CreateTaskForm = () => {
                 select
                 required
                 rules={{
-                  required: 'Please select a category'
+                  required: '❌ Please select a category'
                 }}
               >
                 {Object.entries(TASK_CATEGORIES).map(([key, value]) => (
@@ -277,26 +278,26 @@ const CreateTaskForm = () => {
                 required
                 helperText="Budget must be between ₹50 and ₹10,000"
                 rules={{
-                  required: 'Budget is required to post your task',
+                  required: '❌ Budget is required to post your task',
                   validate: {
                     isNumber: (value) => {
                       const num = parseFloat(value);
                       if (isNaN(num)) {
-                        return 'Please enter a valid number';
+                        return '❌ Please enter a valid number';
                       }
                       return true;
                     },
                     minAmount: (value) => {
                       const num = parseFloat(value);
                       if (num < 50) {
-                        return 'Minimum budget is ₹50. Please enter a higher amount.';
+                        return '❌ Minimum budget is ₹50. Please enter a higher amount.';
                       }
                       return true;
                     },
                     maxAmount: (value) => {
                       const num = parseFloat(value);
                       if (num > 10000) {
-                        return 'Maximum budget is ₹10,000. Please enter a lower amount.';
+                        return '❌ Maximum budget is ₹10,000. Please enter a lower amount.';
                       }
                       return true;
                     }
@@ -311,18 +312,20 @@ const CreateTaskForm = () => {
                 label="Completion Deadline"
                 type="datetime-local"
                 required
+                helperText="ℹ️ Note: Your task completion deadline must be at least 30 hours after the bidding deadline time."
                 rules={{
-                  required: 'Deadline is required',
+                  required: '❌ Deadline is required',
                   validate: (value) => {
                     const deadline = new Date(value);
                     const now = new Date();
-                    const minDeadline = new Date(now.getTime() + 24 * 60 * 60 * 1000); // 24 hours from now
+                    const biddingDeadline = new Date(now.getTime() + 24 * 60 * 60 * 1000); // 24 hours from now
+                    const minCompletionDeadline = new Date(biddingDeadline.getTime() + 30 * 60 * 60 * 1000); // 30 hours after bidding deadline
                     
                     if (deadline <= now) {
-                      return 'Deadline must be in the future';
+                      return '❌ Deadline must be in the future';
                     }
-                    if (deadline < minDeadline) {
-                      return 'Deadline must be at least 24 hours from now';
+                    if (deadline < minCompletionDeadline) {
+                      return '❌ Your task completion deadline must be at least 30 hours after the bidding deadline.';
                     }
                     return true;
                   }

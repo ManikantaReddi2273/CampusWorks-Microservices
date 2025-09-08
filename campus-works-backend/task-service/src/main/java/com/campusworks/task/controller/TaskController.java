@@ -894,7 +894,7 @@ public class TaskController {
             }
             
             Task task = taskOpt.get();
-            LocalDateTime newDeadline = LocalDateTime.now().plusHours(24);
+            LocalDateTime newDeadline = LocalDateTime.now().plusHours(24); // Fixed 24 hours
             task.setBiddingDeadline(newDeadline);
             task.setUpdatedAt(LocalDateTime.now());
             
