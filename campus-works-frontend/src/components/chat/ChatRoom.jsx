@@ -164,6 +164,7 @@ const ChatRoom = ({
     setNewMessage('');
   };
 
+
   const handleKeyPress = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -210,28 +211,43 @@ const ChatRoom = ({
     // Normalize IDs to numbers for comparison
     const currentUserId = parseInt(currentUser.id || currentUser._id);
     const messageSenderId = parseInt(message.senderId);
-    const roomOwnerId = parseInt(room?.ownerId);
-    const roomBidderId = parseInt(room?.bidderId);
     
-    // ✅ CRITICAL FIX: Determine positioning based on MESSAGE SENDER'S ROLE, not current user
-    const isMessageFromTaskOwner = messageSenderId === roomOwnerId;
-    const isMessageFromBidder = messageSenderId === roomBidderId;
+    // ✅ Determine sender role from room data
+    let senderRole = 'bidder'; // Default to bidder
     
-    // ✅ FALLBACK: If room data is not available, use message sender role
-    const fallbackIsMessageFromTaskOwner = message.senderRole === 'owner' || message.senderRole === 'taskowner';
+    if (room) {
+      if (messageSenderId === parseInt(room.ownerId)) {
+        senderRole = 'owner';
+      } else if (messageSenderId === parseInt(room.bidderId)) {
+        senderRole = 'bidder';
+      } else {
+        // If user is neither owner nor bidder, check if they're the current user
+        if (messageSenderId === currentUserId) {
+          // Determine current user's role
+          if (currentUserId === parseInt(room.ownerId)) {
+            senderRole = 'owner';
+          } else {
+            senderRole = 'bidder';
+          }
+        } else {
+          senderRole = 'bidder'; // Default fallback
+        }
+      }
+    }
     
-    // ✅ FINAL: Use room data if available, otherwise use fallback
-    const finalIsMessageFromTaskOwner = room ? isMessageFromTaskOwner : fallbackIsMessageFromTaskOwner;
+    // ✅ STRICT POSITIONING: Based on sender role
+    const isMessageFromTaskOwner = senderRole === 'owner';
+    const isMessageFromBidder = senderRole === 'bidder';
     
-    // ✅ FIXED: Position based on role - Task Owner = RIGHT, Bidder = LEFT
-    const shouldAlignRight = finalIsMessageFromTaskOwner;
+    // ✅ FORCE: Position based on sender role only
+    const shouldAlignRight = isMessageFromTaskOwner; // Owner = RIGHT, Bidder = LEFT
     
     // Determine if message is from current user (for read receipts only)
     const isOwnMessage = currentUserId === messageSenderId;
     
-    // ✅ FIXED: Color logic based on MESSAGE SENDER'S ROLE, not current user
+    // ✅ FIXED: Color logic based on MESSAGE SENDER'S ROLE
     const getMessageColors = () => {
-      return finalIsMessageFromTaskOwner ? {
+      return isMessageFromTaskOwner ? {
         backgroundColor: '#2c2c2c', // BLACK for task owner
         color: '#ffffff',
         borderColor: '#2c2c2c'
@@ -245,23 +261,6 @@ const ChatRoom = ({
     const messageColors = getMessageColors();
     const messageTime = formatMessageTime(message.createdAt);
     
-    // ✅ ENHANCED: Debug logging for troubleshooting
-    console.log('Message positioning debug:', {
-      messageId: message.id,
-      messageText: message.message,
-      currentUserId: currentUserId,
-      messageSenderId: messageSenderId,
-      roomOwnerId: roomOwnerId,
-      roomBidderId: roomBidderId,
-      isMessageFromTaskOwner: isMessageFromTaskOwner,
-      isMessageFromBidder: isMessageFromBidder,
-      fallbackIsMessageFromTaskOwner: fallbackIsMessageFromTaskOwner,
-      finalIsMessageFromTaskOwner: finalIsMessageFromTaskOwner,
-      shouldAlignRight: shouldAlignRight,
-      isOwnMessage: isOwnMessage,
-      messageSenderRole: message.senderRole,
-      positioning: shouldAlignRight ? 'RIGHT (Task Owner)' : 'LEFT (Bidder)'
-    });
 
     return (
       <Box
@@ -397,6 +396,8 @@ const ChatRoom = ({
             <Typography variant="body2" color="text.secondary">
               Chat with your {'task partner'}
             </Typography>
+            
+            
             {otherUserTyping && (
               <Chip 
                 label="Typing..." 
