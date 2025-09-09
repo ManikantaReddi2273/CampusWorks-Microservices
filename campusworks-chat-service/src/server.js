@@ -126,7 +126,7 @@ class ChatServer {
     this.app.get('/test-task/:taskId', async (req, res) => {
       try {
         const { taskId } = req.params;
-        const taskService = require('./src/services/taskService');
+        const taskService = require('./services/taskService');
         const task = await taskService.getTaskById(taskId);
         res.json({
           success: true,

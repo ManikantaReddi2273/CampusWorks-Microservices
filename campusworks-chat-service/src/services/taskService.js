@@ -17,23 +17,30 @@ class TaskService {
     try {
       logger.info('Fetching task from Spring Boot', { taskId, baseUrl: this.baseUrl, hasToken: !!token });
       
-      const headers = {};
+      const headers = {
+        'Content-Type': 'application/json'
+      };
       if (token) {
         headers.Authorization = `Bearer ${token}`;
+        logger.info('Using JWT token for authentication', { tokenLength: token.length });
+      } else {
+        logger.warn('No JWT token provided, request may fail with 401');
       }
       
       const response = await axios.get(
         `${this.baseUrl}/api/tasks/${taskId}`,
         {
           headers,
-          timeout: 5000
+          timeout: 10000 // Increased timeout
         }
       );
 
       logger.info('Task fetched successfully', { 
         taskId, 
         title: response.data?.title, 
-        status: response.data?.status 
+        status: response.data?.status,
+        ownerId: response.data?.ownerId,
+        assignedUserId: response.data?.assignedUserId
       });
 
       return response.data;
@@ -42,9 +49,13 @@ class TaskService {
         taskId, 
         error: error.message, 
         status: error.response?.status,
-        data: error.response?.data 
+        data: error.response?.data,
+        baseUrl: this.baseUrl,
+        hasToken: !!token
       });
-      throw new Error('Task not found');
+      
+      // Return null instead of throwing to allow graceful fallback
+      return null;
     }
   }
 

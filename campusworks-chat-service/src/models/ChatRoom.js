@@ -22,12 +22,12 @@ const chatRoomSchema = new mongoose.Schema({
   },
   bidderId: {
     type: Number,
-    required: true,
+    required: false, // Allow null for tasks without assigned users
     index: true
   },
   bidderEmail: {
     type: String,
-    required: true
+    required: false // Allow null for tasks without assigned users
   },
   status: {
     type: String,
@@ -90,8 +90,8 @@ chatRoomSchema.methods.canUserAccess = function(userId) {
 chatRoomSchema.methods.getOtherUser = function(userId) {
   if (this.ownerId === userId) {
     return {
-      id: this.bidderId,
-      email: this.bidderEmail,
+      id: this.bidderId || null,
+      email: this.bidderEmail || 'Not assigned',
       role: 'bidder'
     };
   } else {

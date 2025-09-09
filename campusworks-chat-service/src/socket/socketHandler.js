@@ -5,6 +5,7 @@ const Message = require('../models/Message');
 const UserSession = require('../models/UserSession');
 const taskService = require('../services/taskService');
 const biddingService = require('../services/biddingService');
+const taskValidationService = require('../services/taskValidationService');
 const logger = require('../utils/logger');
 
 class SocketHandler {
@@ -85,7 +86,11 @@ class SocketHandler {
           userId,
           data
         });
-        socket.emit('error', { message: 'Failed to join room' });
+        socket.emit('error', { 
+          message: 'Failed to join task room',
+          details: error.message,
+          taskId: data?.taskId
+        });
       }
     });
 
@@ -166,10 +171,37 @@ class SocketHandler {
         
         try {
           // ✅ CRITICAL FIX: Get actual task data to determine correct owner/bidder
-          const task = await taskService.getTaskById(taskId);
+          let task = null;
+          try {
+            // First try to get task from Spring Boot service
+            task = await taskService.getTaskById(taskId, socket.user.token);
+            if (task) {
+              logger.info('Task fetched successfully from Spring Boot', { taskId, taskTitle: task?.title });
+            }
+          } catch (taskError) {
+            logger.warn('Failed to fetch task from Spring Boot, trying fallback validation', { 
+              taskId, 
+              error: taskError.message,
+              status: taskError.response?.status
+            });
+          }
           
+          // If task is null or not found, use fallback validation
           if (!task) {
-            throw new Error('Task not found');
+            logger.info('Using fallback task validation', { taskId, userId });
+            const validation = await taskValidationService.validateTaskAccessForChat(
+              taskId, 
+              userId, 
+              socket.user.email
+            );
+            
+            if (validation.valid) {
+              task = validation.task;
+              logger.info('Task validation successful (fallback)', { taskId, taskTitle: task?.title });
+            } else {
+              logger.error('Task validation failed (fallback)', { taskId, error: validation.error });
+              throw new Error(`Task validation failed: ${validation.error}`);
+            }
           }
           
           // ✅ FIXED: Use actual task owner and assigned user IDs
@@ -178,8 +210,8 @@ class SocketHandler {
             taskTitle: task.title || `Task ${taskId}`,
             ownerId: task.ownerId, // ✅ Use actual task owner
             ownerEmail: task.ownerEmail,
-            bidderId: task.assignedUserId, // ✅ Use actual assigned user
-            bidderEmail: task.assignedUserEmail,
+            bidderId: task.assignedUserId || null, // ✅ Use actual assigned user or null
+            bidderEmail: task.assignedUserEmail || null,
             status: 'ACTIVE'
           });
           
@@ -299,13 +331,16 @@ class SocketHandler {
 
     // ✅ CRITICAL FIX: Determine sender role based on room data
     const isSenderTaskOwner = room.ownerId === userId;
-    const isSenderBidder = room.bidderId === userId;
+    const isSenderBidder = room.bidderId && room.bidderId === userId;
     
     // Ensure we have a valid role
     let senderRole = 'bidder'; // Default to bidder
     if (isSenderTaskOwner) {
       senderRole = 'owner';
     } else if (isSenderBidder) {
+      senderRole = 'bidder';
+    } else if (!room.bidderId) {
+      // If no bidder is assigned yet, current user is the bidder
       senderRole = 'bidder';
     }
     
@@ -337,11 +372,17 @@ class SocketHandler {
     const isOwner = room.ownerId === userId;
     const updateField = isOwner ? 'unreadCount.bidder' : 'unreadCount.owner';
     
-    await ChatRoom.findByIdAndUpdate(room._id, {
+    // Only update unread count if there's a bidder assigned
+    const updateData = {
       lastMessageAt: new Date(),
-      lastMessageBy: userId,
-      $inc: { [updateField]: 1 }
-    });
+      lastMessageBy: userId
+    };
+    
+    if (room.bidderId) {
+      updateData.$inc = { [updateField]: 1 };
+    }
+    
+    await ChatRoom.findByIdAndUpdate(room._id, updateData);
 
     // ✅ FIXED: Broadcast to room with sender role
     const messageToBroadcast = {

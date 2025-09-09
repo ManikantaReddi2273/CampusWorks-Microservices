@@ -30,6 +30,7 @@ export const useChat = (taskId, currentUser) => {
     };
 
     const handleError = (error) => {
+      console.error('Chat hook error:', error);
       setError(error.message || 'Chat service error');
     };
 

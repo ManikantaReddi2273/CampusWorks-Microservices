@@ -133,6 +133,11 @@ class ChatService {
 
     this.socket.on('error', (error) => {
       console.error('Chat service error:', error);
+      console.error('Chat error details:', {
+        message: error.message,
+        details: error.details,
+        taskId: error.taskId
+      });
       // Note: Toast notifications should be dispatched through Redux
       this.emit('error', error);
     });
@@ -143,11 +148,24 @@ class ChatService {
    * @param {number} taskId - Task ID
    */
   joinTaskRoom(taskId) {
-    if (!this.socket || !this.isConnected) {
-      console.error('Not connected to chat service');
+    if (!this.socket) {
+      console.error('Socket not initialized');
       return;
     }
 
+    if (!this.isConnected) {
+      console.warn('Not connected to chat service, attempting to reconnect...');
+      // Try to reconnect and then join room
+      this.socket.connect();
+      setTimeout(() => {
+        if (this.isConnected) {
+          this.socket.emit('join-task-room', { taskId });
+        }
+      }, 1000);
+      return;
+    }
+
+    console.log('Joining task room:', taskId);
     this.socket.emit('join-task-room', { taskId });
   }
 

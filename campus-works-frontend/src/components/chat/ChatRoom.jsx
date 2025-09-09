@@ -150,12 +150,13 @@ const ChatRoom = ({
       hasRoom: !!room 
     });
     
-    if (connectionStatus && taskId && !room) {
+    if (connectionStatus && taskId && !room && !isLoading) {
       console.log('ChatRoom: Joining task room:', taskId);
       setIsLoading(true);
+      setError(null);
       chatService.joinTaskRoom(taskId);
     }
-  }, [isConnected, taskId, room]);
+  }, [isConnected, taskId, room, isLoading]);
 
   const handleSendMessage = () => {
     if (!newMessage.trim() || !isConnected) return;
