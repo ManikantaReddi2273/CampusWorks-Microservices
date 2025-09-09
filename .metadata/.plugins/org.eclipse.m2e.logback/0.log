@@ -4201,3 +4201,143 @@ java.io.FileNotFoundException: C:\Users\ManishReddy\OneDrive\Desktop\Campus_ wor
 2025-09-07 20:33:15,159 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
 2025-09-07 20:33:15,165 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\ManishReddy\OneDrive\Desktop\Campus_ works_Records\bidding-service\src\test\resources
 2025-09-07 20:33:28,393 [Worker-3: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact mysql:mysql-connector-java:jar:8.0.33 has been relocated to com.mysql:mysql-connector-j:jar:8.0.33: MySQL Connector/J artifacts moved to reverse-DNS compliant Maven 2+ coordinates.
+2025-09-09 14:03:30,874 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2025-09-09 14:15:33,667 [Worker-12: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.campusworks:api-gateway:1.0.0 @ C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\api-gateway\pom.xml.
+2025-09-09 14:15:56,536 [Worker-12: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.campusworks:auth-service:1.0.0 @ C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\auth-service\pom.xml.
+2025-09-09 14:16:01,871 [Worker-12: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.campusworks:bidding-service:1.0.0 @ C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\bidding-service\pom.xml.
+2025-09-09 14:16:03,382 [Worker-12: Importing Maven projects] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact mysql:mysql-connector-java:jar:8.0.33 has been relocated to com.mysql:mysql-connector-j:jar:8.0.33: MySQL Connector/J artifacts moved to reverse-DNS compliant Maven 2+ coordinates.
+2025-09-09 14:16:04,083 [Worker-12: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.campusworks:eureka-server:1.0.0 @ C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\eureka-server\pom.xml.
+2025-09-09 14:16:08,328 [Worker-12: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.campusworks:profile-service:1.0.0 @ C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\profile-service\pom.xml.
+2025-09-09 14:16:08,394 [Worker-12: Importing Maven projects] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact mysql:mysql-connector-java:jar:8.0.33 has been relocated to com.mysql:mysql-connector-j:jar:8.0.33: MySQL Connector/J artifacts moved to reverse-DNS compliant Maven 2+ coordinates.
+2025-09-09 14:16:09,208 [Worker-12: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.campusworks:task-service:1.0.0 @ C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\task-service\pom.xml.
+2025-09-09 14:16:42,302 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /eureka-server/src/main/java
+2025-09-09 14:16:42,313 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /eureka-server/src/main/resources
+2025-09-09 14:16:42,316 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /eureka-server/src/main/resources
+2025-09-09 14:16:42,318 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /eureka-server/src/test/java
+2025-09-09 14:16:42,321 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /eureka-server/src/test/resources
+2025-09-09 14:16:44,766 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /auth-service/src/main/java
+2025-09-09 14:16:44,768 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /auth-service/src/main/resources
+2025-09-09 14:16:44,773 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /auth-service/src/main/resources
+2025-09-09 14:16:44,774 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /auth-service/src/test/java
+2025-09-09 14:16:44,776 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /auth-service/src/test/resources
+2025-09-09 14:16:48,652 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /api-gateway/src/main/java
+2025-09-09 14:16:48,657 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /api-gateway/src/main/resources
+2025-09-09 14:16:48,666 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /api-gateway/src/main/resources
+2025-09-09 14:16:48,668 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /api-gateway/src/test/java
+2025-09-09 14:16:48,671 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /api-gateway/src/test/resources
+2025-09-09 14:16:50,315 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /bidding-service/src/main/java
+2025-09-09 14:16:50,317 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /bidding-service/src/main/resources
+2025-09-09 14:16:50,319 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /bidding-service/src/main/resources
+2025-09-09 14:16:50,320 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /bidding-service/src/test/java
+2025-09-09 14:16:50,323 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /bidding-service/src/test/resources
+2025-09-09 14:16:52,294 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /profile-service/src/main/java
+2025-09-09 14:16:52,297 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /profile-service/src/main/resources
+2025-09-09 14:16:52,301 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /profile-service/src/main/resources
+2025-09-09 14:16:52,302 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /profile-service/src/test/java
+2025-09-09 14:16:52,307 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /profile-service/src/test/resources
+2025-09-09 14:16:54,334 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /task-service/src/main/java
+2025-09-09 14:16:54,337 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /task-service/src/main/resources
+2025-09-09 14:16:54,341 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /task-service/src/main/resources
+2025-09-09 14:16:54,343 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /task-service/src/test/java
+2025-09-09 14:16:54,346 [Worker-12: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /task-service/src/test/resources
+2025-09-09 14:16:57,787 [Worker-12: Importing Maven projects] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 6 project(s) in 126 sec
+2025-09-09 14:17:02,367 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2025-09-09 14:17:12,488 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.campusworks:api-gateway:1.0.0 @ C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\api-gateway\pom.xml.
+2025-09-09 14:17:14,919 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.campusworks:auth-service:1.0.0 @ C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\auth-service\pom.xml.
+2025-09-09 14:17:16,137 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.campusworks:bidding-service:1.0.0 @ C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\bidding-service\pom.xml.
+2025-09-09 14:17:16,273 [Worker-18: Updating Maven Project] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact mysql:mysql-connector-java:jar:8.0.33 has been relocated to com.mysql:mysql-connector-j:jar:8.0.33: MySQL Connector/J artifacts moved to reverse-DNS compliant Maven 2+ coordinates.
+2025-09-09 14:17:16,874 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.campusworks:eureka-server:1.0.0 @ C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\eureka-server\pom.xml.
+2025-09-09 14:17:18,636 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.campusworks:profile-service:1.0.0 @ C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\profile-service\pom.xml.
+2025-09-09 14:17:18,696 [Worker-18: Updating Maven Project] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact mysql:mysql-connector-java:jar:8.0.33 has been relocated to com.mysql:mysql-connector-j:jar:8.0.33: MySQL Connector/J artifacts moved to reverse-DNS compliant Maven 2+ coordinates.
+2025-09-09 14:17:19,378 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.campusworks:task-service:1.0.0 @ C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\task-service\pom.xml.
+2025-09-09 14:17:29,374 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /api-gateway/src/main/java
+2025-09-09 14:17:29,376 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /api-gateway/src/main/resources
+2025-09-09 14:17:29,381 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /api-gateway/src/main/resources
+2025-09-09 14:17:29,383 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /api-gateway/src/test/java
+2025-09-09 14:17:29,386 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /api-gateway/src/test/resources
+2025-09-09 14:17:30,806 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /auth-service/src/main/java
+2025-09-09 14:17:30,809 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /auth-service/src/main/resources
+2025-09-09 14:17:30,811 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /auth-service/src/main/resources
+2025-09-09 14:17:30,812 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /auth-service/src/test/java
+2025-09-09 14:17:30,814 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /auth-service/src/test/resources
+2025-09-09 14:17:32,700 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /bidding-service/src/main/java
+2025-09-09 14:17:32,703 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /bidding-service/src/main/resources
+2025-09-09 14:17:32,705 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /bidding-service/src/main/resources
+2025-09-09 14:17:32,706 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /bidding-service/src/test/java
+2025-09-09 14:17:32,708 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /bidding-service/src/test/resources
+2025-09-09 14:17:34,467 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /eureka-server/src/main/java
+2025-09-09 14:17:34,472 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /eureka-server/src/main/resources
+2025-09-09 14:17:34,474 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /eureka-server/src/main/resources
+2025-09-09 14:17:34,475 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /eureka-server/src/test/java
+2025-09-09 14:17:34,477 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /eureka-server/src/test/resources
+2025-09-09 14:17:36,726 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /profile-service/src/main/java
+2025-09-09 14:17:36,732 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /profile-service/src/main/resources
+2025-09-09 14:17:36,770 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /profile-service/src/main/resources
+2025-09-09 14:17:36,771 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /profile-service/src/test/java
+2025-09-09 14:17:36,775 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /profile-service/src/test/resources
+2025-09-09 14:17:40,269 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /task-service/src/main/java
+2025-09-09 14:17:40,274 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /task-service/src/main/resources
+2025-09-09 14:17:40,276 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /task-service/src/main/resources
+2025-09-09 14:17:40,277 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /task-service/src/test/java
+2025-09-09 14:17:40,279 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /task-service/src/test/resources
+2025-09-09 14:17:44,985 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed for 6 poms: local refresh takes 1.00 sec, refresh facades takes 25.00 sec, update config takes 12.00 sec 
+2025-09-09 14:17:50,184 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-09 14:17:50,313 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 14:17:50,324 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\api-gateway\src\test\resources
+2025-09-09 14:18:01,073 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-09 14:18:01,224 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-09 14:18:01,296 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\auth-service\src\test\resources
+2025-09-09 14:18:09,727 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-09 14:18:09,757 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 14:18:09,780 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\bidding-service\src\test\resources
+2025-09-09 14:18:10,233 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-09 14:18:10,244 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 14:18:10,249 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\eureka-server\src\test\resources
+2025-09-09 14:18:14,480 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-09 14:18:14,487 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 14:18:14,499 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\profile-service\src\test\resources
+2025-09-09 14:18:19,271 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-09 14:18:19,289 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 14:18:19,296 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\task-service\src\test\resources
+2025-09-09 14:46:14,806 [Worker-48: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-09 14:46:14,829 [Worker-48: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 14:46:14,837 [Worker-48: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\api-gateway\src\test\resources
+2025-09-09 14:46:14,966 [Worker-48: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-09 14:46:14,981 [Worker-48: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 14:46:14,991 [Worker-48: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\auth-service\src\test\resources
+2025-09-09 14:46:15,118 [Worker-48: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-09 14:46:15,132 [Worker-48: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 14:46:15,140 [Worker-48: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\bidding-service\src\test\resources
+2025-09-09 14:46:15,223 [Worker-48: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-09 14:46:15,250 [Worker-48: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 14:46:15,283 [Worker-48: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\eureka-server\src\test\resources
+2025-09-09 14:46:15,434 [Worker-48: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-09 14:46:15,445 [Worker-48: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 14:46:15,452 [Worker-48: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\profile-service\src\test\resources
+2025-09-09 14:46:15,567 [Worker-48: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-09 14:46:15,590 [Worker-48: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 14:46:15,600 [Worker-48: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\task-service\src\test\resources
+2025-09-09 17:07:36,149 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 17:07:36,158 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 17:07:36,165 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\api-gateway\src\test\resources
+2025-09-09 17:07:36,305 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 17:07:36,308 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 17:07:36,312 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\auth-service\src\test\resources
+2025-09-09 17:07:36,487 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 17:07:36,488 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 17:07:36,495 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\bidding-service\src\test\resources
+2025-09-09 17:07:36,615 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 17:07:36,625 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 17:07:36,637 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\eureka-server\src\test\resources
+2025-09-09 17:07:36,796 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 17:07:36,798 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 17:07:36,805 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\profile-service\src\test\resources
+2025-09-09 17:07:36,984 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 17:07:36,985 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 17:07:36,993 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\task-service\src\test\resources
+2025-09-09 17:18:12,052 [Worker-81: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-09 17:18:12,223 [Worker-81: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 17:18:12,266 [Worker-81: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\auth-service\src\test\resources
+2025-09-09 18:52:24,204 [Worker-94: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-09-09 18:52:24,235 [Worker-94: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-09-09 18:52:24,241 [Worker-94: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\ManishReddy\OneDrive\Desktop\CW2\CampusWorks-Microservices\campus-works-backend\auth-service\src\test\resources

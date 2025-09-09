@@ -1,0 +1,27 @@
+{
+  "build": {
+    "builder": "NIXPACKS"
+  },
+  "deploy": {
+    "startCommand": "npm start",
+    "healthcheckPath": "/health",
+    "healthcheckTimeout": 300,
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10
+  },
+  "services": {
+    "chat-service": {
+      "port": 3001,
+      "environment": {
+        "NODE_ENV": "production",
+        "PORT": "3001",
+        "HOST": "0.0.0.0",
+        "SPRING_BOOT_API_URL": "https://api-gateway-production.railway.app",
+        "CORS_ORIGIN": "https://campusworks-frontend.vercel.app",
+        "MONGODB_URI": "mongodb+srv://n210419_db_user:MekxRNW6Pg0JLb3b@cluster0.xrjmxy9.mongodb.net/campusworks_chat?retryWrites=true&w=majority&appName=Cluster0",
+        "JWT_SECRET": "your_production_jwt_secret_here_must_be_at_least_32_characters",
+        "JWT_EXPIRES_IN": "24h"
+      }
+    }
+  }
+}

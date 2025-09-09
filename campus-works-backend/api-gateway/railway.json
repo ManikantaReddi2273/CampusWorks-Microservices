@@ -1,0 +1,27 @@
+{
+  "build": {
+    "builder": "NIXPACKS"
+  },
+  "deploy": {
+    "startCommand": "java -jar target/*.jar",
+    "healthcheckPath": "/actuator/health",
+    "healthcheckTimeout": 300,
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10
+  },
+  "services": {
+    "api-gateway": {
+      "port": 8080,
+      "environment": {
+        "SPRING_PROFILES_ACTIVE": "production",
+        "SERVICE_PORT": "8080",
+        "SERVICE_NAME": "api-gateway",
+        "EUREKA_URL": "https://eureka-server-production.railway.app/eureka/",
+        "EUREKA_HOSTNAME": "api-gateway",
+        "EUREKA_PREFER_IP": "true",
+        "JWT_SECRET": "your_production_jwt_secret_here_must_be_at_least_32_characters",
+        "JWT_EXPIRATION": "86400000"
+      }
+    }
+  }
+}

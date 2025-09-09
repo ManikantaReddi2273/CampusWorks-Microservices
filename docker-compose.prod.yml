@@ -1,0 +1,202 @@
+version: '3.8'
+
+services:
+  # Eureka Server
+  eureka-server:
+    build:
+      context: ./campus-works-backend/eureka-server
+      dockerfile: Dockerfile
+    container_name: campusworks-eureka-prod
+    ports:
+      - "8761:8761"
+    environment:
+      - SERVICE_PORT=8761
+      - SERVICE_NAME=eureka-server
+      - EUREKA_HOSTNAME=eureka-server
+    networks:
+      - campusworks-network
+    restart: unless-stopped
+
+  # API Gateway
+  api-gateway:
+    build:
+      context: ./campus-works-backend/api-gateway
+      dockerfile: Dockerfile
+    container_name: campusworks-api-gateway-prod
+    ports:
+      - "8080:8080"
+    environment:
+      - SERVICE_PORT=8080
+      - SERVICE_NAME=api-gateway
+      - EUREKA_URL=http://eureka-server:8761/eureka/
+      - EUREKA_HOSTNAME=api-gateway
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRATION=${JWT_EXPIRATION}
+    depends_on:
+      - eureka-server
+    networks:
+      - campusworks-network
+    restart: unless-stopped
+
+  # Auth Service
+  auth-service:
+    build:
+      context: ./campus-works-backend/auth-service
+      dockerfile: Dockerfile
+    container_name: campusworks-auth-prod
+    ports:
+      - "9000:9000"
+    environment:
+      - SERVICE_PORT=9000
+      - SERVICE_NAME=auth-service
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=campusworks_auth
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_SSL=true
+      - EUREKA_URL=http://eureka-server:8761/eureka/
+      - EUREKA_HOSTNAME=auth-service
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRATION=${JWT_EXPIRATION}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USERNAME=${SMTP_USERNAME}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - FRONTEND_URL=${FRONTEND_URL}
+    depends_on:
+      - eureka-server
+    networks:
+      - campusworks-network
+    restart: unless-stopped
+
+  # Task Service
+  task-service:
+    build:
+      context: ./campus-works-backend/task-service
+      dockerfile: Dockerfile
+    container_name: campusworks-task-prod
+    ports:
+      - "9001:9001"
+    environment:
+      - SERVICE_PORT=9001
+      - SERVICE_NAME=task-service
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=campusworks_tasks
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_SSL=true
+      - EUREKA_URL=http://eureka-server:8761/eureka/
+      - EUREKA_HOSTNAME=task-service
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USERNAME=${SMTP_USERNAME}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+    depends_on:
+      - eureka-server
+    networks:
+      - campusworks-network
+    restart: unless-stopped
+
+  # Bidding Service
+  bidding-service:
+    build:
+      context: ./campus-works-backend/bidding-service
+      dockerfile: Dockerfile
+    container_name: campusworks-bidding-prod
+    ports:
+      - "9002:9002"
+    environment:
+      - SERVICE_PORT=9002
+      - SERVICE_NAME=bidding-service
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=campusworks_bids
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_SSL=true
+      - EUREKA_URL=http://eureka-server:8761/eureka/
+      - EUREKA_HOSTNAME=bidding-service
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USERNAME=${SMTP_USERNAME}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+    depends_on:
+      - eureka-server
+    networks:
+      - campusworks-network
+    restart: unless-stopped
+
+  # Profile Service
+  profile-service:
+    build:
+      context: ./campus-works-backend/profile-service
+      dockerfile: Dockerfile
+    container_name: campusworks-profile-prod
+    ports:
+      - "9003:9003"
+    environment:
+      - SERVICE_PORT=9003
+      - SERVICE_NAME=profile-service
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=campusworks_profile
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_SSL=true
+      - EUREKA_URL=http://eureka-server:8761/eureka/
+      - EUREKA_HOSTNAME=profile-service
+    depends_on:
+      - eureka-server
+    networks:
+      - campusworks-network
+    restart: unless-stopped
+
+  # Chat Service
+  chat-service:
+    build:
+      context: ./campusworks-chat-service
+      dockerfile: Dockerfile
+    container_name: campusworks-chat-prod
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - HOST=0.0.0.0
+      - SPRING_BOOT_API_URL=http://api-gateway:8080
+      - CORS_ORIGIN=${FRONTEND_URL}
+      - MONGODB_URI=${MONGODB_URI}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRES_IN=${JWT_EXPIRES_IN}
+    depends_on:
+      - api-gateway
+    networks:
+      - campusworks-network
+    restart: unless-stopped
+
+  # Frontend
+  frontend:
+    build:
+      context: ./campus-works-frontend
+      dockerfile: Dockerfile
+    container_name: campusworks-frontend-prod
+    ports:
+      - "80:80"
+    environment:
+      - VITE_API_BASE_URL=${API_BASE_URL}
+      - VITE_CHAT_SERVICE_URL=${CHAT_SERVICE_URL}
+    depends_on:
+      - api-gateway
+      - chat-service
+    networks:
+      - campusworks-network
+    restart: unless-stopped
+
+networks:
+  campusworks-network:
+    driver: bridge

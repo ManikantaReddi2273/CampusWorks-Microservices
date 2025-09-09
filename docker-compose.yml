@@ -1,0 +1,203 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: campusworks-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: reddi2273
+      MYSQL_DATABASE: campusworks
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - campusworks-network
+
+  # MongoDB for Chat
+  mongodb:
+    image: mongo:6.0
+    container_name: campusworks-mongodb
+    environment:
+      MONGO_INITDB_DATABASE: campusworks_chat
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - campusworks-network
+
+  # Eureka Server
+  eureka-server:
+    build:
+      context: ./campus-works-backend/eureka-server
+      dockerfile: Dockerfile
+    container_name: campusworks-eureka
+    ports:
+      - "8761:8761"
+    environment:
+      - SERVICE_PORT=8761
+      - SERVICE_NAME=eureka-server
+      - EUREKA_HOSTNAME=eureka-server
+    networks:
+      - campusworks-network
+
+  # API Gateway
+  api-gateway:
+    build:
+      context: ./campus-works-backend/api-gateway
+      dockerfile: Dockerfile
+    container_name: campusworks-api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - SERVICE_PORT=8080
+      - SERVICE_NAME=api-gateway
+      - EUREKA_URL=http://eureka-server:8761/eureka/
+      - EUREKA_HOSTNAME=api-gateway
+    depends_on:
+      - eureka-server
+    networks:
+      - campusworks-network
+
+  # Auth Service
+  auth-service:
+    build:
+      context: ./campus-works-backend/auth-service
+      dockerfile: Dockerfile
+    container_name: campusworks-auth
+    ports:
+      - "9000:9000"
+    environment:
+      - SERVICE_PORT=9000
+      - SERVICE_NAME=auth-service
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_NAME=campusworks_auth
+      - DB_USERNAME=root
+      - DB_PASSWORD=reddi2273
+      - EUREKA_URL=http://eureka-server:8761/eureka/
+      - EUREKA_HOSTNAME=auth-service
+    depends_on:
+      - mysql
+      - eureka-server
+    networks:
+      - campusworks-network
+
+  # Task Service
+  task-service:
+    build:
+      context: ./campus-works-backend/task-service
+      dockerfile: Dockerfile
+    container_name: campusworks-task
+    ports:
+      - "9001:9001"
+    environment:
+      - SERVICE_PORT=9001
+      - SERVICE_NAME=task-service
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_NAME=campusworks_tasks
+      - DB_USERNAME=root
+      - DB_PASSWORD=reddi2273
+      - EUREKA_URL=http://eureka-server:8761/eureka/
+      - EUREKA_HOSTNAME=task-service
+    depends_on:
+      - mysql
+      - eureka-server
+    networks:
+      - campusworks-network
+
+  # Bidding Service
+  bidding-service:
+    build:
+      context: ./campus-works-backend/bidding-service
+      dockerfile: Dockerfile
+    container_name: campusworks-bidding
+    ports:
+      - "9002:9002"
+    environment:
+      - SERVICE_PORT=9002
+      - SERVICE_NAME=bidding-service
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_NAME=campusworks_bids
+      - DB_USERNAME=root
+      - DB_PASSWORD=reddi2273
+      - EUREKA_URL=http://eureka-server:8761/eureka/
+      - EUREKA_HOSTNAME=bidding-service
+    depends_on:
+      - mysql
+      - eureka-server
+    networks:
+      - campusworks-network
+
+  # Profile Service
+  profile-service:
+    build:
+      context: ./campus-works-backend/profile-service
+      dockerfile: Dockerfile
+    container_name: campusworks-profile
+    ports:
+      - "9003:9003"
+    environment:
+      - SERVICE_PORT=9003
+      - SERVICE_NAME=profile-service
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_NAME=campusworks_profile
+      - DB_USERNAME=root
+      - DB_PASSWORD=reddi2273
+      - EUREKA_URL=http://eureka-server:8761/eureka/
+      - EUREKA_HOSTNAME=profile-service
+    depends_on:
+      - mysql
+      - eureka-server
+    networks:
+      - campusworks-network
+
+  # Chat Service
+  chat-service:
+    build:
+      context: ./campusworks-chat-service
+      dockerfile: Dockerfile
+    container_name: campusworks-chat
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - HOST=0.0.0.0
+      - SPRING_BOOT_API_URL=http://api-gateway:8080
+      - CORS_ORIGIN=http://localhost:3000
+      - MONGODB_URI=mongodb://mongodb:27017/campusworks_chat
+    depends_on:
+      - mongodb
+      - api-gateway
+    networks:
+      - campusworks-network
+
+  # Frontend
+  frontend:
+    build:
+      context: ./campus-works-frontend
+      dockerfile: Dockerfile
+    container_name: campusworks-frontend
+    ports:
+      - "3000:80"
+    environment:
+      - VITE_API_BASE_URL=http://localhost:8080
+      - VITE_CHAT_SERVICE_URL=http://localhost:3001
+    depends_on:
+      - api-gateway
+      - chat-service
+    networks:
+      - campusworks-network
+
+volumes:
+  mysql_data:
+  mongodb_data:
+
+networks:
+  campusworks-network:
+    driver: bridge
