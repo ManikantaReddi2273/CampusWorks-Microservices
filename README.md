@@ -40,7 +40,7 @@ CampusWorks is a peer-to-peer academic task outsourcing platform where students 
 ### 🔐 Authentication & Authorization
 - User registration with email verification
 - JWT-based authentication
-- Simplified role system (STUDENT/ADMIN)
+- Simplified role system (STUDENT)
 - Password reset functionality
 
 ### 📝 Task Management
@@ -74,7 +74,7 @@ CampusWorks is a peer-to-peer academic task outsourcing platform where students 
 - **Auth Service** (Port: 9000) - User authentication and JWT generation
 - **Task Service** (Port: 9001) - Task CRUD operations and status management
 - **Bidding Service** (Port: 9002) - Bid management and auction logic
-- **Profile Service** (Port: 9006) - User profile management
+- **Profile Service** (Port: 9003) - User profile management
 - **Chat Service** (Port: 3001) - Real-time messaging with Socket.io
 
 ### Frontend
@@ -252,9 +252,6 @@ VITE_APP_VERSION=1.0.0
 - **Eureka Dashboard**: http://localhost:8761
 - **Chat Service Health**: http://localhost:3001/health
 
-### Default Admin Credentials
-- **Email**: admin@campusworks.com
-- **Password**: admin123
 
 ## 📚 API Documentation
 
