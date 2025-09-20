@@ -67,7 +67,7 @@ public class TaskService {
         
         // Set bidding deadline to fixed 24 hours
        // LocalDateTime biddingDeadline = LocalDateTime.now().plusHours(BIDDING_PERIOD_HOURS);
-              LocalDateTime biddingDeadline = LocalDateTime.now().plusMinutes(5);
+              LocalDateTime biddingDeadline = LocalDateTime.now().plusSeconds(60);
 
         task.setBiddingDeadline(biddingDeadline);
         

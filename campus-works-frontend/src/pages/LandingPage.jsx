@@ -685,7 +685,7 @@ export default function LandingPage() {
         <Container maxWidth="lg">
           <Box textAlign="center">
             <Typography variant="body2" color="#5a6c7d">
-              © {new Date().getFullYear()} CampusWorks. All rights reserved BY MANISH REDDY. 
+              © {new Date().getFullYear()} CampusWorks. All rights reserved BY MANIKANTA REDDY. 
               Built for students.
             </Typography>
           </Box>
