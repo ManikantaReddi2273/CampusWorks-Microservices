@@ -8,143 +8,89 @@ import org.springframework.stereotype.Service;
 import java.util.regex.Pattern;
 
 /**
- * Service for validating college email addresses
- * Only allows RGUKT Nuzvidu emails with specific pattern
+ * Service for validating user email addresses.
+ * Accepts any standard email format (not restricted to college domains).
  */
 @Service
 public class EmailValidationService {
 
     private static final Logger logger = LoggerFactory.getLogger(EmailValidationService.class);
 
-    @Value("${app.email.college.pattern:^n\\d{6}@rguktn\\.ac\\.in$}")
-    private String collegeEmailPattern;
+    // Standard email pattern (local@domain)
+    private static final Pattern DEFAULT_EMAIL_PATTERN =
+            Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
 
-    @Value("${app.email.college.domain:rguktn.ac.in}")
-    private String collegeDomain;
+    @Value("${app.email.pattern:^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$}")
+    private String emailPattern;
 
     private Pattern pattern;
 
-    /**
-     * Initialize the email pattern
-     */
     private Pattern getPattern() {
         if (pattern == null) {
-            pattern = Pattern.compile(collegeEmailPattern);
-            logger.info("🎓 Initialized college email pattern: {}", collegeEmailPattern);
+            try {
+                pattern = Pattern.compile(emailPattern);
+            } catch (Exception e) {
+                logger.warn("Invalid app.email.pattern '{}', falling back to default", emailPattern);
+                pattern = DEFAULT_EMAIL_PATTERN;
+            }
+            logger.info("Initialized email validation pattern: {}", emailPattern);
         }
         return pattern;
     }
 
     /**
-     * Validate if email matches the college email pattern
-     * Pattern: ^n\d{6}@rguktn\.ac\.in$
-     * 
-     * Valid examples:
-     * - n210419@rguktn.ac.in
-     * - n191003@rguktn.ac.in
-     * - n210456@rguktn.ac.in
-     * 
-     * Invalid examples:
-     * - student@rguktn.ac.in
-     * - n12345@rguktn.ac.in (only 5 digits)
-     * - n1234567@rguktn.ac.in (7 digits)
-     * - n210419@gmail.com
+     * Validate email format (any valid email address).
+     * Kept method name for compatibility with existing AuthService callers.
      */
     public boolean isValidCollegeEmail(String email) {
+        return isValidEmail(email);
+    }
+
+    public boolean isValidEmail(String email) {
         if (email == null || email.trim().isEmpty()) {
-            logger.debug("❌ Email validation failed: Email is null or empty");
+            logger.debug("Email validation failed: empty");
             return false;
         }
 
-        email = email.trim().toLowerCase();
-        boolean isValid = getPattern().matcher(email).matches();
-        
+        String normalized = email.trim().toLowerCase();
+        boolean isValid = getPattern().matcher(normalized).matches();
+
         if (isValid) {
-            logger.debug("✅ Email validation successful: {}", email);
+            logger.debug("Email validation successful: {}", normalized);
         } else {
-            logger.debug("❌ Email validation failed: {} (doesn't match pattern: {})", email, collegeEmailPattern);
+            logger.debug("Email validation failed: {}", normalized);
         }
-        
+
         return isValid;
     }
 
-    /**
-     * Extract student ID from email
-     * Example: n210419@rguktn.ac.in -> 210419
-     */
     public String extractStudentId(String email) {
-        if (!isValidCollegeEmail(email)) {
-            return null;
-        }
-        
-        // Extract the 6 digits after 'n'
-        String localPart = email.substring(0, email.indexOf("@"));
-        return localPart.substring(1); // Remove 'n' prefix
-    }
-
-    /**
-     * Extract student year from email
-     * Example: n210419@rguktn.ac.in -> 21 (year 2021)
-     */
-    public String extractStudentYear(String email) {
-        String studentId = extractStudentId(email);
-        if (studentId != null && studentId.length() >= 2) {
-            return "20" + studentId.substring(0, 2); // 21 -> 2021
-        }
         return null;
     }
 
-    /**
-     * Get validation error message for invalid emails
-     */
+    public String extractStudentYear(String email) {
+        return null;
+    }
+
     public String getValidationErrorMessage(String email) {
         if (email == null || email.trim().isEmpty()) {
             return "Email address is required";
         }
-
-        email = email.trim().toLowerCase();
-
-        if (!email.endsWith("@" + collegeDomain)) {
-            return "Only " + collegeDomain + " email addresses are allowed";
+        if (!isValidEmail(email)) {
+            return "Please enter a valid email address (example: you@gmail.com)";
         }
-
-        if (!email.startsWith("n")) {
-            return "Email must start with 'n' followed by 6 digits";
-        }
-
-        String localPart = email.substring(0, email.indexOf("@"));
-        if (localPart.length() != 7) { // n + 6 digits
-            return "Email must be in format: n######@" + collegeDomain + " (n followed by exactly 6 digits)";
-        }
-
-        try {
-            String digits = localPart.substring(1);
-            Integer.parseInt(digits); // Check if it's numeric
-            if (digits.length() != 6) {
-                return "Email must contain exactly 6 digits after 'n'";
-            }
-        } catch (NumberFormatException e) {
-            return "Email must contain only digits after 'n'";
-        }
-
-        return "Invalid email format. Use: n######@" + collegeDomain + " (example: n210419@" + collegeDomain + ")";
+        return "Invalid email format";
     }
 
-    /**
-     * Get the college domain
-     */
     public String getCollegeDomain() {
-        return collegeDomain;
+        return "";
     }
 
-    /**
-     * Get example valid emails for display
-     */
     public String[] getExampleEmails() {
         return new String[]{
-            "n210419@" + collegeDomain,
-            "n191003@" + collegeDomain,
-            "n210456@" + collegeDomain
+            "you@gmail.com",
+            "student@outlook.com",
+            "user@example.com"
         };
     }
 }

@@ -32,16 +32,15 @@ const RegisterPage = () => {
   const [formErrors, setFormErrors] = useState({});
   const [touched, setTouched] = useState({});
 
-  // College email validation regex
-  const COLLEGE_EMAIL_REGEX = /^n\d{6}@rguktn\.ac\.in$/;
+  const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
   
   const validateCollegeEmail = (email) => {
     if (!email) {
       return 'Email is required';
     }
     
-    if (!COLLEGE_EMAIL_REGEX.test(email)) {
-      return 'Only RGUKT Nuzvidu college emails are allowed. Format: n######@rguktn.ac.in';
+    if (!EMAIL_REGEX.test(email.trim())) {
+      return 'Please enter a valid email address';
     }
     
     return '';
@@ -206,7 +205,7 @@ const RegisterPage = () => {
               name="email"
               autoComplete="email"
               autoFocus
-              placeholder="n210419@rguktn.ac.in"
+              placeholder="you@gmail.com"
               value={formData.email}
               onChange={handleChange}
               onBlur={handleBlur}

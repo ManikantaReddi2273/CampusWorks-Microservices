@@ -49,7 +49,7 @@ public class AuthService {
     /**
      * Register a new user with email verification
      * All new registrations default to STUDENT role and require email verification
-     * @param email user's email address (must be valid college email)
+     * @param email user's email address (any valid email)
      * @param password user's password
      * @return created user object
      */

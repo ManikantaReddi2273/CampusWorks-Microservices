@@ -674,40 +674,30 @@ public class AuthController {
     }
     
     /**
-     * Validate college email format (utility endpoint)
-     * @param email email to validate
-     * @return validation result
+     * Validate email format (utility endpoint) — any standard email is accepted.
      */
     @GetMapping("/validate-email/{email}")
     public ResponseEntity<?> validateEmail(@PathVariable String email) {
         logger.info("📧 Email validation request for: {}", email);
         
         try {
-            // Use the email validation service from AuthService
-            boolean isValid = authService.findByEmail("dummy@test.com").isEmpty(); // Just to access the service
-            
             Map<String, Object> response = new HashMap<>();
             response.put("email", email);
             response.put("timestamp", System.currentTimeMillis());
-            
-            // This is a simple pattern check - you might want to inject EmailValidationService here
-            boolean validFormat = email != null && email.matches("^n\\d{6}@rguktn\\.ac\\.in$");
+
+            boolean validFormat = email != null
+                    && email.matches("(?i)^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
             
             response.put("valid", validFormat);
             
             if (validFormat) {
                 response.put("message", "Email format is valid");
-                // Extract student info
-                String studentId = email.substring(1, 7); // Extract 6 digits after 'n'
-                String year = "20" + studentId.substring(0, 2);
-                response.put("studentId", studentId);
-                response.put("admissionYear", year);
             } else {
-                response.put("message", "Invalid email format. Must be: n######@rguktn.ac.in (n followed by 6 digits)");
+                response.put("message", "Invalid email format. Use a normal email like you@gmail.com");
                 response.put("examples", new String[]{
-                    "n210419@rguktn.ac.in",
-                    "n191003@rguktn.ac.in",
-                    "n210456@rguktn.ac.in"
+                    "you@gmail.com",
+                    "student@outlook.com",
+                    "user@example.com"
                 });
             }
             

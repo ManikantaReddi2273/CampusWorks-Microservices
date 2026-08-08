@@ -51,9 +51,9 @@ const LoginPage = () => {
       return 'Email is required';
     }
     
-    const emailRegex = /^n\d{6}@rguktn\.ac\.in$/;
-    if (!emailRegex.test(email)) {
-      return 'Please enter a valid RGUKT Nuzvidu email (n######@rguktn.ac.in)';
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    if (!emailRegex.test(email.trim())) {
+      return 'Please enter a valid email address';
     }
     
     return '';
@@ -216,7 +216,7 @@ const LoginPage = () => {
               name="email"
               autoComplete="email"
               autoFocus
-              placeholder="n210419@rguktn.ac.in"
+              placeholder="you@gmail.com"
               value={formData.email}
               onChange={handleChange}
               onBlur={handleBlur}

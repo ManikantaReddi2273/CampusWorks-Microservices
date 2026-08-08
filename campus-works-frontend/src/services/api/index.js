@@ -270,7 +270,7 @@ export const apiUtils = {
         }
       } else if (status === 400) {
         if (message.includes('Invalid email format')) {
-          message = 'Please enter a valid RGUKT Nuzvidu email address (n######@rguktn.ac.in).';
+          message = 'Please enter a valid email address.';
         } else if (message.includes('Password too weak')) {
           message = 'Password does not meet security requirements. Please use a stronger password.';
         } else if (

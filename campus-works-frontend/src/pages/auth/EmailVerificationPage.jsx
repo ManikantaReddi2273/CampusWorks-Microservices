@@ -174,12 +174,12 @@ const EmailVerificationPage = () => {
     if (!email) return;
     
     // Validate email format
-    const emailRegex = /^n\d{6}@rguktn\.ac\.in$/;
-    if (!emailRegex.test(email)) {
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    if (!emailRegex.test(email.trim())) {
       setResendState({
         loading: false,
         success: false,
-        error: 'Please enter a valid RGUKT Nuzvidu email (n######@rguktn.ac.in)'
+        error: 'Please enter a valid email address'
       });
       return;
     }
