@@ -7,10 +7,25 @@
 | Relational DB | **Neon** (PostgreSQL) |
 | Chat DB | **MongoDB Atlas** |
 
-> I prepared Dockerfiles, `render.yaml`, cloud-ready env properties, and this guide.  
-> **You must complete the dashboard steps below** (accounts, secrets, URLs). There is no CLI login for Neon/Render/Vercel/Atlas on this machine.
-
 > Free Render services **sleep when idle**. First request after sleep can take 1–2 minutes. Before demos, open each `*.onrender.com` URL once to wake them.
+
+---
+
+## Your connection strings (filled)
+
+**Neon host:** `ep-weathered-cloud-axhpd4hu-pooler.c-4.us-east-2.aws.neon.tech`  
+**Neon user:** `neondb_owner`  
+**Neon password:** `npg_pC6tqO7mkPwb`
+
+**MongoDB Atlas (chat):**
+
+```text
+mongodb+srv://n210419_db_user:reddi2273@cluster0.xrjmxy9.mongodb.net/campusworks_chat?retryWrites=true&w=majority&appName=Cluster0
+```
+
+**Still replace after Render/Vercel go live:**
+- `XXXX` → your real Render service hostnames (from Render dashboard)
+- `YOUR_VERCEL_APP` → your Vercel URL
 
 ---
 
@@ -30,10 +45,12 @@ Browser → Vercel (frontend)
 
 ---
 
-## STEP 1 — Neon (PostgreSQL) — YOU
+## STEP 1 — Neon (PostgreSQL) — REQUIRED before auth/task/bidding deploy
 
-1. Go to [https://console.neon.tech](https://console.neon.tech) → create/open a project  
-2. SQL Editor — run:
+> If `cw-auth-service`, `cw-task-service`, or `cw-bidding-service` failed on Render,  
+> almost always the Neon databases below are missing. Create them first, then **Manual Deploy**.
+
+In Neon SQL Editor, run (skip any that already exist):
 
 ```sql
 CREATE DATABASE campusworks_auth;
@@ -42,50 +59,37 @@ CREATE DATABASE campusworks_bids;
 CREATE DATABASE campusworks_profile;
 ```
 
-3. **Connect** panel → copy Host, User, Password  
-
-**JDBC URL pattern** (replace `HOST`):
+**JDBC URLs (ready):**
 
 ```text
-jdbc:postgresql://HOST/campusworks_auth?sslmode=require
-jdbc:postgresql://HOST/campusworks_tasks?sslmode=require
-jdbc:postgresql://HOST/campusworks_bids?sslmode=require
-jdbc:postgresql://HOST/campusworks_profile?sslmode=require
+jdbc:postgresql://ep-weathered-cloud-axhpd4hu-pooler.c-4.us-east-2.aws.neon.tech/campusworks_auth?sslmode=require
+jdbc:postgresql://ep-weathered-cloud-axhpd4hu-pooler.c-4.us-east-2.aws.neon.tech/campusworks_tasks?sslmode=require
+jdbc:postgresql://ep-weathered-cloud-axhpd4hu-pooler.c-4.us-east-2.aws.neon.tech/campusworks_bids?sslmode=require
+jdbc:postgresql://ep-weathered-cloud-axhpd4hu-pooler.c-4.us-east-2.aws.neon.tech/campusworks_profile?sslmode=require
 ```
 
 ---
 
-## STEP 2 — MongoDB Atlas (Chat) — YOU
+## STEP 2 — MongoDB Atlas (Chat)
 
-1. [https://cloud.mongodb.com](https://cloud.mongodb.com) → create free cluster  
-2. Database Access → create user + password  
-3. Network Access → allow `0.0.0.0/0` (Render outbound)  
-4. Connect → Drivers → copy URI, e.g.
-
-```text
-mongodb+srv://USER:PASSWORD@cluster0.xxxxx.mongodb.net/campusworks_chat?retryWrites=true&w=majority
-```
+Your `campusworks_chat` DB on Cluster0 is ready.  
+Also confirm **Network Access** allows `0.0.0.0/0`.
 
 ---
 
-## STEP 3 — Push code to GitHub — YOU (if not already)
+## STEP 3 — GitHub
 
-Repo: `https://github.com/ManikantaReddi2273/CampusWorks-Microservices.git`
-
-```bash
-git add .
-git commit -m "Add Render/Vercel/Neon/Atlas deployment config"
-git push origin main
-```
+Repo: `https://github.com/ManikantaReddi2273/CampusWorks-Microservices.git`  
+(Deploy config already pushed on `main`.)
 
 ---
 
-## STEP 4 — Render Blueprint — YOU
+## STEP 4 — Render Blueprint
 
 1. [https://dashboard.render.com](https://dashboard.render.com)  
 2. **New +** → **Blueprint**  
-3. Connect GitHub → select **CampusWorks-Microservices** → apply `render.yaml`  
-4. Render creates:
+3. Connect GitHub → **CampusWorks-Microservices** → apply `render.yaml`  
+4. Services created:
 
 | Service | Purpose |
 |---------|---------|
@@ -97,14 +101,17 @@ git push origin main
 | `cw-api-gateway` | Public API entry |
 | `cw-chat-service` | Socket.io chat |
 
-5. Wait until **eureka** is Live, copy its URL (e.g. `https://cw-eureka-server-xxxx.onrender.com`)  
-6. Paste env vars below into each service → **Save** → redeploy if needed  
+5. Wait until Eureka is **Live**, copy its public URL  
+6. Paste env blocks below into each service → Save → redeploy  
 
-Use the **same** `JWT_SECRET` everywhere (gateway, auth, chat).
+Use the **same** `JWT_SECRET` on gateway, auth, and chat.
 
 ---
 
-### Env templates (paste & replace)
+### Env templates (copy-paste into Render)
+
+> After Blueprint finishes, replace every `XXXX` with the real suffix from your Render URLs  
+> (example: if Eureka is `https://cw-eureka-server-a1b2.onrender.com`, use that full host).
 
 #### cw-eureka-server
 ```env
@@ -118,12 +125,12 @@ EUREKA_INSTANCE_SECURE_PORT=443
 #### cw-auth-service
 ```env
 JAVA_OPTS=-Xms64m -Xmx200m
-SPRING_DATASOURCE_URL=jdbc:postgresql://YOUR_NEON_HOST/campusworks_auth?sslmode=require
+SPRING_DATASOURCE_URL=jdbc:postgresql://ep-weathered-cloud-axhpd4hu-pooler.c-4.us-east-2.aws.neon.tech/campusworks_auth?sslmode=require
 SPRING_DATASOURCE_USERNAME=neondb_owner
-SPRING_DATASOURCE_PASSWORD=YOUR_NEON_PASSWORD
+SPRING_DATASOURCE_PASSWORD=npg_pC6tqO7mkPwb
 JWT_SECRET=mysupersecuresecretkeythatismorethan32chars
-SPRING_MAIL_USERNAME=your_gmail@gmail.com
-SPRING_MAIL_PASSWORD=your_gmail_app_password
+SPRING_MAIL_USERNAME=campusworks2273@gmail.com
+SPRING_MAIL_PASSWORD=nlbdkysxhffrjwnt
 APP_FRONTEND_URL=https://YOUR_VERCEL_APP.vercel.app
 EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=https://cw-eureka-server-XXXX.onrender.com/eureka/
 EUREKA_INSTANCE_PREFER_IP_ADDRESS=false
@@ -135,11 +142,11 @@ EUREKA_INSTANCE_SECURE_PORT=443
 #### cw-task-service
 ```env
 JAVA_OPTS=-Xms64m -Xmx200m
-SPRING_DATASOURCE_URL=jdbc:postgresql://YOUR_NEON_HOST/campusworks_tasks?sslmode=require
+SPRING_DATASOURCE_URL=jdbc:postgresql://ep-weathered-cloud-axhpd4hu-pooler.c-4.us-east-2.aws.neon.tech/campusworks_tasks?sslmode=require
 SPRING_DATASOURCE_USERNAME=neondb_owner
-SPRING_DATASOURCE_PASSWORD=YOUR_NEON_PASSWORD
-SPRING_MAIL_USERNAME=your_gmail@gmail.com
-SPRING_MAIL_PASSWORD=your_gmail_app_password
+SPRING_DATASOURCE_PASSWORD=npg_pC6tqO7mkPwb
+SPRING_MAIL_USERNAME=campusworks2273@gmail.com
+SPRING_MAIL_PASSWORD=nlbdkysxhffrjwnt
 BIDDING_SERVICE_URL=https://cw-bidding-service-XXXX.onrender.com
 PROFILE_SERVICE_URL=https://cw-profile-service-XXXX.onrender.com
 EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=https://cw-eureka-server-XXXX.onrender.com/eureka/
@@ -152,11 +159,11 @@ EUREKA_INSTANCE_SECURE_PORT=443
 #### cw-bidding-service
 ```env
 JAVA_OPTS=-Xms64m -Xmx200m
-SPRING_DATASOURCE_URL=jdbc:postgresql://YOUR_NEON_HOST/campusworks_bids?sslmode=require
+SPRING_DATASOURCE_URL=jdbc:postgresql://ep-weathered-cloud-axhpd4hu-pooler.c-4.us-east-2.aws.neon.tech/campusworks_bids?sslmode=require
 SPRING_DATASOURCE_USERNAME=neondb_owner
-SPRING_DATASOURCE_PASSWORD=YOUR_NEON_PASSWORD
-SPRING_MAIL_USERNAME=your_gmail@gmail.com
-SPRING_MAIL_PASSWORD=your_gmail_app_password
+SPRING_DATASOURCE_PASSWORD=npg_pC6tqO7mkPwb
+SPRING_MAIL_USERNAME=campusworks2273@gmail.com
+SPRING_MAIL_PASSWORD=nlbdkysxhffrjwnt
 TASK_SERVICE_URL=https://cw-task-service-XXXX.onrender.com
 EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=https://cw-eureka-server-XXXX.onrender.com/eureka/
 EUREKA_INSTANCE_PREFER_IP_ADDRESS=false
@@ -168,9 +175,9 @@ EUREKA_INSTANCE_SECURE_PORT=443
 #### cw-profile-service
 ```env
 JAVA_OPTS=-Xms64m -Xmx200m
-SPRING_DATASOURCE_URL=jdbc:postgresql://YOUR_NEON_HOST/campusworks_profile?sslmode=require
+SPRING_DATASOURCE_URL=jdbc:postgresql://ep-weathered-cloud-axhpd4hu-pooler.c-4.us-east-2.aws.neon.tech/campusworks_profile?sslmode=require
 SPRING_DATASOURCE_USERNAME=neondb_owner
-SPRING_DATASOURCE_PASSWORD=YOUR_NEON_PASSWORD
+SPRING_DATASOURCE_PASSWORD=npg_pC6tqO7mkPwb
 TASK_SERVICE_URL=https://cw-task-service-XXXX.onrender.com
 EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=https://cw-eureka-server-XXXX.onrender.com/eureka/
 EUREKA_INSTANCE_PREFER_IP_ADDRESS=false
@@ -198,7 +205,7 @@ EUREKA_INSTANCE_SECURE_PORT=443
 #### cw-chat-service
 ```env
 NODE_ENV=production
-MONGODB_URI=mongodb+srv://USER:PASSWORD@cluster0.xxxxx.mongodb.net/campusworks_chat?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://n210419_db_user:reddi2273@cluster0.xrjmxy9.mongodb.net/campusworks_chat?retryWrites=true&w=majority&appName=Cluster0
 JWT_SECRET=mysupersecuresecretkeythatismorethan32chars
 SPRING_BOOT_BASE_URL=https://cw-api-gateway-XXXX.onrender.com
 AUTH_SERVICE_URL=https://cw-auth-service-XXXX.onrender.com
@@ -209,7 +216,7 @@ SOCKET_CORS_ORIGIN=http://localhost:3000,https://YOUR_VERCEL_APP.vercel.app
 
 ---
 
-## STEP 5 — Vercel (Frontend) — YOU
+## STEP 5 — Vercel (Frontend)
 
 1. [https://vercel.com](https://vercel.com) → **Add New Project** → import `CampusWorks-Microservices`  
 2. **Root Directory**: `campus-works-frontend`  
@@ -225,46 +232,26 @@ VITE_ENABLE_REDUX_DEVTOOLS=false
 ```
 
 5. Deploy → copy the Vercel URL  
-6. Go back to Render and update:
-   - Gateway `CORS_ALLOWED_ORIGINS` (include Vercel URL)
-   - Chat `SOCKET_CORS_ORIGIN` (include Vercel URL)
-   - Auth `APP_FRONTEND_URL` (Vercel URL — for email verification links)
+6. Update on Render:
+   - Gateway `CORS_ALLOWED_ORIGINS` (add Vercel URL)
+   - Chat `SOCKET_CORS_ORIGIN` (add Vercel URL)
+   - Auth `APP_FRONTEND_URL` (Vercel URL)
 
 ---
 
-## STEP 6 — Smoke test — YOU
+## STEP 6 — Smoke test
 
-1. Wake services: open Eureka, Auth, Task, Bidding, Profile, Gateway, Chat once each  
-2. Gateway health: `https://cw-api-gateway-XXXX.onrender.com/actuator/health`  
-3. Chat health: `https://cw-chat-service-XXXX.onrender.com/health`  
+1. Wake each Render service once in the browser  
+2. Gateway: `https://cw-api-gateway-XXXX.onrender.com/actuator/health`  
+3. Chat: `https://cw-chat-service-XXXX.onrender.com/health`  
 4. Open Vercel app → Register / Login → create task → bid  
 
 ---
 
-## What was prepared in the repo (already done)
+## Notes
 
-- PostgreSQL migration (driver + dialect + Neon-ready env vars)  
-- Dockerfiles for all 6 Java services + chat  
-- Root `render.yaml` Blueprint  
-- Cloud `PORT` / Eureka / CORS / Feign direct URL support  
-- Chat Atlas-ready `MONGODB_URI` + CORS list support  
-- Frontend `vercel.json` SPA rewrites  
-
-## What only YOU can do
-
-1. Create Neon DBs + copy JDBC URLs/password  
-2. Create MongoDB Atlas cluster + URI  
-3. Push to GitHub (if needed)  
-4. Apply Render Blueprint + paste secrets/URLs  
-5. Deploy frontend on Vercel with `VITE_*` vars  
-6. Wire final Vercel URL into CORS / email frontend URL  
-7. Provide Gmail app password for verification emails  
-
----
-
-## Notes / limits
-
-- Render **free** account may limit how many services run at once — if Blueprint fails, create services one-by-one or upgrade plan.  
-- Cold starts make Eureka flaky; **always set `GATEWAY_*_URI` and `TASK_SERVICE_URL` / `BIDDING_SERVICE_URL` direct HTTPS URLs**.  
-- Tables are created by Hibernate (`ddl-auto=update`) on first start.  
-- Chat does **not** use Neon — only MongoDB Atlas.  
+- Neon + Atlas credentials above are filled for copy-paste.  
+- Only `XXXX` (Render hosts) and `YOUR_VERCEL_APP` still need your live URLs.  
+- Create the 4 Neon databases if they are not created yet.  
+- Chat uses Atlas only (`campusworks_chat`), not Neon.  
+- Do not commit this file publicly if the repo is open — it contains DB passwords.  
