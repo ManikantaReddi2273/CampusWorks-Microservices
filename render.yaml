@@ -9,7 +9,7 @@ services:
     region: oregon
     dockerfilePath: ./campus-works-backend/eureka-server/Dockerfile
     dockerContext: ./campus-works-backend/eureka-server
-    healthCheckPath: /actuator/health
+    healthCheckPath: /actuator/health/liveness
     envVars:
       - key: JAVA_OPTS
         value: "-Xms32m -Xmx180m"
@@ -29,7 +29,7 @@ services:
     region: oregon
     dockerfilePath: ./campus-works-backend/auth-service/Dockerfile
     dockerContext: ./campus-works-backend/auth-service
-    healthCheckPath: /actuator/health
+    healthCheckPath: /actuator/health/liveness
     envVars:
       - key: JAVA_OPTS
         value: "-Xms32m -Xmx180m"
@@ -67,7 +67,7 @@ services:
     region: oregon
     dockerfilePath: ./campus-works-backend/task-service/Dockerfile
     dockerContext: ./campus-works-backend/task-service
-    healthCheckPath: /actuator/health
+    healthCheckPath: /actuator/health/liveness
     envVars:
       - key: JAVA_OPTS
         value: "-Xms32m -Xmx180m"
@@ -105,7 +105,7 @@ services:
     region: oregon
     dockerfilePath: ./campus-works-backend/bidding-service/Dockerfile
     dockerContext: ./campus-works-backend/bidding-service
-    healthCheckPath: /actuator/health
+    healthCheckPath: /actuator/health/liveness
     envVars:
       - key: JAVA_OPTS
         value: "-Xms32m -Xmx180m"
@@ -141,7 +141,7 @@ services:
     region: oregon
     dockerfilePath: ./campus-works-backend/profile-service/Dockerfile
     dockerContext: ./campus-works-backend/profile-service
-    healthCheckPath: /actuator/health
+    healthCheckPath: /actuator/health/liveness
     envVars:
       - key: JAVA_OPTS
         value: "-Xms32m -Xmx180m"
@@ -173,7 +173,7 @@ services:
     region: oregon
     dockerfilePath: ./campus-works-backend/api-gateway/Dockerfile
     dockerContext: ./campus-works-backend/api-gateway
-    healthCheckPath: /actuator/health
+    healthCheckPath: /actuator/health/liveness
     envVars:
       - key: JAVA_OPTS
         value: "-Xms32m -Xmx180m"
