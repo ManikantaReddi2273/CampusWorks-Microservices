@@ -65,9 +65,8 @@ public class TaskService {
         task.setCreatedAt(LocalDateTime.now());
         task.setUpdatedAt(LocalDateTime.now());
         
-        // Set bidding deadline to fixed 24 hours
-       // LocalDateTime biddingDeadline = LocalDateTime.now().plusHours(BIDDING_PERIOD_HOURS);
-              LocalDateTime biddingDeadline = LocalDateTime.now().plusSeconds(60);
+        // Set bidding deadline to fixed 24 hours from now
+        LocalDateTime biddingDeadline = LocalDateTime.now().plusHours(BIDDING_PERIOD_HOURS);
 
         task.setBiddingDeadline(biddingDeadline);
         
@@ -77,8 +76,8 @@ public class TaskService {
             throw new RuntimeException("Task completion deadline is required");
         }
         
-        // Validate completion deadline is at least 24 hours after bidding deadline
-        LocalDateTime minCompletionDeadline = biddingDeadline.plusMinutes(5);
+        // Completion deadline must be at least 30 hours after bidding deadline
+        LocalDateTime minCompletionDeadline = biddingDeadline.plusHours(30);
 
         if (task.getCompletionDeadline().isBefore(minCompletionDeadline)) {
             throw new RuntimeException("Task completion deadline must be at least 30 hours after the bidding deadline");
