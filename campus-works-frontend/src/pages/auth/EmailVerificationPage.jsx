@@ -352,7 +352,7 @@ const EmailVerificationPage = () => {
                   <li>Verification link may have expired (valid for 24 hours)</li>
                   <li>Link may have already been used</li>
                   <li>Check your spam/junk folder for the email</li>
-                  <li>Make sure you're using your RGUKT Nuzvidu email</li>
+                  <li>Make sure you're using the same email you registered with</li>
                 </Typography>
               </Box>
             </Box>

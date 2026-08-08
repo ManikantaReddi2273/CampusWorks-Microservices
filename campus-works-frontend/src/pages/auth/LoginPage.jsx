@@ -221,7 +221,7 @@ const LoginPage = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               error={touched.email && !!formErrors.email}
-              helperText={touched.email && formErrors.email ? formErrors.email : "Enter your RGUKT Nuzvidu email"}
+              helperText={touched.email && formErrors.email ? formErrors.email : "Enter your email address"}
             />
             <TextField
               margin="normal"
