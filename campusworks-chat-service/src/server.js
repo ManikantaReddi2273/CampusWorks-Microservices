@@ -54,9 +54,13 @@ class ChatServer {
       crossOriginEmbedderPolicy: false
     }));
 
-    // CORS middleware
+    // CORS middleware (comma-separated origins from SOCKET_CORS_ORIGIN)
+    const corsOrigins = String(config.socketCorsOrigin || '')
+      .split(',')
+      .map((o) => o.trim())
+      .filter(Boolean);
     this.app.use(cors({
-      origin: config.socketCorsOrigin,
+      origin: corsOrigins.length === 1 ? corsOrigins[0] : corsOrigins,
       credentials: true,
       methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization', 'X-User-Id', 'X-User-Email', 'X-User-Roles']

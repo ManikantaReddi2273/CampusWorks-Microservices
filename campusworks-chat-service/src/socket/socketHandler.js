@@ -10,9 +10,13 @@ const logger = require('../utils/logger');
 
 class SocketHandler {
   constructor(server, config) {
+    const corsOrigins = String(config.socketCorsOrigin || '')
+      .split(',')
+      .map((o) => o.trim())
+      .filter(Boolean);
     this.io = new Server(server, {
       cors: {
-        origin: config.socketCorsOrigin,
+        origin: corsOrigins.length === 1 ? corsOrigins[0] : corsOrigins,
         methods: ['GET', 'POST'],
         credentials: true
       },

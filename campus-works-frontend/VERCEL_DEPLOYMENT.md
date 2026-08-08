@@ -20,12 +20,14 @@ The 404 error was occurring because Vercel didn't know how to handle client-side
 In your Vercel dashboard, go to Settings > Environment Variables and add:
 
 ```
-VITE_API_BASE_URL=https://your-backend-api-url.com
+VITE_API_BASE_URL=https://cw-api-gateway-XXXX.onrender.com
+VITE_CHAT_SERVICE_URL=https://cw-chat-service-XXXX.onrender.com
 VITE_APP_NAME=CampusWorks
 VITE_APP_VERSION=1.0.0
-VITE_RAZORPAY_KEY_ID=your_razorpay_key_id
 VITE_ENABLE_REDUX_DEVTOOLS=false
 ```
+
+See root `DEPLOYMENT.md` for the full Neon + Render + Atlas + Vercel checklist.
 
 ## Important Notes:
 

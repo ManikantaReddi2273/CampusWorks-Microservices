@@ -16,7 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
  * Feign Client for Task Service
  * Handles inter-service communication with Task Service
  */
-@FeignClient(name = "task-service", fallback = TaskServiceClientFallback.class, configuration = FeignClientConfig.class)
+@FeignClient(
+        name = "task-service",
+        url = "${services.task-service.url:}",
+        fallback = TaskServiceClientFallback.class,
+        configuration = FeignClientConfig.class
+)
 public interface TaskServiceClient {
     
     /**

@@ -4,7 +4,7 @@
 [![React](https://img.shields.io/badge/React-19.1.1-blue.svg)](https://reactjs.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-6.0+-green.svg)](https://www.mongodb.com/)
-[![MySQL](https://img.shields.io/badge/MySQL-8.0+-blue.svg)](https://www.mysql.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15+-blue.svg)](https://www.postgresql.org/)
 
 ## 📋 Table of Contents
 
@@ -104,7 +104,7 @@ CampusWorks is a peer-to-peer academic task outsourcing platform where students 
 - **MongoDB** with Mongoose for data persistence
 
 ### Databases
-- **MySQL 8.0** for relational data (users, tasks, bids, profiles)
+- **PostgreSQL 15+** (or Neon) for relational data (users, tasks, bids, profiles)
 - **MongoDB 6.0** for chat messages and real-time data
 
 ## 📋 Prerequisites
@@ -113,7 +113,7 @@ Before running the application, ensure you have the following installed:
 
 - **Java 17** or higher
 - **Node.js 18+** and npm
-- **MySQL 8.0+**
+- **PostgreSQL 15+** (local or Neon)
 - **MongoDB 6.0+**
 - **Maven 3.8+**
 - **Git**
@@ -187,7 +187,7 @@ npm run dev
 ## ⚙️ Configuration
 
 ### Database Configuration
-Create the following MySQL databases:
+Create the following PostgreSQL databases:
 ```sql
 CREATE DATABASE campusworks_auth;
 CREATE DATABASE campusworks_tasks;
@@ -198,12 +198,19 @@ CREATE DATABASE campusworks_profile;
 ### Environment Variables
 Update the following configuration files:
 
-**Backend Services** (`application.properties`):
+**Backend Services** (`application.properties` / env vars):
 ```properties
-# Database Configuration
-spring.datasource.url=jdbc:mysql://localhost:3306/campusworks_auth
-spring.datasource.username=root
+# Database Configuration (PostgreSQL / Neon)
+spring.datasource.url=jdbc:postgresql://localhost:5432/campusworks_auth
+spring.datasource.username=postgres
 spring.datasource.password=your_password
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+# Or override via env (recommended for Neon / Render):
+# SPRING_DATASOURCE_URL=jdbc:postgresql://...
+# SPRING_DATASOURCE_USERNAME=...
+# SPRING_DATASOURCE_PASSWORD=...
 
 # JWT Configuration
 security.jwt.secret=mysupersecuresecretkeythatismorethan32chars
@@ -236,7 +243,7 @@ VITE_APP_VERSION=1.0.0
 ## 🏃‍♂️ Running the Application
 
 ### Start Order
-1. **MySQL** and **MongoDB** databases
+1. **PostgreSQL** and **MongoDB** databases
 2. **Eureka Server** (Port: 8761)
 3. **API Gateway** (Port: 8080)
 4. **Auth Service** (Port: 9000)
@@ -299,15 +306,17 @@ POST /api/chat/rooms/{roomId}/messages/read - Mark as read
 
 ## 🗄️ Database Schema
 
-### MySQL Tables
+### PostgreSQL Tables
+
+Tables are created/updated automatically by Hibernate (`spring.jpa.hibernate.ddl-auto=update`). Equivalent schemas:
 
 **Users Table** (campusworks_auth)
 ```sql
 CREATE TABLE users (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    id BIGSERIAL PRIMARY KEY,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    role ENUM('STUDENT', 'ADMIN') NOT NULL,
+    role VARCHAR(50) NOT NULL,
     enabled BOOLEAN DEFAULT FALSE,
     email_verified BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -317,12 +326,12 @@ CREATE TABLE users (
 **Tasks Table** (campusworks_tasks)
 ```sql
 CREATE TABLE tasks (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    id BIGSERIAL PRIMARY KEY,
     title VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
     budget DECIMAL(10,2) NOT NULL,
-    category ENUM('ACADEMIC_WRITING', 'PROGRAMMING', 'MATHEMATICS', 'SCIENCE', 'LITERATURE', 'ENGINEERING', 'OTHER') NOT NULL,
-    status ENUM('OPEN', 'IN_PROGRESS', 'COMPLETED', 'ACCEPTED', 'CANCELLED') DEFAULT 'OPEN',
+    category VARCHAR(50) NOT NULL,
+    status VARCHAR(50) DEFAULT 'OPEN',
     owner_id BIGINT NOT NULL,
     assigned_user_id BIGINT,
     bidding_deadline TIMESTAMP NOT NULL,
@@ -334,12 +343,12 @@ CREATE TABLE tasks (
 **Bids Table** (campusworks_bids)
 ```sql
 CREATE TABLE bids (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    id BIGSERIAL PRIMARY KEY,
     task_id BIGINT NOT NULL,
     bidder_id BIGINT NOT NULL,
     amount DECIMAL(10,2) NOT NULL,
     proposal TEXT,
-    status ENUM('PENDING', 'ACCEPTED', 'REJECTED', 'WITHDRAWN') DEFAULT 'PENDING',
+    status VARCHAR(50) DEFAULT 'PENDING',
     is_winning BOOLEAN DEFAULT FALSE,
     upi_id VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -424,7 +433,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Backend Development**: Spring Boot Microservices
 - **Frontend Development**: React.js with Material-UI
 - **Chat Service**: Node.js with Socket.io
-- **Database Design**: MySQL and MongoDB
+- **Database Design**: PostgreSQL and MongoDB
 
 ## 📞 Support
 

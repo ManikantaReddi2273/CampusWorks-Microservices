@@ -8,7 +8,11 @@ import java.util.List;
 /**
  * Feign Client for communicating with Bidding Service
  */
-@FeignClient(name = "bidding-service", fallback = BiddingServiceClientFallback.class)
+@FeignClient(
+        name = "bidding-service",
+        url = "${services.bidding-service.url:}",
+        fallback = BiddingServiceClientFallback.class
+)
 public interface BiddingServiceClient {
     
     /**

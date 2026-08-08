@@ -11,7 +11,11 @@ import java.util.List;
 /**
  * Feign Client for communicating with Task Service
  */
-@FeignClient(name = "task-service", fallback = TaskServiceClientFallback.class)
+@FeignClient(
+        name = "task-service",
+        url = "${services.task-service.url:}",
+        fallback = TaskServiceClientFallback.class
+)
 public interface TaskServiceClient {
     
     /**

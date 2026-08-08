@@ -7,7 +7,11 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Feign Client for communicating with Profile Service
  */
-@FeignClient(name = "profile-service", fallback = ProfileServiceClientFallback.class)
+@FeignClient(
+        name = "profile-service",
+        url = "${services.profile-service.url:}",
+        fallback = ProfileServiceClientFallback.class
+)
 public interface ProfileServiceClient {
     
     /**
