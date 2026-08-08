@@ -34,7 +34,7 @@ services:
       - key: JAVA_OPTS
         value: "-Xms32m -Xmx180m"
       - key: SPRING_DATASOURCE_URL
-        value: "jdbc:postgresql://ep-weathered-cloud-axhpd4hu-pooler.c-4.us-east-2.aws.neon.tech/campusworks_auth?sslmode=require"
+        value: "jdbc:postgresql://ep-weathered-cloud-axhpd4hu.c-4.us-east-2.aws.neon.tech/campusworks_auth?sslmode=require"
       - key: SPRING_DATASOURCE_USERNAME
         value: "neondb_owner"
       - key: SPRING_DATASOURCE_PASSWORD
@@ -72,7 +72,7 @@ services:
       - key: JAVA_OPTS
         value: "-Xms32m -Xmx180m"
       - key: SPRING_DATASOURCE_URL
-        value: "jdbc:postgresql://ep-weathered-cloud-axhpd4hu-pooler.c-4.us-east-2.aws.neon.tech/campusworks_tasks?sslmode=require"
+        value: "jdbc:postgresql://ep-weathered-cloud-axhpd4hu.c-4.us-east-2.aws.neon.tech/campusworks_tasks?sslmode=require"
       - key: SPRING_DATASOURCE_USERNAME
         value: "neondb_owner"
       - key: SPRING_DATASOURCE_PASSWORD
@@ -110,7 +110,7 @@ services:
       - key: JAVA_OPTS
         value: "-Xms32m -Xmx180m"
       - key: SPRING_DATASOURCE_URL
-        value: "jdbc:postgresql://ep-weathered-cloud-axhpd4hu-pooler.c-4.us-east-2.aws.neon.tech/campusworks_bids?sslmode=require"
+        value: "jdbc:postgresql://ep-weathered-cloud-axhpd4hu.c-4.us-east-2.aws.neon.tech/campusworks_bids?sslmode=require"
       - key: SPRING_DATASOURCE_USERNAME
         value: "neondb_owner"
       - key: SPRING_DATASOURCE_PASSWORD
@@ -146,7 +146,7 @@ services:
       - key: JAVA_OPTS
         value: "-Xms32m -Xmx180m"
       - key: SPRING_DATASOURCE_URL
-        value: "jdbc:postgresql://ep-weathered-cloud-axhpd4hu-pooler.c-4.us-east-2.aws.neon.tech/campusworks_profile?sslmode=require"
+        value: "jdbc:postgresql://ep-weathered-cloud-axhpd4hu.c-4.us-east-2.aws.neon.tech/campusworks_profile?sslmode=require"
       - key: SPRING_DATASOURCE_USERNAME
         value: "neondb_owner"
       - key: SPRING_DATASOURCE_PASSWORD
