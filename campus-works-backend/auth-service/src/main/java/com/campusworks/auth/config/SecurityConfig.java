@@ -50,6 +50,8 @@ public class SecurityConfig {
                                "/auth/forgot-password", "/auth/reset-password", 
                                "/auth/verification-status/**", "/auth/validate-email/**", 
                                "/auth/resend-verification-public", "/auth/health").permitAll()
+                // Render health checks must be public
+                .requestMatchers("/actuator/health", "/actuator/health/**", "/actuator/info").permitAll()
                 
                 // Protected endpoints (require authentication)
                 .requestMatchers("/auth/change-password", "/auth/delete-account", 

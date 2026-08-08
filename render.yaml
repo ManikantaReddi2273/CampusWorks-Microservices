@@ -29,7 +29,7 @@ services:
     region: oregon
     dockerfilePath: ./campus-works-backend/auth-service/Dockerfile
     dockerContext: ./campus-works-backend/auth-service
-    healthCheckPath: /actuator/health/liveness
+    healthCheckPath: /auth/health
     envVars:
       - key: JAVA_OPTS
         value: "-Xms32m -Xmx180m"
