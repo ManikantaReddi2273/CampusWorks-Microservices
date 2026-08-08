@@ -34,11 +34,11 @@ services:
       - key: JAVA_OPTS
         value: "-Xms32m -Xmx180m"
       - key: SPRING_DATASOURCE_URL
-        value: "jdbc:postgresql://ep-weathered-cloud-axhpd4hu.c-4.us-east-2.aws.neon.tech/campusworks_auth?sslmode=require"
+        value: "jdbc:postgresql://ep-cool-smoke-axrpqs7p.c-4.us-east-2.aws.neon.tech/campusworks_auth?sslmode=require"
       - key: SPRING_DATASOURCE_USERNAME
         value: "neondb_owner"
       - key: SPRING_DATASOURCE_PASSWORD
-        value: "npg_pC6tqO7mkPwb"
+        value: "npg_ZX8zbMLvqtF3"
       - key: JWT_SECRET
         value: "mysupersecuresecretkeythatismorethan32chars"
       - key: SPRING_MAIL_USERNAME
@@ -72,11 +72,11 @@ services:
       - key: JAVA_OPTS
         value: "-Xms32m -Xmx180m"
       - key: SPRING_DATASOURCE_URL
-        value: "jdbc:postgresql://ep-weathered-cloud-axhpd4hu.c-4.us-east-2.aws.neon.tech/campusworks_tasks?sslmode=require"
+        value: "jdbc:postgresql://ep-cool-smoke-axrpqs7p.c-4.us-east-2.aws.neon.tech/campusworks_tasks?sslmode=require"
       - key: SPRING_DATASOURCE_USERNAME
         value: "neondb_owner"
       - key: SPRING_DATASOURCE_PASSWORD
-        value: "npg_pC6tqO7mkPwb"
+        value: "npg_ZX8zbMLvqtF3"
       - key: SPRING_MAIL_USERNAME
         value: "campusworks2273@gmail.com"
       - key: SPRING_MAIL_PASSWORD
@@ -110,11 +110,11 @@ services:
       - key: JAVA_OPTS
         value: "-Xms32m -Xmx180m"
       - key: SPRING_DATASOURCE_URL
-        value: "jdbc:postgresql://ep-weathered-cloud-axhpd4hu.c-4.us-east-2.aws.neon.tech/campusworks_bids?sslmode=require"
+        value: "jdbc:postgresql://ep-cool-smoke-axrpqs7p.c-4.us-east-2.aws.neon.tech/campusworks_bids?sslmode=require"
       - key: SPRING_DATASOURCE_USERNAME
         value: "neondb_owner"
       - key: SPRING_DATASOURCE_PASSWORD
-        value: "npg_pC6tqO7mkPwb"
+        value: "npg_ZX8zbMLvqtF3"
       - key: SPRING_MAIL_USERNAME
         value: "campusworks2273@gmail.com"
       - key: SPRING_MAIL_PASSWORD
@@ -146,11 +146,11 @@ services:
       - key: JAVA_OPTS
         value: "-Xms32m -Xmx180m"
       - key: SPRING_DATASOURCE_URL
-        value: "jdbc:postgresql://ep-weathered-cloud-axhpd4hu.c-4.us-east-2.aws.neon.tech/campusworks_profile?sslmode=require"
+        value: "jdbc:postgresql://ep-cool-smoke-axrpqs7p.c-4.us-east-2.aws.neon.tech/campusworks_profile?sslmode=require"
       - key: SPRING_DATASOURCE_USERNAME
         value: "neondb_owner"
       - key: SPRING_DATASOURCE_PASSWORD
-        value: "npg_pC6tqO7mkPwb"
+        value: "npg_ZX8zbMLvqtF3"
       - key: TASK_SERVICE_URL
         value: "https://cw-task-service.onrender.com"
       - key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE

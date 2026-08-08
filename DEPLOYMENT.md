@@ -13,9 +13,9 @@
 
 ## Your connection strings (filled)
 
-**Neon host (direct, no `-pooler`):** `ep-weathered-cloud-axhpd4hu.c-4.us-east-2.aws.neon.tech`  
+**Neon host (direct, no `-pooler`):** `ep-cool-smoke-axrpqs7p.c-4.us-east-2.aws.neon.tech`  
 **Neon user:** `neondb_owner`  
-**Neon password:** `npg_pC6tqO7mkPwb`  
+**Neon password:** `npg_ZX8zbMLvqtF3`  
 
 > Use the **direct** host for Spring Boot / Hibernate. The PgBouncer `-pooler` endpoint can close connections during DDL and cause `This connection has been closed` on Render.
 
@@ -64,10 +64,10 @@ CREATE DATABASE campusworks_profile;
 **JDBC URLs (ready):**
 
 ```text
-jdbc:postgresql://ep-weathered-cloud-axhpd4hu.c-4.us-east-2.aws.neon.tech/campusworks_auth?sslmode=require
-jdbc:postgresql://ep-weathered-cloud-axhpd4hu.c-4.us-east-2.aws.neon.tech/campusworks_tasks?sslmode=require
-jdbc:postgresql://ep-weathered-cloud-axhpd4hu.c-4.us-east-2.aws.neon.tech/campusworks_bids?sslmode=require
-jdbc:postgresql://ep-weathered-cloud-axhpd4hu.c-4.us-east-2.aws.neon.tech/campusworks_profile?sslmode=require
+jdbc:postgresql://ep-cool-smoke-axrpqs7p.c-4.us-east-2.aws.neon.tech/campusworks_auth?sslmode=require
+jdbc:postgresql://ep-cool-smoke-axrpqs7p.c-4.us-east-2.aws.neon.tech/campusworks_tasks?sslmode=require
+jdbc:postgresql://ep-cool-smoke-axrpqs7p.c-4.us-east-2.aws.neon.tech/campusworks_bids?sslmode=require
+jdbc:postgresql://ep-cool-smoke-axrpqs7p.c-4.us-east-2.aws.neon.tech/campusworks_profile?sslmode=require
 ```
 
 ---
@@ -127,9 +127,9 @@ EUREKA_INSTANCE_SECURE_PORT=443
 #### cw-auth-service
 ```env
 JAVA_OPTS=-Xms64m -Xmx200m
-SPRING_DATASOURCE_URL=jdbc:postgresql://ep-weathered-cloud-axhpd4hu.c-4.us-east-2.aws.neon.tech/campusworks_auth?sslmode=require
+SPRING_DATASOURCE_URL=jdbc:postgresql://ep-cool-smoke-axrpqs7p.c-4.us-east-2.aws.neon.tech/campusworks_auth?sslmode=require
 SPRING_DATASOURCE_USERNAME=neondb_owner
-SPRING_DATASOURCE_PASSWORD=npg_pC6tqO7mkPwb
+SPRING_DATASOURCE_PASSWORD=npg_ZX8zbMLvqtF3
 JWT_SECRET=mysupersecuresecretkeythatismorethan32chars
 SPRING_MAIL_USERNAME=campusworks2273@gmail.com
 SPRING_MAIL_PASSWORD=nlbdkysxhffrjwnt
@@ -144,9 +144,9 @@ EUREKA_INSTANCE_SECURE_PORT=443
 #### cw-task-service
 ```env
 JAVA_OPTS=-Xms64m -Xmx200m
-SPRING_DATASOURCE_URL=jdbc:postgresql://ep-weathered-cloud-axhpd4hu.c-4.us-east-2.aws.neon.tech/campusworks_tasks?sslmode=require
+SPRING_DATASOURCE_URL=jdbc:postgresql://ep-cool-smoke-axrpqs7p.c-4.us-east-2.aws.neon.tech/campusworks_tasks?sslmode=require
 SPRING_DATASOURCE_USERNAME=neondb_owner
-SPRING_DATASOURCE_PASSWORD=npg_pC6tqO7mkPwb
+SPRING_DATASOURCE_PASSWORD=npg_ZX8zbMLvqtF3
 SPRING_MAIL_USERNAME=campusworks2273@gmail.com
 SPRING_MAIL_PASSWORD=nlbdkysxhffrjwnt
 BIDDING_SERVICE_URL=https://cw-bidding-service-XXXX.onrender.com
@@ -161,9 +161,9 @@ EUREKA_INSTANCE_SECURE_PORT=443
 #### cw-bidding-service
 ```env
 JAVA_OPTS=-Xms64m -Xmx200m
-SPRING_DATASOURCE_URL=jdbc:postgresql://ep-weathered-cloud-axhpd4hu.c-4.us-east-2.aws.neon.tech/campusworks_bids?sslmode=require
+SPRING_DATASOURCE_URL=jdbc:postgresql://ep-cool-smoke-axrpqs7p.c-4.us-east-2.aws.neon.tech/campusworks_bids?sslmode=require
 SPRING_DATASOURCE_USERNAME=neondb_owner
-SPRING_DATASOURCE_PASSWORD=npg_pC6tqO7mkPwb
+SPRING_DATASOURCE_PASSWORD=npg_ZX8zbMLvqtF3
 SPRING_MAIL_USERNAME=campusworks2273@gmail.com
 SPRING_MAIL_PASSWORD=nlbdkysxhffrjwnt
 TASK_SERVICE_URL=https://cw-task-service-XXXX.onrender.com
@@ -177,9 +177,9 @@ EUREKA_INSTANCE_SECURE_PORT=443
 #### cw-profile-service
 ```env
 JAVA_OPTS=-Xms64m -Xmx200m
-SPRING_DATASOURCE_URL=jdbc:postgresql://ep-weathered-cloud-axhpd4hu.c-4.us-east-2.aws.neon.tech/campusworks_profile?sslmode=require
+SPRING_DATASOURCE_URL=jdbc:postgresql://ep-cool-smoke-axrpqs7p.c-4.us-east-2.aws.neon.tech/campusworks_profile?sslmode=require
 SPRING_DATASOURCE_USERNAME=neondb_owner
-SPRING_DATASOURCE_PASSWORD=npg_pC6tqO7mkPwb
+SPRING_DATASOURCE_PASSWORD=npg_ZX8zbMLvqtF3
 TASK_SERVICE_URL=https://cw-task-service-XXXX.onrender.com
 EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=https://cw-eureka-server-XXXX.onrender.com/eureka/
 EUREKA_INSTANCE_PREFER_IP_ADDRESS=false
