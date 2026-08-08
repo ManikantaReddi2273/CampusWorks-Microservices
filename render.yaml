@@ -1,6 +1,5 @@
 # Render Blueprint — Neon + MongoDB Atlas + Render + Vercel
-# After sync: replace XXXX Render hostnames in any remaining service env UIs if needed.
-# Ensure Neon DBs exist: campusworks_auth, campusworks_tasks, campusworks_bids, campusworks_profile
+# IMPORTANT: In Neon SQL Editor create DBs first (see neon-init.sql), then Manual Deploy failed services.
 
 services:
   - type: web
@@ -47,9 +46,9 @@ services:
       - key: SPRING_MAIL_PASSWORD
         value: "nlbdkysxhffrjwnt"
       - key: APP_FRONTEND_URL
-        value: "http://localhost:3000"
+        value: "https://campus-works.vercel.app"
       - key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
-        sync: false
+        value: "https://cw-eureka-server.onrender.com/eureka/"
       - key: EUREKA_INSTANCE_PREFER_IP_ADDRESS
         value: "false"
       - key: EUREKA_NON_SECURE_PORT_ENABLED
@@ -83,11 +82,11 @@ services:
       - key: SPRING_MAIL_PASSWORD
         value: "nlbdkysxhffrjwnt"
       - key: BIDDING_SERVICE_URL
-        sync: false
+        value: "https://cw-bidding-service.onrender.com"
       - key: PROFILE_SERVICE_URL
-        sync: false
+        value: "https://cw-profile-service.onrender.com"
       - key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
-        sync: false
+        value: "https://cw-eureka-server.onrender.com/eureka/"
       - key: EUREKA_INSTANCE_PREFER_IP_ADDRESS
         value: "false"
       - key: EUREKA_NON_SECURE_PORT_ENABLED
@@ -121,9 +120,9 @@ services:
       - key: SPRING_MAIL_PASSWORD
         value: "nlbdkysxhffrjwnt"
       - key: TASK_SERVICE_URL
-        sync: false
+        value: "https://cw-task-service.onrender.com"
       - key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
-        sync: false
+        value: "https://cw-eureka-server.onrender.com/eureka/"
       - key: EUREKA_INSTANCE_PREFER_IP_ADDRESS
         value: "false"
       - key: EUREKA_NON_SECURE_PORT_ENABLED
@@ -153,9 +152,9 @@ services:
       - key: SPRING_DATASOURCE_PASSWORD
         value: "npg_pC6tqO7mkPwb"
       - key: TASK_SERVICE_URL
-        sync: false
+        value: "https://cw-task-service.onrender.com"
       - key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
-        sync: false
+        value: "https://cw-eureka-server.onrender.com/eureka/"
       - key: EUREKA_INSTANCE_PREFER_IP_ADDRESS
         value: "false"
       - key: EUREKA_NON_SECURE_PORT_ENABLED
@@ -181,17 +180,17 @@ services:
       - key: JWT_SECRET
         value: "mysupersecuresecretkeythatismorethan32chars"
       - key: CORS_ALLOWED_ORIGINS
-        value: "http://localhost:3000"
+        value: "http://localhost:3000,https://campus-works.vercel.app"
       - key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
-        sync: false
+        value: "https://cw-eureka-server.onrender.com/eureka/"
       - key: GATEWAY_AUTH_SERVICE_URI
-        sync: false
+        value: "https://cw-auth-service.onrender.com"
       - key: GATEWAY_TASK_SERVICE_URI
-        sync: false
+        value: "https://cw-task-service.onrender.com"
       - key: GATEWAY_BIDDING_SERVICE_URI
-        sync: false
+        value: "https://cw-bidding-service.onrender.com"
       - key: GATEWAY_PROFILE_SERVICE_URI
-        sync: false
+        value: "https://cw-profile-service.onrender.com"
       - key: EUREKA_INSTANCE_PREFER_IP_ADDRESS
         value: "false"
       - key: EUREKA_NON_SECURE_PORT_ENABLED
@@ -217,12 +216,12 @@ services:
       - key: JWT_SECRET
         value: "mysupersecuresecretkeythatismorethan32chars"
       - key: SPRING_BOOT_BASE_URL
-        sync: false
+        value: "https://cw-api-gateway.onrender.com"
       - key: AUTH_SERVICE_URL
-        sync: false
+        value: "https://cw-auth-service.onrender.com"
       - key: TASK_SERVICE_URL
-        sync: false
+        value: "https://cw-task-service.onrender.com"
       - key: BIDDING_SERVICE_URL
-        sync: false
+        value: "https://cw-bidding-service.onrender.com"
       - key: SOCKET_CORS_ORIGIN
-        value: "http://localhost:3000"
+        value: "http://localhost:3000,https://campus-works.vercel.app"
