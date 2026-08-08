@@ -4,7 +4,7 @@ import { API_CONFIG, STORAGE_KEYS } from '@constants';
 // Create axios instance
 const api = axios.create({
   baseURL: API_CONFIG.BASE_URL,
-  timeout: 10000,
+  timeout: 60000,
   headers: {
     'Content-Type': 'application/json'
   }
@@ -241,7 +241,13 @@ export const apiUtils = {
       // Server responded with error status
       const status = error.response.status;
       const data = error.response.data;
-      let message = data?.message || 'An error occurred';
+      // Auth service often returns a plain string body, not { message: "..." }
+      let message =
+        (typeof data === 'string' && data.trim()) ||
+        data?.message ||
+        data?.error ||
+        (typeof data?.error === 'string' ? data.error : null) ||
+        'An error occurred';
       
       // Provide specific error messages based on status and response
       if (status === 401) {
@@ -267,8 +273,12 @@ export const apiUtils = {
           message = 'Please enter a valid RGUKT Nuzvidu email address (n######@rguktn.ac.in).';
         } else if (message.includes('Password too weak')) {
           message = 'Password does not meet security requirements. Please use a stronger password.';
-        } else if (message.includes('Email already exists')) {
-          message = 'An account with this email already exists. Please try signing in instead.';
+        } else if (
+          message.includes('Email already exists') ||
+          message.includes('already exists') ||
+          message.includes('User with this email already exists')
+        ) {
+          message = 'An account with this email already exists. Please sign in, or verify your email if you just registered.';
         } else if (message.includes('already verified') || message.includes('already active')) {
           message = 'Your email is already verified! You can now sign in to your account.';
         } else {

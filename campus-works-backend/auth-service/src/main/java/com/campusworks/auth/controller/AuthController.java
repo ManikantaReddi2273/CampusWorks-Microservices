@@ -65,7 +65,10 @@ public class AuthController {
         } catch (Exception e) {
             logger.error("❌ Registration failed for email: {} - Error: {}", 
                         request.getEmail(), e.getMessage(), e);
-            return ResponseEntity.badRequest().body("Registration failed: " + e.getMessage());
+            Map<String, Object> error = new HashMap<>();
+            error.put("message", "Registration failed: " + e.getMessage());
+            error.put("error", e.getMessage());
+            return ResponseEntity.badRequest().body(error);
         }
     }
     
